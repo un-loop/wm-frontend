@@ -1,8 +1,7 @@
 module.exports = {
-  name: "London",
-  shortName: "London",
-  description:
-    "A bold, minimal theme for Gatsby, focused on clean typography & beautiful imagery",
+  name: "The Woolly Mammoth",
+  shortName: "Woolly",
+  description: "Seattle's Premier Comfort Shoe Store",
   url: "https://gatsby-london.netlify.com", // Domain of your site without prefix!
   prefix: "/",
   author: "Imed Adel",
