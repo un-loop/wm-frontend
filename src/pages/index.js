@@ -1,11 +1,9 @@
 import React from "react"
 import { graphql, StaticQuery } from "gatsby"
-
+import SwipeableTextMobileStepper from "../components/carousel"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import PostCard from "../components/postCard"
-import "react-responsive-carousel/lib/styles/carousel.min.css"
-import DemoCarousel from "../components/DemoCarousel"
 
 // import "../utils/global.scss"
 import "../utils/normalize.css"
@@ -23,7 +21,8 @@ const BlogIndex = ({ data }, location) => {
         keywords={[`blog`, `gatsby`, `javascript`, `react`]}
       />
       {/* <Bio /> */}
-      <DemoCarousel />
+      <SwipeableTextMobileStepper />
+      {/* <DemoCarousel /> */}
       {/* {data.site.siteMetadata.description && (
         <header className="page-head">
           <h2 className="page-head-title">
