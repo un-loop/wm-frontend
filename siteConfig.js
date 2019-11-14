@@ -1,7 +1,7 @@
 module.exports = {
   name: "The Woolly Mammoth",
-  shortName: "Woolly Mammoth",
-  description: "Hello there",
+  description: "Seattle's Premier Comfort Shoe Store",
+
   url: "https://gatsby-london.netlify.com", // Domain of your site without prefix!
   prefix: "/",
   author: "Imed Adel",

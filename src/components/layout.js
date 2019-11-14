@@ -35,6 +35,18 @@ const Layout = props => {
               <li className="nav-elements" role="menuitem">
                 <Link to={`/elements`}>Elements</Link>
               </li>
+              <li className="nav-elements" role="menuitem">
+                <Link to={`/contact`}>Contact</Link>
+              </li>
+              <li className="nav-elements" role="menuitem">
+                <Link to={`/blog`}>Blog</Link>
+              </li>
+              <li className="nav-elements" role="menuitem">
+                <Link to={`/men`}>Men</Link>
+              </li>
+              <li className="nav-elements" role="menuitem">
+                <Link to={`/women`}>Women</Link>
+              </li>
             </ul>
           </nav>
           <div className="site-head-center">
@@ -45,7 +57,11 @@ const Layout = props => {
           <div className="site-head-right">
             <div className="social-links">
               <a
-                href="https://www.facebook.com"
+                href="https://www.facebook.com/pg/thewoollymammothshoes"
+                img
+                alt="follow me on facebook"
+                img
+                src="https://c866088.ssl.cf3.rackcdn.com/assets/facebook30x30.png"
                 title="Facebook"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -53,7 +69,16 @@ const Layout = props => {
                 Facebook
               </a>
               <a
-                href="https://twitter.com"
+                href="https://www.instagram.com/thewoollymammothshoes/"
+                title="Instagram"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Instagram
+              </a>
+
+              <a
+                href="https://twitter.com/woolly_shoes"
                 title="Twitter"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -78,15 +103,7 @@ const Layout = props => {
         </div>
       </main>
       <footer className="site-foot">
-        &copy; {new Date().getFullYear()} <Link to={`/`}>{title}</Link> &mdash;
-        Built with{" "}
-        <a
-          href="https://gatsbyjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Gatsby
-        </a>
+        &copy; {new Date().getFullYear()} <Link to={`/`}>{title}</Link>
       </footer>
     </div>
   )
