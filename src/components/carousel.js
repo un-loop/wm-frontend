@@ -13,20 +13,13 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews)
 
 const tutorialSteps = [
   {
-    label: "blundstone",
-    imgPath: "https://wm-photos.s3.amazonaws.com/blundstoneAll.jpg",
+    imgPath: "https://wm-photos.s3.amazonaws.com/blund1.jpg",
   },
   {
-    label: "Herschel",
     imgPath: "https://wm-photos.s3.amazonaws.com/herschelMix.jpg",
   },
   {
-    label: "Men's Josef seibel",
-    imgPath: "https://wm-photos.s3.amazonaws.com/josefSiebelTal.jpg",
-  },
-  {
-    label: "Josef seibel",
-    imgPath: "https://wm-photos.s3.amazonaws.com/jsMedBlkMix_25.jpg",
+    imgPath: "https://wm-photos.s3.amazonaws.com/leopard.JPG",
   },
 ]
 
@@ -34,6 +27,12 @@ const useStyles = makeStyles(theme => ({
   root: {
     maxWidth: 600,
     flexGrow: 1,
+    display: "flex",
+    flexDirection: "column",
+    // alignItems: "stretch",
+    textAlign: "center",
+    marginLeft: "29%",
+    marginRight: "25%",
   },
   header: {
     display: "flex",
