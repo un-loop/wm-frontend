@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { graphql, StaticQuery } from "gatsby"
 
 import Layout from "../components/layout"
@@ -8,12 +8,28 @@ import PostCard from "../components/postCard"
 // import "../utils/global.scss"
 import "../utils/normalize.css"
 import "../utils/css/screen.css"
+import client from "../client"
 //TODO: switch to staticQuery, get rid of comments, remove unnecessary components, export as draft template
 const BlogIndex = ({ data }, location) => {
   const siteTitle = data.site.siteMetadata.title
   const posts = data.allMarkdownRemark.edges
   let postCounter = 0
-
+  useEffect(() => {
+    onLoad()
+  }, [])
+  async function onLoad() {
+    try {
+      const products = await client.fetch(`
+        *[_type == 'vendor']{
+          title, distributor}`)
+      console.log("testing 123", products)
+    } catch (e) {
+      if (e !== "No current user") {
+        alert(e)
+      }
+    }
+    // setIsLoading(false);
+  }
   return (
     <Layout title={siteTitle}>
       <SEO title="Home" keywords={[`blog`, `gatsby`, `javascript`, `react`]} />
