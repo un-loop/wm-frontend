@@ -19,9 +19,9 @@ const AboutPage = ({ data }, location) => {
       />
 
       <article className="post-content page-template no-image">
-        <div className="post-content-body">
-          <h3 id="dynamic-styles">Call Us for Superior Service</h3>
-          <div class="column-50 left">
+        <h3 id="dynamic-styles">Call Us for Superior Service</h3>
+        <div className="post-content-body" class="row">
+          <div class="col-6">
             <div class="body-text-2">Telephone:(206)632-3254</div>
             <div class="body-text-2">Fax:(206)545-3814</div>
             <a
@@ -30,10 +30,29 @@ const AboutPage = ({ data }, location) => {
             >
               info@woollymammothshoes.com
             </a>
+            <div class="w-100" />
           </div>
-          <div class="column-50 right">
+          <div class="col-6">
             <div class="body-text-2">4303 University Way NE</div>
             <div class="body-text-2">Seattle, WA 98105</div>
+          </div>
+        </div>
+      </article>
+      <article className="post-content page-template no-image">
+        <h3 id="dynamic-styles">Stop By and See Us</h3>
+        <div className="post-content-body" class="row">
+          <div class="col-6">
+            <div class="body-text-2" />
+            <div class="body-text-2">Monday 10:00 to 7:00</div>
+            <div class="body-text-2">Tuesday 10:00 to 7:00</div>
+            <div class="body-text-2">Wednesday 10:00 to 7:00</div>
+            <div class="body-text-2">Thursday 10:00 to 7:00</div>
+            <div class="body-text-2">Friday 10:00 to 7:00</div>
+            <div class="w-100" />
+          </div>
+          <div class="col-6">
+            <div class="body-text-2">Satuday 10:00 to 6:00</div>
+            <div class="body-text-2">Sunday 12:00 to 7:00</div>
           </div>
         </div>
       </article>
