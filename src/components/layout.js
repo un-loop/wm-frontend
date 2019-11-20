@@ -6,6 +6,7 @@ const Layout = props => {
   const [toggleNav, setToggleNav] = React.useState(false)
   return (
     <div className={`site-wrapper ${toggleNav ? `site-head-open` : ``}`}>
+      <h1>Woolly Mammoth</h1>
       <header className="site-head">
         <div className="site-head-container">
           <a
@@ -50,50 +51,24 @@ const Layout = props => {
               </li>
             </ul>
           </nav>
-          <div className="site-head-center">
+          {/* <div className="site-head-center">
             <Link className="site-head-logo" to={`/`}>
               {title}
             </Link>
-          </div>
+          </div> */}
           <div className="site-head-right">
             <div className="social-links">
+              <i class="fa fa-facebook" />
               <a
                 href="https://www.facebook.com/pg/thewoollymammothshoes"
                 img
                 alt="follow me on facebook"
-                img
-                src="https://c866088.ssl.cf3.rackcdn.com/assets/facebook30x30.png"
-                title="Facebook"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Facebook
-              </a>
-              <a
-                href="https://www.instagram.com/thewoollymammothshoes/"
-                title="Instagram"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Instagram
-              </a>
+              />
+              <i class="fa fa-instagram" />
+              <a href="https://www.instagram.com/thewoollymammothshoes/" />
 
-              <a
-                href="https://twitter.com/woolly_shoes"
-                title="Twitter"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Twitter
-              </a>
-              <Link
-                to={`/rss.xml`}
-                title="RSS"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                RSS
-              </Link>
+              <i class="fa fa-twitter" />
+              <a href="https://twitter.com/woolly_shoes" />
             </div>
           </div>
         </div>
