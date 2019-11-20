@@ -6,9 +6,14 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 class BlogPostTemplate extends React.Component {
+  async componentDidMount() {
+    console.log("Create sanity API request here based on URL")
+  }
   render() {
     const post = this.props.data.markdownRemark
     const siteTitle = this.props.data.site.siteMetadata.title
+    console.log("Hello world", window.location.pathname)
+    const brand = window.location.pathname
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
