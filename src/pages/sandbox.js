@@ -12,8 +12,10 @@ class Search extends React.Component {
   }
 
   async componentDidMount() {
-    const result = await client.fetch(`*[_type == 'vendor']{
-            title, distributor}`)
+    const result = await client.fetch(`*[_type == 'vendor' ]{
+            title, slug}`)
+    console.log(result)
+    const url = result.slug.current
     this.setState({ vendors: result })
   }
 
