@@ -19,40 +19,42 @@ const AboutPage = ({ data }, location) => {
       />
 
       <article className="post-content page-template no-image">
-        <div className="post-content-body">
-          <h2 id="clean-minimal-and-deeply-customisable-london-is-a-theme-made-for-people-who-appreciate-simple-lines-">
-            Clean, minimal, and deeply customisable. London is a theme made for
-            people who appreciate simple lines.
-          </h2>
-          <figure className="kg-card kg-image-card kg-width-full">
-            <Img
-              fluid={data.benchAccounting.childImageSharp.fluid}
-              className="kg-image"
-            />
-            <figcaption>Large imagery is at the heart of this theme</figcaption>
-          </figure>
-          <h3 id="dynamic-styles">Dynamic styles</h3>
-          <p>
-            London comes with photo-centric main layout best suited to
-            photography, graphics portfolios and other image-heavy uses.
-          </p>
-          <p>
-            Both post and page templates are light and minimal, with all the
-            focus on the content while the design of the theme gets out of the
-            way. Beneath the hood, London enjoys the full power of the{" "}
-            <a href="https://docs.ghost.org/api/handlebars-themes/">
-              Ghost Handlebars Theme API
-            </a>{" "}
-            to provide limitless customisation options and dynamic styles.
-          </p>
-          <p>
-            Don't forget to check out the{" "}
-            <a href="https://docs.ghost.org/integrations/">
-              Ghost Integrations Directory
-            </a>{" "}
-            for more ways to integrate Ghost with your favourite services.
-          </p>
+        <h3 id="dynamic-styles">Call for Superior Service</h3>
+        <div className="post-content-body" class="row">
+          <div class="col-6">
+            <div class="body-text-2">Telephone:(206)632-3254</div>
+            <div class="body-text-2">Fax:(206)545-3814</div>
+            <a
+              href="mailto:info@woollymammothshoes.com"
+              class="body-text-2 link"
+            >
+              info@woollymammothshoes.com
+            </a>
+            <div class="w-100" />
+          </div>
+          <div class="col-6">
+            <div class="body-text-2">4303 University Way NE</div>
+            <div class="body-text-2">Seattle, WA 98105</div>
+          </div>
         </div>
+        <article className="post-content page-template no-image">
+          <h3 id="dynamic-styles">Stop By and See Us</h3>
+          <div className="post-content-body" class="row">
+            <div class="col-6">
+              <div class="body-text-2" />
+              <div class="body-text-2">Monday 10:00 to 7:00</div>
+              <div class="body-text-2">Tuesday 10:00 to 7:00</div>
+              <div class="body-text-2">Wednesday 10:00 to 7:00</div>
+              <div class="body-text-2">Thursday 10:00 to 7:00</div>
+              <div class="body-text-2">Friday 10:00 to 7:00</div>
+              <div class="w-100" />
+            </div>
+            <div class="col-6">
+              <div class="body-text-2">Satuday 10:00 to 6:00</div>
+              <div class="body-text-2">Sunday 12:00 to 7:00</div>
+            </div>
+          </div>
+        </article>
       </article>
     </Layout>
   )
