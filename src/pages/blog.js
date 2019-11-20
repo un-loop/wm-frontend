@@ -32,11 +32,6 @@ const BlogPage = ({ data }, location) => {
     // setIsLoading(false);
   }
 
-  // function displayBlog() {
-  //   document.getElementById("blog").innerHTML =
-  //   blog.map(blog);
-  // }
-
   return (
     <Layout title={siteTitle}>
       <SEO title="Blog" keywords={[`blog`, `gatsby`, `javascript`, `react`]} />
