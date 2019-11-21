@@ -49,7 +49,7 @@ const BlogPage = ({ data }, location) => {
       <SEO title="Blog" keywords={[`blog`, `gatsby`, `javascript`, `react`]} />
 
       <article className="post-content page-template no-image">
-        <div className="post-content-body">
+        {/* <div className="post-content-body">
           <h2 id="clean-minimal-and-deeply-customisable-london-is-a-theme-made-for-people-who-appreciate-simple-lines-" />
           <figure className="kg-card kg-image-card kg-width-full">
             <img
@@ -58,24 +58,24 @@ const BlogPage = ({ data }, location) => {
               align="middle"
             />
             <figcaption>Hershal</figcaption>
-          </figure>
+          </figure> */}
 
-          <h3>Blog Post</h3>
-          {blogs.map((blog, i) => {
-            console.log(blog)
-            return (
-              <div>
-                <h4>{blog.title}</h4>
-                <BlockContent
-                  blocks={blog.blog}
-                  image={blog.image}
-                  projectId="v8vntiu0"
-                  dataset="production"
-                />
-              </div>
-            )
-          })}
-        </div>
+        <h3>Blog Post</h3>
+        {blogs.map((blog, i) => {
+          console.log(blog)
+          return (
+            <div>
+              <h4>{blog.title}</h4>
+              <BlockContent
+                blocks={blog.blog}
+                image={blog.image}
+                projectId="v8vntiu0"
+                dataset="production"
+              />
+            </div>
+          )
+        })}
+        {/* </div> */}
       </article>
     </Layout>
   )
