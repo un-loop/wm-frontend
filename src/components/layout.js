@@ -40,13 +40,11 @@ const Layout = props => {
               <li className="nav-about" role="menuitem">
                 <Link to={`/about`}>About</Link>
               </li>
-              <li className="nav-elements" role="menuitem">
-                <Link to={`/blog`}>Blog</Link>
-              </li>
+
               {/* <li className="nav-elements" role="menuitem"> */}
-              <li className="nav-elements" role="menuitem">
+              {/* <li className="nav-elements" role="menuitem">
                 <Link to={`/elements`}>Elements</Link>
-              </li>
+              </li> */}
               <li className="nav-elements" role="menuitem">
                 <Link to={`/contact`}>Contact</Link>
               </li>
@@ -72,17 +70,18 @@ const Layout = props => {
           </div> */}
           <div className="site-head-right">
             <div className="social-links">
-              <i class="fa fa-facebook" />
-              <a
-                href="https://www.facebook.com/pg/thewoollymammothshoes"
-                img
-                alt="follow me on facebook"
-              />
-              <i class="fa fa-instagram" />
-              <a href="https://www.instagram.com/thewoollymammothshoes/" />
-
-              <i class="fa fa-twitter" />
-              <a href="https://twitter.com/woolly_shoes" />
+              <a href="https://www.facebook.com/pg/thewoollymammothshoes">
+                <i class="fa fa-facebook" />
+              </a>
+              <a href="https://www.instagram.com/thewoollymammothshoes/">
+                <i class="fa fa-instagram" />
+              </a>
+              <a href="https://twitter.com/woolly_shoes">
+                <i class="fa fa-twitter" />
+              </a>
+              <li className="nav-elements" role="menuitem">
+                <Link to={`/blog`}>Blog</Link>
+              </li>
             </div>
           </div>
         </div>
