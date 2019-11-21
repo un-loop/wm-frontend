@@ -1,12 +1,19 @@
 import React from "react"
 import { Link } from "gatsby"
 
+const logonoAddClear = require("../images/logono_add_clear.png")
 const Layout = props => {
   const { title, children } = props
   const [toggleNav, setToggleNav] = React.useState(false)
   return (
     <div className={`site-wrapper ${toggleNav ? `site-head-open` : ``}`}>
-      <h1>Woolly Mammoth</h1>
+      <React.Fragment>
+        <div className="logo">
+          <div class="col-md-4">
+            <img src={logonoAddClear} alt="logo" />
+          </div>
+        </div>
+      </React.Fragment>
       <header className="site-head">
         <div className="site-head-container">
           <a
@@ -36,26 +43,26 @@ const Layout = props => {
               <li className="nav-elements" role="menuitem">
                 <Link to={`/blog`}>Blog</Link>
               </li>
+              {/* <li className="nav-elements" role="menuitem"> */}
               <li className="nav-elements" role="menuitem">
-                <li className="nav-elements" role="menuitem">
-                  <Link to={`/elements`}>Elements</Link>
-                </li>
-                <li className="nav-elements" role="menuitem">
-                  <Link to={`/contact`}>Contact</Link>
-                </li>
-                <li className="nav-elements" role="menuitem">
-                  <Link to={`/men`}>Men</Link>
-                </li>
-                <li className="nav-elements" role="menuitem">
-                  <Link to={`/women`}>Women</Link>
-                </li>
-                <li className="nav-elements" role="menuitem">
+                <Link to={`/elements`}>Elements</Link>
+              </li>
+              <li className="nav-elements" role="menuitem">
+                <Link to={`/contact`}>Contact</Link>
+              </li>
+              <li className="nav-elements" role="menuitem">
+                <Link to={`/men`}>Men</Link>
+              </li>
+              <li className="nav-elements" role="menuitem">
+                <Link to={`/women`}>Women</Link>
+              </li>
+              {/* <li className="nav-elements" role="menuitem">
                   <Link to={`/accessories`}>Accessories</Link>
                 </li>
                 <li className="nav-elements" role="menuitem">
                   <Link to={`/kids`}>Kids</Link>
-                </li>
-              </li>
+                </li> */}
+              {/* </li> */}
             </ul>
           </nav>
           {/* <div className="site-head-center">

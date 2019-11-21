@@ -1,3 +1,26 @@
+.logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 25%;
+  height: 25%;
+}
+/* #container { */
+/* background-image:url(yourimage.jpg); */
+/* background-position:center;
+  width:700px;
+  height:400px; */
+/* } */
+/* .retro{ */
+/* padding-bottom: 50px; */
+/* border: 200px;
+  height: 100px;
+  width: 50%; */
+/* margin-left: auto;
+  margin-right: auto; */
+/* max-width: 500px;
+  max-height: 300px; */
+/* } */
 /* Reset
 /* ---------------------------------------------------------- */
 

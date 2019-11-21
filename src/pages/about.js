@@ -7,7 +7,7 @@ import SEO from "../components/seo"
 
 import "../utils/normalize.css"
 import "../utils/css/screen.css"
-
+const storeFront = require("../images/bench-accounting-49909-unsplash.jpg")
 const AboutPage = ({ data }, location) => {
   const siteTitle = data.site.siteMetadata.title
 
@@ -17,18 +17,32 @@ const AboutPage = ({ data }, location) => {
 
       <article className="post-content page-template no-image">
         <div className="post-content-body">
-          <h2 id="clean-minimal-and-deeply-customisable-london-is-a-theme-made-for-people-who-appreciate-simple-lines-">
+          <h3 id="clean-minimal-and-deeply-customisable-london-is-a-theme-made-for-people-who-appreciate-simple-lines-">
             Locally owned for over 40 years, specializing in comfortable, high
             quality, good-looking shoes and excellent customer service.
-          </h2>
+          </h3>
+
           {/* <figure className="kg-card kg-image-card kg-width-full">
             <Img
+              src={storeFront}
               fluid={data.benchAccounting.childImageSharp.fluid}
               className="kg-image"
             />
             <figcaption>Large imagery is at the heart of this theme</figcaption>
           </figure> */}
           {/* <h3 id="dynamic-styles"></h3> */}
+          <React.Fragment>
+            <div className="retro" id="container">
+              <img
+                src={storeFront}
+                alt="logo"
+                width="800px"
+                height="300px"
+                margin-left="auto"
+                margin-right="auto"
+              />
+            </div>
+          </React.Fragment>
           <p>
             Seattle shoppers in search of comfortable, functional and
             fashionable footwear look no further. Where comfort meets fashion is
