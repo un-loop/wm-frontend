@@ -1,18 +1,29 @@
 import React, { useEffect, useState } from "react"
+
 import { graphql, StaticQuery } from "gatsby"
 // import Img from "gatsby-image"
 import client from "../client"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-
+import BlockContent from "@sanity/block-content-to-react"
 import "../utils/normalize.css"
 import "../utils/css/screen.css"
 
 const BlogPage = ({ data }, location) => {
+  // console.log(data)
   const siteTitle = data.site.siteMetadata.title
   // const posts = data.allMarkdownRemark.edges
   // let postCounter = 0
   const [blogs, setBlogs] = useState([])
+  // const serializers = {
+  //   types: {
+  //     code: props => (
+  //       <pre data-language={props.node.language}>
+  //   <code>{props.node.code}</code>
+  //       </pre>
+  //     )
+  //   }
+  // }
 
   useEffect(() => {
     onLoad()
@@ -22,6 +33,7 @@ const BlogPage = ({ data }, location) => {
       const blogs = await client.fetch(`
         *[_type == 'blog']{
           title, images, author, created, blog}`)
+
       // console.log("testing 123", blogs)
       setBlogs(blogs)
     } catch (e) {
@@ -47,9 +59,21 @@ const BlogPage = ({ data }, location) => {
             />
             <figcaption>Hershal</figcaption>
           </figure>
+
           <h3>Blog Post</h3>
           {blogs.map((blog, i) => {
-            return <p>{blog.title} </p>
+            console.log(blog)
+            return (
+              <div>
+                <h4>{blog.title}</h4>
+                <BlockContent
+                  blocks={blog.blog}
+                  image={blog.image}
+                  projectId="v8vntiu0"
+                  dataset="production"
+                />
+              </div>
+            )
           })}
         </div>
       </article>
