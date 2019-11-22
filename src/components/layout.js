@@ -1,11 +1,19 @@
 import React from "react"
 import { Link } from "gatsby"
 
+const logonoAddClear = require("../images/logono_add_clear.png")
 const Layout = props => {
   const { title, children } = props
   const [toggleNav, setToggleNav] = React.useState(false)
   return (
     <div className={`site-wrapper ${toggleNav ? `site-head-open` : ``}`}>
+      <React.Fragment>
+        <div className="logo">
+          <div class="col-md-4">
+            <img src={logonoAddClear} alt="logo" />
+          </div>
+        </div>
+      </React.Fragment>
       <header className="site-head">
         <div className="site-head-container">
           <a
@@ -32,8 +40,13 @@ const Layout = props => {
               <li className="nav-about" role="menuitem">
                 <Link to={`/about`}>About</Link>
               </li>
+
+              {/* <li className="nav-elements" role="menuitem"> */}
+              {/* <li className="nav-elements" role="menuitem">
+                <Link to={`/elements`}>Elements</Link>
+              </li> */}
               <li className="nav-elements" role="menuitem">
-                <Link to={`/blog`}>Blog</Link>
+                <Link to={`/contact`}>Contact</Link>
               </li>
               <li className="nav-elements" role="menuitem">
                 <Link to={`/contact`}>Contact</Link>
@@ -44,52 +57,34 @@ const Layout = props => {
               <li className="nav-elements" role="menuitem">
                 <Link to={`/women`}>Women</Link>
               </li>
+              {/* <li className="nav-elements" role="menuitem">
+                  <Link to={`/accessories`}>Accessories</Link>
+                </li>
+                <li className="nav-elements" role="menuitem">
+                  <Link to={`/kids`}>Kids</Link>
+                </li> */}
+              {/* </li> */}
             </ul>
           </nav>
-          <div className="site-head-center">
+          {/* <div className="site-head-center">
             <Link className="site-head-logo" to={`/`}>
               {title}
             </Link>
-          </div>
+          </div> */}
           <div className="site-head-right">
             <div className="social-links">
-              <a
-                href="https://www.facebook.com/pg/thewoollymammothshoes"
-                img
-                alt="follow me on facebook"
-                img
-                src="https://c866088.ssl.cf3.rackcdn.com/assets/facebook30x30.png"
-                title="Facebook"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Facebook
+              <a href="https://www.facebook.com/pg/thewoollymammothshoes">
+                <i class="fa fa-facebook" />
               </a>
-              <a
-                href="https://www.instagram.com/thewoollymammothshoes/"
-                title="Instagram"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Instagram
+              <a href="https://www.instagram.com/thewoollymammothshoes/">
+                <i class="fa fa-instagram" />
               </a>
-
-              <a
-                href="https://twitter.com/woolly_shoes"
-                title="Twitter"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Twitter
+              <a href="https://twitter.com/woolly_shoes">
+                <i class="fa fa-twitter" />
               </a>
-              <Link
-                to={`/rss.xml`}
-                title="RSS"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                RSS
-              </Link>
+              <li className="nav-elements" role="menuitem">
+                <Link to={`/blog`}>Blog</Link>
+              </li>
             </div>
           </div>
         </div>
