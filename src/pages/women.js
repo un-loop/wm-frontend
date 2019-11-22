@@ -18,26 +18,36 @@ const AboutPage = ({ data }, location) => {
       <article className="post-content page-template no-image">
         <div className="post-content-body">
           <h2 id="clean-minimal-and-deeply-customisable-london-is-a-theme-made-for-people-who-appreciate-simple-lines-">
-            Beauty treatment for your feet
+            Clean, minimal, and deeply customisable. London is a theme made for
+            people who appreciate simple lines.
           </h2>
-          {/* <figure className="kg-card kg-image-card kg-width-full">
+          <figure className="kg-card kg-image-card kg-width-full">
             <Img
               fluid={data.benchAccounting.childImageSharp.fluid}
               className="kg-image"
             />
             <figcaption>Large imagery is at the heart of this theme</figcaption>
-          </figure> */}
-          <h3 id="dynamic-styles">Get more miles for your shoes</h3>
+          </figure>
+          <h3 id="dynamic-styles">Dynamic styles</h3>
           <p>
-            Shoes is our passion. We carry an extensive collection of shoes for
-            women, from sandals and sneakers to women's boots, we're confident
-            you'll find the perfect ones for you!
+            London comes with photo-centric main layout best suited to
+            photography, graphics portfolios and other image-heavy uses.
           </p>
           <p>
-            Everything's better in leather. Luxe up your casual look with
-            leather shoes for women in a range of styles and designs, from easy
-            slip-on shoes to leather and more. Feel classy and confident on
-            every occasion in leather shoes for women.
+            Both post and page templates are light and minimal, with all the
+            focus on the content while the design of the theme gets out of the
+            way. Beneath the hood, London enjoys the full power of the{" "}
+            <a href="https://docs.ghost.org/api/handlebars-themes/">
+              Ghost Handlebars Theme API
+            </a>{" "}
+            to provide limitless customisation options and dynamic styles.
+          </p>
+          <p>
+            Don't forget to check out the{" "}
+            <a href="https://docs.ghost.org/integrations/">
+              Ghost Integrations Directory
+            </a>{" "}
+            for more ways to integrate Ghost with your favourite services.
           </p>
         </div>
       </article>

@@ -36,24 +36,13 @@ const Layout = props => {
                 <Link to={`/blog`}>Blog</Link>
               </li>
               <li className="nav-elements" role="menuitem">
-                <li className="nav-elements" role="menuitem">
-                  <Link to={`/elements`}>Elements</Link>
-                </li>
-                <li className="nav-elements" role="menuitem">
-                  <Link to={`/contact`}>Contact</Link>
-                </li>
-                <li className="nav-elements" role="menuitem">
-                  <Link to={`/men`}>Men</Link>
-                </li>
-                <li className="nav-elements" role="menuitem">
-                  <Link to={`/women`}>Women</Link>
-                </li>
-                <li className="nav-elements" role="menuitem">
-                  <Link to={`/accessories`}>Accessories</Link>
-                </li>
-                <li className="nav-elements" role="menuitem">
-                  <Link to={`/kids`}>Kids</Link>
-                </li>
+                <Link to={`/contact`}>Contact</Link>
+              </li>
+              <li className="nav-elements" role="menuitem">
+                <Link to={`/men`}>Men</Link>
+              </li>
+              <li className="nav-elements" role="menuitem">
+                <Link to={`/women`}>Women</Link>
               </li>
             </ul>
           </nav>
