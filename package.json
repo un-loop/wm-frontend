@@ -44,6 +44,7 @@
     "react-helmet": "^5.2.1",
     "react-swipeable-views": "^0.13.3",
     "react-swipeable-views-utils": "^0.13.3",
+    "reactjs-dropdown-component": "^1.0.6",
     "typeface-alegreya": "^0.0.69",
     "typeface-merriweather": "0.0.72",
     "typeface-montserrat": "0.0.54",
