@@ -8,6 +8,7 @@ class Dropdown extends Component {
       vendors: [],
       title: "",
       key: "title",
+      gender: "",
       listOpen: false,
       headerTitle: this.props.title,
     }
@@ -15,7 +16,7 @@ class Dropdown extends Component {
   }
   async componentDidMount() {
     const results = await client.fetch(`*[_type == 'vendor' ]{	
-                title, slug}`)
+                title, gender, slug}`)
     console.log(results)
     // const url = result.slug.current
     this.setState({ vendors: results })
@@ -94,14 +95,19 @@ class Dropdown extends Component {
         </div>
         {listOpen && (
           <ul className="dd-list" onClick={e => e.stopPropagation()}>
-            {this.state.vendors.map(item => (
-              <li
-                className="dd-list-item"
-                key={item.title}
-                onClick={() => this.selectedItem(item.title, item.key)}
-              >
-                {item.title} {item.selected}
-              </li>
+            {this.state.vendors.map(vendor => (
+              <React.Fragment>
+                {vendor.gender === this.props.gender ||
+                vendor.gender === "both" ? (
+                  <li
+                    className="dd-list-item"
+                    key={vendor.title}
+                    onClick={() => this.selectedItem(vendor.title, vendor.key)}
+                  >
+                    {vendor.title} {vendor.selected}
+                  </li>
+                ) : null}
+              </React.Fragment>
             ))}
           </ul>
         )}

@@ -7,7 +7,6 @@ const logonoAddClear = require("../images/logono_add_clear.png")
 const Layout = props => {
   const { title, children } = props
   const [toggleNav, setToggleNav] = useState(false)
-  const [vendors, setVendors] = useState([])
 
   return (
     <div className={`site-wrapper ${toggleNav ? `site-head-open` : ``}`}>
@@ -55,15 +54,11 @@ const Layout = props => {
 
               <li className="nav-elements" role="menuitem">
                 {/* <Link to={`/men`}>Men</Link> */}
-                <Dropdown
-                  title="Men"
-                  gender="male"
-                  // list={vendors}
-                  // resetThenSet={this.resetThenSet}
-                />
+                <Dropdown title="Men" gender="male" />
               </li>
               <li className="nav-elements" role="menuitem">
-                <Link to={`/women`}>Women</Link>
+                {/* <Link to={`/women`}>Women</Link> */}
+                <Dropdown title="Women" gender="female" />
               </li>
               {/* <li className="nav-elements" role="menuitem">
                   <Link to={`/accessories`}>Accessories</Link>
