@@ -50,7 +50,7 @@ const BlogPage = ({ data }, location) => {
     padding: 10,
     marginTop: 30,
     marginBottom: 40,
-    paddingLeft: 30,
+    paddingLeft: 10,
   }
   return (
     <Layout title={siteTitle}>
