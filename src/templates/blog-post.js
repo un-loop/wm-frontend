@@ -1,19 +1,40 @@
 import React from "react"
 import { graphql } from "gatsby"
 import Img from "gatsby-image"
-
+import client from "../client"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import { func, string } from "prop-types"
+import { request } from "http"
 
 class BlogPostTemplate extends React.Component {
-  async componentDidMount() {
-    console.log("Create sanity API request here based on URL")
+  constructor(props) {
+    super(props)
+    this.state = {
+      brands: [],
+    }
   }
+  async componentDidMount() {
+    console.log("Hello world", window.location.pathname)
+    const brand = window.location.pathname.slice(1, -1)
+    const result = await client.fetch(`*[_type == 'product' && vendorTitle == '${brand}']
+    `)
+    this.setState({ brands: result })
+  }
+
+  async fetchProducts() {}
+  // todo:
+  // 1 move lines 22-25 into the component didmount func
+  // 2 remove the slashes and extract just the brand
+  // 3 plug i n that brand as a variable into the interpolated string
+  // 4 set state of product to be that api request
+  // 5 create constructor for state
+  // 6 inside of the render create a map func that takes every product for the vendor and displays it for that vendor
+
   render() {
     const post = this.props.data.markdownRemark
     const siteTitle = this.props.data.site.siteMetadata.title
-    console.log("Hello world", window.location.pathname)
-    const brand = window.location.pathname
+    console.log(this.state.brands)
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
@@ -27,7 +48,11 @@ class BlogPostTemplate extends React.Component {
           <header className="post-content-header">
             <h1 className="post-content-title">{post.frontmatter.title}</h1>
           </header>
-
+          <div>
+            {this.state.brands.map(brand => (
+              <p>{brand.title}</p>
+            ))}
+          </div>
           {post.frontmatter.description && (
             <p class="post-content-excerpt">{post.frontmatter.description}</p>
           )}

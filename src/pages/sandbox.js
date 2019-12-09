@@ -18,8 +18,14 @@ class Search extends React.Component {
     console.log(result)
     // const url = result.slug.current
     this.setState({ vendors: result })
+    this.fetchProducts()
   }
-
+  async fetchProducts() {
+    const result = await client.fetch(`*[_type == 'product' && [] == ]{
+      title
+    }`)
+    console.log("product:", result)
+  }
   onChange = e => {
     this.setState({ title: e.target.value })
   }
