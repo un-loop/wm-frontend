@@ -43,7 +43,15 @@ const BlogPage = ({ data }, location) => {
     }
     // setIsLoading(false);
   }
-
+  const mystyle = {
+    borderRadius: "25px",
+    boxShadow: "2px 2px 15px grey",
+    border: "1px solid grey",
+    padding: 10,
+    marginTop: 30,
+    marginBottom: 40,
+    paddingLeft: 30,
+  }
   return (
     <Layout title={siteTitle}>
       <SEO title="Blog" keywords={[`blog`, `gatsby`, `javascript`, `react`]} />
@@ -64,8 +72,8 @@ const BlogPage = ({ data }, location) => {
         {blogs.map((blog, i) => {
           console.log(blog)
           return (
-            <div>
-              <h4>{blog.title}</h4>
+            <div style={mystyle}>
+              <h4 style={{ paddingLeft: 15 }}>{blog.title}</h4>
               <BlockContent
                 blocks={blog.blog}
                 image={blog.image}
