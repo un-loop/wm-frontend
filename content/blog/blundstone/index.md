@@ -1,8 +1,8 @@
 ---
 title: Blundstone
 date: "2019-05-06"
-thumbnail: ./blundstoneAll.jpg
+# thumbnail: ./blundstoneAll.jpg
 description: Blundstone for him or her
 ---
 
-![blundstone](./blund1.jpg)
+<!-- ![blundstone](./blund1.jpg) -->

@@ -4,8 +4,10 @@ import Img from "gatsby-image"
 import client from "../client"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { func, string } from "prop-types"
-import { request } from "http"
+import myConfiguredSanityClient from "../client"
+import imageUrlBuilder from "@sanity/image-url"
+
+const builder = imageUrlBuilder(myConfiguredSanityClient)
 
 class BlogPostTemplate extends React.Component {
   constructor(props) {
@@ -20,16 +22,9 @@ class BlogPostTemplate extends React.Component {
     const result = await client.fetch(`*[_type == 'product' && vendorTitle == '${brand}']
     `)
     this.setState({ brands: result })
-  }
 
-  async fetchProducts() {}
-  // todo:
-  // 1 move lines 22-25 into the component didmount func
-  // 2 remove the slashes and extract just the brand
-  // 3 plug i n that brand as a variable into the interpolated string
-  // 4 set state of product to be that api request
-  // 5 create constructor for state
-  // 6 inside of the render create a map func that takes every product for the vendor and displays it for that vendor
+    console.log(result)
+  }
 
   render() {
     const post = this.props.data.markdownRemark
@@ -49,9 +44,24 @@ class BlogPostTemplate extends React.Component {
             <h1 className="post-content-title">{post.frontmatter.title}</h1>
           </header>
           <div>
-            {this.state.brands.map(brand => (
-              <p>{brand.title}</p>
-            ))}
+            {this.state.brands.map(brand => {
+              function urlFor(_ref) {
+                return builder.image(_ref)
+              }
+              return (
+                <React.Fragment>
+                  <p>{brand.title}</p>
+                  {/* <p>{brand.defaultProductVariant.images[0].asset._ref}</p> */}
+                  <img
+                    src={urlFor(
+                      brand.defaultProductVariant.images[0].asset._ref
+                    )
+                      .width(200)
+                      .url()}
+                  />
+                </React.Fragment>
+              )
+            })}
           </div>
           {post.frontmatter.description && (
             <p class="post-content-excerpt">{post.frontmatter.description}</p>
