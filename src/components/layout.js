@@ -1,10 +1,13 @@
-import React from "react"
+import React, { useState } from "react"
 import { Link } from "gatsby"
+import Dropdown from "./Dropdown"
+import client from "../client"
 
 const logonoAddClear = require("../images/logono_add_clear.png")
 const Layout = props => {
   const { title, children } = props
-  const [toggleNav, setToggleNav] = React.useState(false)
+  const [toggleNav, setToggleNav] = useState(false)
+
   return (
     <div className={`site-wrapper ${toggleNav ? `site-head-open` : ``}`}>
       <React.Fragment>
@@ -50,10 +53,12 @@ const Layout = props => {
               </li>
 
               <li className="nav-elements" role="menuitem">
-                <Link to={`/men`}>Men</Link>
+                {/* <Link to={`/men`}>Men</Link> */}
+                <Dropdown title="Men" gender="male" />
               </li>
               <li className="nav-elements" role="menuitem">
-                <Link to={`/women`}>Women</Link>
+                {/* <Link to={`/women`}>Women</Link> */}
+                <Dropdown title="Women" gender="female" />
               </li>
               {/* <li className="nav-elements" role="menuitem">
                   <Link to={`/accessories`}>Accessories</Link>
