@@ -8,6 +8,11 @@ const Layout = props => {
   const { title, children } = props
   const [toggleNav, setToggleNav] = useState(false)
 
+  const mystyle = {
+    zIndex: 10,
+    position: absolute,
+  }
+
   return (
     <div className={`site-wrapper ${toggleNav ? `site-head-open` : ``}`}>
       <React.Fragment>
@@ -37,27 +42,19 @@ const Layout = props => {
           </a>
           <nav id="swup" class="site-head-left">
             <ul className="nav" role="menu">
-              <li className="nav-home nav-current" role="menuitem">
+              <li className="nav-home" role="menuitem" style={mystyle}>
                 <Link to={`/`}>Home</Link>
-              </li>
-              <li className="nav-about" role="menuitem">
-                <Link to={`/about`}>About</Link>
               </li>
 
               {/* <li className="nav-elements" role="menuitem"> */}
               {/* <li className="nav-elements" role="menuitem">
                 <Link to={`/elements`}>Elements</Link>
               </li> */}
-              <li className="nav-elements" role="menuitem">
-                <Link to={`/contact`}>Contact</Link>
-              </li>
 
-              <li className="nav-elements" role="menuitem">
-                {/* <Link to={`/men`}>Men</Link> */}
+              <li className="nav-elements" role="menuitem" style={mystyle}>
                 <Dropdown title="Men" gender="male" />
               </li>
-              <li className="nav-elements" role="menuitem">
-                {/* <Link to={`/women`}>Women</Link> */}
+              <li className="nav-elements" role="menuitem" style={mystyle}>
                 <Dropdown title="Women" gender="female" />
               </li>
               {/* <li className="nav-elements" role="menuitem">
@@ -75,6 +72,15 @@ const Layout = props => {
             </Link>
           </div> */}
           <div className="site-head-right">
+            <li className="nav-elements" role="menuitem" style={mystyle}>
+              <Link to={`/blog`}>Blog</Link>
+            </li>
+            <li className="nav-about" role="menuitem" style={mystyle}>
+              <Link to={`/about`}>About</Link>
+            </li>
+            <li className="nav-elements" role="menuitem" style={mystyle}>
+              <Link to={`/contact`}>Contact</Link>
+            </li>
             <div className="social-links">
               <a href="https://www.facebook.com/pg/thewoollymammothshoes">
                 <i class="fa fa-facebook" />
@@ -85,9 +91,6 @@ const Layout = props => {
               <a href="https://twitter.com/woolly_shoes">
                 <i class="fa fa-twitter" />
               </a>
-              <li className="nav-elements" role="menuitem">
-                <Link to={`/blog`}>Blog</Link>
-              </li>
             </div>
           </div>
         </div>
