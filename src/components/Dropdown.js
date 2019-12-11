@@ -1,7 +1,8 @@
 import React, { Component } from "react"
 import client from "../client"
+import Dropdown from "reactjs-dropdown-component"
 
-class Dropdown extends Component {
+class DropdownContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -94,7 +95,11 @@ class Dropdown extends Component {
           {listOpen}
         </div>
         {listOpen && (
-          <ul className="dd-list" onClick={e => e.stopPropagation()}>
+          <ul
+            className="dd-list"
+            style={{ display: "flex", flexDirection: "column" }}
+            onClick={e => e.stopPropagation()}
+          >
             {this.state.vendors.map(vendor => (
               <React.Fragment>
                 {vendor.gender === this.props.gender ||
@@ -116,4 +121,4 @@ class Dropdown extends Component {
   }
 }
 
-export default Dropdown
+export default DropdownContainer

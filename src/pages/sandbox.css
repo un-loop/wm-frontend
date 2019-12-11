@@ -1,0 +1,8 @@
+.MuiFormLabel-root {
+  font-size: large !important;
+}
+
+#search-box {
+  font-size: large !important;
+  height: 100 !important;
+}

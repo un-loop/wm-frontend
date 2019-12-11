@@ -1,17 +1,14 @@
 import React, { useState } from "react"
 import { Link } from "gatsby"
-import Dropdown from "./Dropdown"
-import client from "../client"
+import DropdownContainer from "./Dropdown"
+// import client from "../client
+import Search from "../pages/sandbox"
+import "../pages/sandbox.css"
 
 const logonoAddClear = require("../images/logono_add_clear.png")
 const Layout = props => {
   const { title, children } = props
   const [toggleNav, setToggleNav] = useState(false)
-
-  const mystyle = {
-    zIndex: 10,
-    position: absolute,
-  }
 
   return (
     <div className={`site-wrapper ${toggleNav ? `site-head-open` : ``}`}>
@@ -23,7 +20,7 @@ const Layout = props => {
         </div>
       </React.Fragment>
       <header className="site-head">
-        <div className="site-head-container">
+        <div className="site-head-container" style={{ marginTop: 20 }}>
           <a
             className="nav-burger"
             href={`#`}
@@ -42,59 +39,51 @@ const Layout = props => {
           </a>
           <nav id="swup" class="site-head-left">
             <ul className="nav" role="menu">
-              <li className="nav-home" role="menuitem" style={mystyle}>
+              <li className="nav-home" role="menuitem">
                 <Link to={`/`}>Home</Link>
               </li>
 
-              {/* <li className="nav-elements" role="menuitem"> */}
-              {/* <li className="nav-elements" role="menuitem">
-                <Link to={`/elements`}>Elements</Link>
-              </li> */}
-
-              <li className="nav-elements" role="menuitem" style={mystyle}>
-                <Dropdown title="Men" gender="male" />
+              <li className="nav-about" role="menuitem">
+                <Link to={`/about`}>About</Link>
               </li>
-              <li className="nav-elements" role="menuitem" style={mystyle}>
-                <Dropdown title="Women" gender="female" />
+              <li className="nav-elements" role="menuitem">
+                <Link to={`/contact`}>Contact</Link>
               </li>
-              {/* <li className="nav-elements" role="menuitem">
-                  <Link to={`/accessories`}>Accessories</Link>
-                </li>
-                <li className="nav-elements" role="menuitem">
-                  <Link to={`/kids`}>Kids</Link>
-                </li> */}
-              {/* </li> */}
             </ul>
           </nav>
-          {/* <div className="site-head-center">
-            <Link className="site-head-logo" to={`/`}>
-              {title}
-            </Link>
-          </div> */}
-          <div className="site-head-right">
-            <li className="nav-elements" role="menuitem" style={mystyle}>
-              <Link to={`/blog`}>Blog</Link>
-            </li>
-            <li className="nav-about" role="menuitem" style={mystyle}>
-              <Link to={`/about`}>About</Link>
-            </li>
-            <li className="nav-elements" role="menuitem" style={mystyle}>
-              <Link to={`/contact`}>Contact</Link>
-            </li>
-            <div className="social-links">
-              <a href="https://www.facebook.com/pg/thewoollymammothshoes">
-                <i class="fa fa-facebook" />
-              </a>
-              <a href="https://www.instagram.com/thewoollymammothshoes/">
-                <i class="fa fa-instagram" />
-              </a>
-              <a href="https://twitter.com/woolly_shoes">
-                <i class="fa fa-twitter" />
-              </a>
-            </div>
-          </div>
+          <nav class="site-head-right">
+            <ul className="nav" role="menu">
+              <div className="social-links">
+                <a href="https://www.facebook.com/pg/thewoollymammothshoes">
+                  <i class="fa fa-facebook" />
+                </a>
+                <a href="https://www.instagram.com/thewoollymammothshoes/">
+                  <i class="fa fa-instagram" />
+                </a>
+                <a href="https://twitter.com/woolly_shoes">
+                  <i class="fa fa-twitter" />
+                </a>
+              </div>
+              <li className="nav-elements" role="menuitem">
+                <Link to={`/blog`}>Blog</Link>
+              </li>
+            </ul>
+          </nav>
         </div>
       </header>
+      <div>
+        <ul style={{ listStyle: "none", display: "flex" }}>
+          <li className="nav-elements" role="menuitem">
+            <DropdownContainer title="Women" gender="female" key={title} />
+          </li>
+          <li className="nav-elements" role="menuitem">
+            <DropdownContainer title="Men" gender="male" key={title} />
+          </li>
+          <li className="nav-elements" role="menuitem">
+            <Search style={{}} />
+          </li>
+        </ul>
+      </div>
       <main id="site-main" className="site-main">
         <div id="swup" className="transition-fade">
           {children}
