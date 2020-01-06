@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { graphql, StaticQuery } from "gatsby"
 import SwipeableTextMobileStepper from "../components/carousel"
 import Layout from "../components/layout"
@@ -9,10 +9,13 @@ import "font-awesome/css/font-awesome.min.css"
 import "../utils/normalize.css"
 import "../utils/css/screen.css"
 import client from "../client"
+import imageUrlBuilder from "@sanity/image-url"
 //TODO: switch to staticQuery, get rid of comments, remove unnecessary components, export as draft template
+
 const BlogIndex = ({ data }, location) => {
   const siteTitle = data.site.siteMetadata.title
   const posts = data.allMarkdownRemark.edges
+  const [logos, setLogos] = useState([])
   let postCounter = 0
   useEffect(() => {
     onLoad()
@@ -20,9 +23,9 @@ const BlogIndex = ({ data }, location) => {
   async function onLoad() {
     try {
       const products = await client.fetch(`
-        *[_type == 'vendor']{
-          title, distributor}`)
+        *[_type == 'vendor']`)
       console.log("testing 123", products)
+      setLogos(products)
     } catch (e) {
       if (e !== "No current user") {
         alert(e)
@@ -44,6 +47,19 @@ const BlogIndex = ({ data }, location) => {
         </header>
       )} */}
       <div className="post-feed">
+        {logos.map((logo, i) => {
+          postCounter++
+          return (
+            <PostCard
+              key={logo.slug.current}
+              count={postCounter}
+              node={logo}
+              postClass={`post`}
+            />
+            // <h1>yo</h1>
+          )
+        })}
+        {/* <div className="post-feed">
         {posts.map(({ node }) => {
           postCounter++
           return (
@@ -54,7 +70,7 @@ const BlogIndex = ({ data }, location) => {
               postClass={`post`}
             />
           )
-        })}
+        })} */}
       </div>
     </Layout>
   )

@@ -2,6 +2,7 @@ import React from "react"
 import client from "../client"
 import Autocomplete from "@material-ui/lab/Autocomplete"
 import { TextField } from "@material-ui/core"
+import "./sandbox.css"
 
 class Search extends React.Component {
   constructor(props) {
@@ -36,13 +37,19 @@ class Search extends React.Component {
           id="search-box"
           options={this.state.vendors}
           getOptionLabel={option => option.title}
-          style={{ width: 300 }}
+          style={{ width: 300, height: 100 }}
           renderInput={params => (
             <TextField
+              id="search-text-box"
               {...params}
-              label="Combo box"
+              label="Search"
               variant="outlined"
               fullWidth
+              style={{
+                border: "1px solid grey",
+                borderRadius: 10,
+                fontSize: "22px !important",
+              }}
             />
           )}
         />
