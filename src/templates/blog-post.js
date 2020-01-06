@@ -7,7 +7,8 @@ import SEO from "../components/seo"
 import myConfiguredSanityClient from "../client"
 import imageUrlBuilder from "@sanity/image-url"
 import { Button, ButtonToolbar } from "react-bootstrap"
-import "bootstrap/dist/css/bootstrap.min.css"
+import "../utils/css/components/global.css"
+// import "bootstrap/dist/css/bootstrap.min.css"
 import Blundstone from "../components/Blundstone"
 const builder = imageUrlBuilder(myConfiguredSanityClient)
 
@@ -17,6 +18,7 @@ class BlogPostTemplate extends React.Component {
     this.state = {
       brands: [],
       addModalShow: false,
+      showBig: false,
     }
   }
   async componentDidMount() {
@@ -25,8 +27,6 @@ class BlogPostTemplate extends React.Component {
     const result = await client.fetch(`*[_type == 'product' && vendorTitle == '${brand}']
     `)
     this.setState({ brands: result })
-
-    console.log(result)
   }
 
   render() {
@@ -41,6 +41,18 @@ class BlogPostTemplate extends React.Component {
             title={post.frontmatter.title}
             description={post.frontmatter.description || post.excerpt}
           />
+          <React.Fragment>
+            <ButtonToolbar>
+              <Button
+                className="btn"
+                variant="primary"
+                onClick={() => this.setState({ addModalShow: true })}
+              >
+                Open Modal
+              </Button>
+            </ButtonToolbar>
+            <Blundstone show={this.state.addModalShow} onHide={addModalClose} />
+          </React.Fragment>
           <article
             className={`post-content ${post.frontmatter.thumbnail ||
               `no-image`}`}
@@ -56,7 +68,6 @@ class BlogPostTemplate extends React.Component {
                 return (
                   <React.Fragment>
                     <p>{brand.title}</p>
-                    {/* <p>{brand.defaultProductVariant.images[0].asset._ref}</p> */}
                     <img
                       src={urlFor(
                         brand.defaultProductVariant.images[0].asset._ref
@@ -95,15 +106,6 @@ class BlogPostTemplate extends React.Component {
             </footer>
           </article>
         </Layout>
-        <ButtonToolbar>
-          <Button
-            variant="primary"
-            onClick={() => this.setState({ addModalShow: true })}
-          >
-            Close ModaL
-          </Button>
-        </ButtonToolbar>
-        <Blundstone show={this.state.addModalShow} onHide={addModalClose} />
       </div>
     )
   }
