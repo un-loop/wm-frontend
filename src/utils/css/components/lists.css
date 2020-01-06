@@ -34,9 +34,11 @@ ol {
 }
 
 li {
-  margin: 0.5em 0;
+  margin: 0.5em 0.5em;
   padding-left: 0.3em;
   line-height: 1.6em;
+  max-width: 8.9em;
+  max-height: 1.7em;
 }
 
 dt {

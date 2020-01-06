@@ -2,7 +2,33 @@
   font-size: large !important;
 }
 
-#search-box {
-  font-size: large !important;
-  height: 100 !important;
+/* .MuiOutlinedInput-base {
+  font-size: larger !important;
 }
+
+.MuiAutocomplete-inputRoot {
+  font-size: larger !important;
+  max-height: 50 !important;
+} */
+
+.MuiFormControl-root {
+  font-size: large !important;
+  max-height: 1.7em !important;
+}
+
+.MuiInputBase-root {
+  font-size: large !important;
+  max-height: 1.6em !important;
+}
+
+#search-box {
+  font-size: larger !important;
+  max-height: 1.6em !important;
+  width: 5rem !important;
+}
+
+/* #search-text-box {
+  max-height: 50 !important;
+  width: "50%" !important;
+  font-size: large !important;
+} */
