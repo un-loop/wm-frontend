@@ -427,3 +427,9 @@ h6 {
   margin: 1.5em 0 1em 0;
   font-size: 2.2rem;
 }
+.btn {
+  border-radius: 3px;
+  padding: 0.25rem 1rem;
+  margin-right: 1rem;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.26);
+}
