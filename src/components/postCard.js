@@ -8,17 +8,19 @@ function urlFor(_ref) {
 }
 export default props => {
   console.log("Post Card: ", props.node)
-  const link = urlFor(props.node.logo.asset._ref).url()
+  const link = urlFor(props.node.images[0].asset._ref).url()
   console.log("Card Link: ", link)
   return (
     <article
       className={`post-card ${props.count % 3 === 0 && `post-card-large`} ${
         props.postClass
       } 
-    ${urlFor(props.node.logo.asset._ref) ? `with-image` : `no-image`}`}
+    ${urlFor(props.node.images[0].asset._ref) ? `with-image` : `no-image`}`}
       style={
-        props.node.logo.asset._ref && {
-          backgroundImage: `url(${urlFor(props.node.logo.asset._ref).url()})`,
+        props.node.images[0].asset._ref && {
+          backgroundImage: `url(${urlFor(
+            props.node.images[0].asset._ref
+          ).url()})`,
         }
       }
     >
