@@ -23,11 +23,11 @@ class BlogPostTemplate extends React.Component {
   }
   async componentDidMount() {
     console.log("Hello world", window.location.pathname)
-    const brand = window.location.pathname.slice(1, -1)
+    const brand = window.location.pathname.split("/")
     console.log("Brand: ", brand)
     try {
       const result = await client.fetch(
-        `*[_type == 'product' && vendorTitle == '${brand}']`
+        `*[_type == 'product' && vendorTitle == '${brand[1]}']`
       )
       console.log(result)
       this.setState({ brands: result })
