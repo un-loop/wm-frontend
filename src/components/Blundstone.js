@@ -1,5 +1,6 @@
 import React from "react"
 import Backdrop from "../components/Backdrop/Backdrop"
+import BlogPostTemplate from "../templates/blog-post.js"
 import { Modal, ModalBody, ModalHeader, Button } from "react-bootstrap"
 import "bootstrap/dist/css/bootstrap.min.css"
 import "../templates/blog-post"
@@ -9,12 +10,17 @@ class Blundstone extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      creating: false,
+      showModal: false,
     }
   }
-  startCreateEventHandler = () => {
-    this.setState({ creating: true })
+  setModalState(showModal) {
+    this.setState({
+      showModal: showModal,
+    })
   }
+  // startCreateEventHandler = () => {
+  //   this.setState({ showModal: true })
+  // }
   render() {
     return (
       <React.Fragment>
@@ -31,20 +37,22 @@ class Blundstone extends React.Component {
               Blundstone
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body>
-            <div className="">put the info</div>
-            <h4>Centered Modal</h4>
-            <p>
-              Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-              dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
-              ac consectetur ac, vestibulum at eros.
-              {/* <img
-                      src={
-                        .width(200)
-                        .url()}
-                    /> */}
-            </p>
-          </Modal.Body>
+
+          <div className="">put the info</div>
+          <h4>Centered Modal</h4>
+          <div>
+            <img
+              src={this.props.brand}
+              onClick={this.setModalState.bind(this, true)}
+            />
+            <Modal.Body isOpen={this.state.showModal}>
+              <img
+                src={this.props.brand}
+                onClick={this.setModalState.bind(this, false)}
+              />
+            </Modal.Body>
+          </div>
+
           <Modal.Footer>
             <Button onClick={this.props.onHide} className="modal-btn">
               Close
