@@ -24,9 +24,16 @@ class BlogPostTemplate extends React.Component {
   async componentDidMount() {
     console.log("Hello world", window.location.pathname)
     const brand = window.location.pathname.slice(1, -1)
-    const result = await client.fetch(`*[_type == 'product' && vendorTitle == '${brand}']
-    `)
-    this.setState({ brands: result })
+    console.log("Brand: ", brand)
+    try {
+      const result = await client.fetch(
+        `*[_type == 'product' && vendorTitle == '${brand}']`
+      )
+      console.log(result)
+      this.setState({ brands: result })
+    } catch (e) {
+      console.log("Sanity fetch", e)
+    }
   }
 
   render() {
