@@ -2,8 +2,8 @@ import React, { useState } from "react"
 import { Link } from "gatsby"
 import DropdownContainer from "./Dropdown"
 // import client from "../client
-import Search from "../pages/sandbox"
-import "../pages/sandbox.css"
+import UseAutoComplete from "../components/search"
+// import "../pages/sandbox.css"
 
 const logonoAddClear = require("../images/logono_add_clear.png")
 const Layout = props => {
@@ -80,7 +80,7 @@ const Layout = props => {
             <DropdownContainer title="Men" gender="male" key={title} />
           </li>
           <li className="nav-elements" role="menuitem">
-            <Search style={{}} />
+            <UseAutoComplete style={{}} />
           </li>
         </ul>
       </div>
