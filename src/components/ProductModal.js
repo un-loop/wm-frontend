@@ -18,11 +18,17 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews)
 
 const useStyles = makeStyles(theme => ({
   root: {
-    maxWidth: "100%",
-    flexGrow: 1,
-    display: "flex",
-    flexDirection: "column",
-    textAlign: "center",
+    // padding: '0 70px',
+    // box-sizing: border-box,
+    // display: 'absolute',
+    // width: '100%',
+    // top: '50%',
+    // left: '50%',
+    // maxWidth: "100%",
+    // flexGrow: 1,
+    // display: "flex",
+    // flexDirection: "column",
+    // textAlign: "center",
   },
   // header: {
   //   display: "flex",
@@ -93,12 +99,15 @@ function SwipeableTextMobileStepper() {
             return builder.image(_ref)
           }
           return (
-            <div key={step.label}>
+            <div
+              key={step.label}
+              style={{ display: "flex", justifyContent: "center" }}
+            >
               {Math.abs(activeStep - index) <= 2 ? (
                 <img
                   // className={classes.img}
                   src={urlFor(step.defaultProductVariant.images[0].asset._ref)
-                    .width(200)
+                    .width(400)
                     .url()}
                   // src={image.image}
                   // alt={image.label}
