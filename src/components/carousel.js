@@ -36,8 +36,6 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     // alignItems: "stretch",
     textAlign: "center",
-    marginLeft: "29%",
-    marginRight: "25%",
   },
   header: {
     display: "flex",
@@ -96,9 +94,6 @@ function SwipeableTextMobileStepper() {
 
   return (
     <div className={classes.root}>
-      <Paper square elevation={0} className={classes.header}>
-        {/* <Typography>{carouselImages[activeStep].label}</Typography> */}
-      </Paper>
       <AutoPlaySwipeableViews
         axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={activeStep}
