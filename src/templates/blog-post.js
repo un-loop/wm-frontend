@@ -9,7 +9,7 @@ import imageUrlBuilder from "@sanity/image-url"
 import { Button, ButtonToolbar } from "react-bootstrap"
 import "../utils/css/components/global.css"
 // import "bootstrap/dist/css/bootstrap.min.css"
-import Blundstone from "../components/Blundstone"
+import ProductDisplay from "../components/ProductDisplay"
 const builder = imageUrlBuilder(myConfiguredSanityClient)
 
 class BlogPostTemplate extends React.Component {
@@ -23,11 +23,11 @@ class BlogPostTemplate extends React.Component {
   }
   async componentDidMount() {
     console.log("Hello world", window.location.pathname)
-    const brand = window.location.pathname.slice(1, -1)
+    const brand = window.location.pathname.split("/")
     console.log("Brand: ", brand)
     try {
       const result = await client.fetch(
-        `*[_type == 'product' && vendorTitle == '${brand}']`
+        `*[_type == 'product' && vendorTitle == '${brand[1]}']`
       )
       console.log(result)
       this.setState({ brands: result })
@@ -58,7 +58,10 @@ class BlogPostTemplate extends React.Component {
                 Open Modal
               </Button>
             </ButtonToolbar>
-            <Blundstone show={this.state.addModalShow} onHide={addModalClose} />
+            <ProductDisplay
+              show={this.state.addModalShow}
+              onHide={addModalClose}
+            />
           </React.Fragment>
           <article
             className={`post-content ${post.frontmatter.thumbnail ||
