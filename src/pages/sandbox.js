@@ -32,12 +32,20 @@ class Search extends React.Component {
   }
   render() {
     return (
-      <div>
-        <Autocomplete
+      <div
+      // style={{
+      //   border: "1px solid grey",
+      //   borderRadius: 10,
+      //   fontSize: "larger",
+      //   maxHeight: "1.6em",
+
+      // }}
+      >
+        {/* <Autocomplete
           id="search-box"
           options={this.state.vendors}
           getOptionLabel={option => option.title}
-          style={{ width: 300, height: 100 }}
+          style={{ maxWidth: 250, maxHeight: 50 }}
           renderInput={params => (
             <TextField
               id="search-text-box"
@@ -45,14 +53,10 @@ class Search extends React.Component {
               label="Search"
               variant="outlined"
               fullWidth
-              style={{
-                border: "1px solid grey",
-                borderRadius: 10,
-                fontSize: "22px !important",
-              }}
+              
             />
           )}
-        />
+        /> */}
         {/* <input type="text" name="name"
             placeholder="Search"
             value={this.state.title}

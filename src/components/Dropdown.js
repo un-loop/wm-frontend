@@ -88,9 +88,18 @@ class DropdownContainer extends Component {
 
   render() {
     const { listOpen, headerTitle } = this.state
+    const myStyle = {
+      borderRadius: 10,
+      maxHeight: "1.7em",
+      maxWidth: "8.9em",
+    }
     return (
-      <div className="dd-wrapper">
-        <div className="dd-header" onClick={() => this.toggleList()}>
+      <div className="dd-wrapper" style={myStyle}>
+        <div
+          className="dd-header"
+          style={myStyle}
+          onClick={() => this.toggleList()}
+        >
           <div className="dd-header-title">{headerTitle}</div>
           {listOpen}
         </div>
