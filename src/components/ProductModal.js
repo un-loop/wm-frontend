@@ -46,29 +46,15 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-function SwipeableTextMobileStepper() {
+function SwipeableTextMobileStepper(props) {
   const classes = useStyles()
   const theme = useTheme()
   const [activeStep, setActiveStep] = useState(0)
   const [carouselImages, setCarouselImages] = useState([])
-
   useEffect(() => {
-    onLoad()
+    setCarouselImages(props.brands)
+    setActiveStep(props.openingIndex)
   }, [])
-  async function onLoad() {
-    const brand = window.location.pathname.split("/")
-    try {
-      const carousel = await client.fetch(`
-      *[_type == 'product' && vendorTitle == '${brand[1]}']`)
-
-      console.log("testing 123", carousel)
-      setCarouselImages(carousel)
-    } catch (e) {
-      if (e !== "No current user") {
-        alert(e)
-      }
-    }
-  }
 
   const maxSteps = carouselImages.length
 
@@ -81,9 +67,8 @@ function SwipeableTextMobileStepper() {
   }
 
   const handleStepChange = step => {
-    setActiveStep(step)
+    setActiveStep(step + 1)
   }
-
   return (
     <div className={classes.root}>
       <Paper square elevation={0} className={classes.header}></Paper>
@@ -94,7 +79,8 @@ function SwipeableTextMobileStepper() {
         enableMouseEvents
       >
         {carouselImages.map((step, index) => {
-          console.log("Step:", step)
+          // console.log("Step:", step)
+          // console.log('Image Index: ', index)
           function urlFor(_ref) {
             return builder.image(_ref)
           }

@@ -52,7 +52,7 @@ export default function UseAutocomplete() {
         *[_type == 'vendor']{
           slug, title }`)
 
-      console.log("testing 123", vendor)
+      // console.log("testing 123", vendor)
       setVendor(vendor)
     } catch (e) {
       if (e !== "No current user") {

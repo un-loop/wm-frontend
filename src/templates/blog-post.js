@@ -19,17 +19,15 @@ class BlogPostTemplate extends React.Component {
       brands: [],
       addModalShow: false,
       showBig: false,
+      openingIndex: 0,
     }
   }
   async componentDidMount() {
-    console.log("Hello world", window.location.pathname)
     const brand = window.location.pathname.split("/")
-    console.log("Brand: ", brand)
     try {
       const result = await client.fetch(
         `*[_type == 'product' && vendorTitle == '${brand[1]}']`
       )
-      console.log(result)
       this.setState({ brands: result })
     } catch (e) {
       console.log("Sanity fetch", e)
@@ -39,8 +37,8 @@ class BlogPostTemplate extends React.Component {
   render() {
     const post = this.props.data.markdownRemark
     const siteTitle = this.props.data.site.siteMetadata.title
-    console.log(this.state.brands)
     let addModalClose = () => this.setState({ addModalShow: false })
+    console.log(this.state.openingIndex)
     return (
       <div>
         <Layout location={this.props.location} title={siteTitle}>
@@ -48,21 +46,7 @@ class BlogPostTemplate extends React.Component {
             title={post.frontmatter.title}
             description={post.frontmatter.description || post.excerpt}
           />
-          <React.Fragment>
-            <ButtonToolbar>
-              <Button
-                className="btn"
-                variant="primary"
-                onClick={() => this.setState({ addModalShow: true })}
-              >
-                Open Modal
-              </Button>
-            </ButtonToolbar>
-            <ProductDisplay
-              show={this.state.addModalShow}
-              onHide={addModalClose}
-            />
-          </React.Fragment>
+
           <article
             className={`post-content ${post.frontmatter.thumbnail ||
               `no-image`}`}
@@ -70,14 +54,36 @@ class BlogPostTemplate extends React.Component {
             <header className="post-content-header">
               <h1 className="post-content-title">{post.frontmatter.title}</h1>
             </header>
-            <div>
-              {this.state.brands.map(brand => {
+            {post.frontmatter.description && (
+              <p className="post-content-excerpt">
+                {post.frontmatter.description}
+              </p>
+            )}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                flex: "0 1 24%",
+                flexWrap: "wrap",
+              }}
+            >
+              {this.state.brands.map((brand, index) => {
                 function urlFor(_ref) {
                   return builder.image(_ref)
                 }
                 return (
-                  <React.Fragment>
-                    <p>{brand.title}</p>
+                  <div
+                    key={index}
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      flexWrap: "wrap",
+                      flex: "0 1 24%",
+                    }}
+                    onClick={() =>
+                      this.setState({ addModalShow: true, openingIndex: index })
+                    }
+                  >
                     <img
                       src={urlFor(
                         brand.defaultProductVariant.images[0].asset._ref
@@ -85,13 +91,18 @@ class BlogPostTemplate extends React.Component {
                         .width(200)
                         .url()}
                     />
-                  </React.Fragment>
+                    <p>{brand.title}</p>
+                  </div>
                 )
               })}
             </div>
-            {post.frontmatter.description && (
-              <p class="post-content-excerpt">{post.frontmatter.description}</p>
-            )}
+
+            <ProductDisplay
+              show={this.state.addModalShow}
+              onHide={addModalClose}
+              brands={this.state.brands}
+              openingIndex={this.state.openingIndex}
+            />
 
             {post.frontmatter.thumbnail && (
               <div className="post-content-image">

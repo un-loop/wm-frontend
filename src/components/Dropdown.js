@@ -18,8 +18,6 @@ class DropdownContainer extends Component {
   async componentDidMount() {
     const results = await client.fetch(`*[_type == 'vendor' ]{	
                 title, gender, slug}`)
-    console.log(results)
-    // const url = result.slug.current
     this.setState({ vendors: results })
   }
 

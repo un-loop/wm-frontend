@@ -1,9 +1,10 @@
 .logo {
-  display: block;
+  display: ;
   margin-left: auto;
   margin-right: auto;
-  width: 25%;
-  height: 25%;
+  width: 35%;
+  height: 35%;
+  justify-content: center;
 }
 /* #container { */
 /* background-image:url(yourimage.jpg); */
