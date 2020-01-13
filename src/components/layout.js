@@ -14,8 +14,8 @@ const Layout = props => {
     <div className={`site-wrapper ${toggleNav ? `site-head-open` : ``}`}>
       <React.Fragment>
         <div className="logo">
-          <div class="col-md-4">
-            <img src={logonoAddClear} alt="logo" />
+          <div>
+            <img className="imgLogo" src={logonoAddClear} alt="logo" />
           </div>
         </div>
       </React.Fragment>
@@ -37,7 +37,7 @@ const Layout = props => {
               </div>
             </div>
           </a>
-          <nav id="swup" class="site-head-left">
+          <nav id="swup" className="site-head-left">
             <ul className="nav" role="menu">
               <li className="nav-home" role="menuitem">
                 <Link to={`/`}>Home</Link>
@@ -51,17 +51,17 @@ const Layout = props => {
               </li>
             </ul>
           </nav>
-          <nav class="site-head-right">
+          <nav className="site-head-right">
             <ul className="nav" role="menu">
               <div className="social-links">
                 <a href="https://www.facebook.com/pg/thewoollymammothshoes">
-                  <i class="fa fa-facebook" />
+                  <i className="fa fa-facebook" />
                 </a>
                 <a href="https://www.instagram.com/thewoollymammothshoes/">
-                  <i class="fa fa-instagram" />
+                  <i className="fa fa-instagram" />
                 </a>
                 <a href="https://twitter.com/woolly_shoes">
-                  <i class="fa fa-twitter" />
+                  <i className="fa fa-twitter" />
                 </a>
               </div>
               <li className="nav-elements" role="menuitem">
@@ -73,13 +73,13 @@ const Layout = props => {
       </header>
       <div>
         <ul style={{ listStyle: "none", display: "flex" }}>
-          <li className="nav-elements" role="menuitem">
+          <li>
             <DropdownContainer title="Women" gender="female" key={title} />
           </li>
-          <li className="nav-elements" role="menuitem">
+          <li>
             <DropdownContainer title="Men" gender="male" key={title} />
           </li>
-          <li className="nav-elements" role="menuitem">
+          <li>
             <UseAutoComplete style={{}} />
           </li>
         </ul>

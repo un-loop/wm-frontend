@@ -1,6 +1,5 @@
 import React from "react"
 import Backdrop from "../components/Backdrop/Backdrop"
-import BlogPostTemplate from "../templates/blog-post.js"
 import { Modal, ModalBody, ModalHeader, Button } from "react-bootstrap"
 import Carousel, { ModalGateway } from "react-images"
 import "bootstrap/dist/css/bootstrap.min.css"
@@ -28,23 +27,8 @@ class ProductDisplay extends React.Component {
     })
   }
 
-  async componentDidMount() {
-    const brand = window.location.pathname.split("/")
-    console.log(brand)
-    try {
-      const networkResponse = await client.fetch(`
-      *[_type == 'product' && vendorTitle == '${brand[1]}']`)
-
-      console.log("testing 123", networkResponse)
-      this.setState({ images: networkResponse })
-    } catch (e) {
-      console.log(e)
-    }
-  }
-  // startCreateEventHandler = () => {
-  //   this.setState({ showModal: true })
-  // }
   render() {
+    console.log("props", this.props)
     return (
       <React.Fragment>
         <Backdrop />
@@ -66,37 +50,10 @@ class ProductDisplay extends React.Component {
           <h4>Centered Modal</h4> */}
             <div>
               <Modal.Body isOpen={this.state.showModal}>
-                {/* <img
-                src={this.props.brand}
-                onClick={this.setModalState.bind(this, false)}
-              /> */}
-                <SwipeableTextMobileStepper />
-
-                {/* {this.state.images.map((image, index) => {
-                console.log("image:", image)
-                function urlFor(_ref) {
-                  return builder.image(_ref)
-                }
-                return (
-                  <div key={index}>
-                    
-                    {Math.abs(activeStep - index) <= 2 ? (
-                    <img
-                      className={classes.img}
-                      src={urlFor(
-                        image.defaultProductVariant.images[0].asset._ref
-                      )
-                        .width(200)
-                        .url()}
-                      src={image.image}
-                      alt={image.label}
-                    />
-                
-                    
-                  </div>
-                )
-              })} */}
-                {/* <Carousel views={images} /> */}
+                <SwipeableTextMobileStepper
+                  // images={this.props.brands}
+                  {...this.props}
+                />
               </Modal.Body>
             </div>
 

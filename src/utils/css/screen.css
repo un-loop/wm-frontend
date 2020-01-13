@@ -138,6 +138,7 @@ body {
 }
 
 .site-head-container {
+  font-size: 3.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -154,7 +155,7 @@ body {
 
 .nav {
   display: flex;
-  margin: 0 0 0 -12px;
+  /* margin: 0 0 0 -12px; */
   padding: 0;
   list-style: none;
 }
@@ -167,9 +168,11 @@ body {
 
 .site-head-left a,
 .site-head-right a {
-  display: block;
+  /* display: inline-block; */
+  display: flex;
+  justify-content: center;
   margin: 0;
-  padding: 10px 12px;
+  padding: 5px 6px;
   color: var(--color-base);
   font-weight: 600;
   opacity: 0.4;
