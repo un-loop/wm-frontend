@@ -5,6 +5,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import "../utils/normalize.css"
 import "../utils/css/screen.css"
+const googleMap = require("../images/googleMap.png")
 const AboutPage = ({ data }, location) => {
   const siteTitle = data.site.siteMetadata.title
   return (
@@ -30,6 +31,9 @@ const AboutPage = ({ data }, location) => {
           <div class="col-6">
             <div class="body-text-2">4303 University Way NE</div>
             <div class="body-text-2">Seattle, WA 98105</div>
+          </div>
+          <div class="col-6">
+            <div class="body-text-2">MAP</div>
           </div>
         </div>
         <article className="post-content page-template no-image">
