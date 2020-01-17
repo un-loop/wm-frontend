@@ -5,6 +5,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import "../utils/normalize.css"
 import "../utils/css/screen.css"
+import { fontSize } from "@material-ui/system"
 const googleMap = require("../images/googleMap.png")
 const AboutPage = ({ data }, location) => {
   const siteTitle = data.site.siteMetadata.title
@@ -32,8 +33,16 @@ const AboutPage = ({ data }, location) => {
             <div class="body-text-2">4303 University Way NE</div>
             <div class="body-text-2">Seattle, WA 98105</div>
           </div>
-          <div class="col-6">
-            <div class="body-text-2">MAP</div>
+
+          <div>
+            <div class="body-text-2">
+              <img src={googleMap} alt="map" width="2300px" height="400px" />
+            </div>
+            <div>
+              <div style={{ fontSize: "20pt" }}>
+                We offer parking validation for any of the UDPA lots.
+              </div>
+            </div>
           </div>
         </div>
         <article className="post-content page-template no-image">
