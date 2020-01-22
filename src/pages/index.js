@@ -15,17 +15,31 @@ import imageUrlBuilder from "@sanity/image-url"
 const BlogIndex = ({ data }, location) => {
   const siteTitle = data.site.siteMetadata.title
   const posts = data.allMarkdownRemark.edges
-  const [logos, setLogos] = useState([])
+  // const [logos, setLogos] = useState([])
+  const [images, setImages] = useState([])
   let postCounter = 0
   useEffect(() => {
     onLoad()
   }, [])
+  // async function onLoad() {
+  //   try {
+  //     const products = await client.fetch(`
+  //       *[_type == 'vendor']`)
+  //     console.log("testing 123", products)
+  //     setLogos(products)
+  //   } catch (e) {
+  //     if (e !== "No current user") {
+  //       alert(e)
+  //     }
+  //   }
+  //   // setIsLoading(false);
+  // }
   async function onLoad() {
     try {
       const products = await client.fetch(`
-        *[_type == 'vendor']`)
+        *[_type == 'product']`)
       console.log("testing 123", products)
-      setLogos(products)
+      setImages(products)
     } catch (e) {
       if (e !== "No current user") {
         alert(e)
@@ -47,7 +61,7 @@ const BlogIndex = ({ data }, location) => {
         </header>
       )} */}
       <div className="post-feed">
-        {logos.map((logo, i) => {
+        {/* {logos.map((logo, i) => {
           postCounter++
           return (
             <PostCard
@@ -56,7 +70,18 @@ const BlogIndex = ({ data }, location) => {
               node={logo}
               postClass={`post`}
             />
-            // <h1>yo</h1>
+          )
+        })} */}
+        {images.map((image, i) => {
+          console.log("Image:", image)
+          postCounter++
+          return (
+            <PostCard
+              key={image.slug.current}
+              count={postCounter}
+              node={image}
+              postClass={`post`}
+            />
           )
         })}
         {/* <div className="post-feed">
