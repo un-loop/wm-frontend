@@ -46,6 +46,7 @@
     "react-dom": "^16.12.0",
     "react-helmet": "^5.2.1",
     "react-images": "^1.1.0-beta.1",
+    "react-responsive": "^8.0.3",
     "react-swipeable-views": "^0.13.3",
     "react-swipeable-views-utils": "^0.13.3",
     "reactjs-dropdown-component": "^1.0.6",

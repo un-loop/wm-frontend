@@ -410,9 +410,9 @@ body {
   }
 }
 
-/* .post-card-large {
+.post-card-large {
   flex: 1 1 100%;
-} */
+}
 
 .post-card-link {
   flex: 1 1 auto;

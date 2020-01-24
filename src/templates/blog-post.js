@@ -38,7 +38,6 @@ class BlogPostTemplate extends React.Component {
     const post = this.props.data.markdownRemark
     const siteTitle = this.props.data.site.siteMetadata.title
     let addModalClose = () => this.setState({ addModalShow: false })
-    console.log(this.state.openingIndex)
     return (
       <div>
         <Layout location={this.props.location} title={siteTitle}>

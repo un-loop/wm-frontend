@@ -68,7 +68,7 @@ function SwipeableTextMobileStepper() {
         *[_type == 'carousel']{
           slug, image}`)
 
-      console.log("testing 123", carousel)
+      // console.log("testing 123", carousel)
       setCarouselImages(carousel)
     } catch (e) {
       if (e !== "No current user") {
@@ -101,7 +101,7 @@ function SwipeableTextMobileStepper() {
         enableMouseEvents
       >
         {carouselImages.map((step, index) => {
-          console.log("Step:", step)
+          // console.log("Step:", step)
           function urlFor(_ref) {
             return builder.image(_ref)
           }

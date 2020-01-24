@@ -12,19 +12,20 @@ const Layout = props => {
 
   return (
     <div className={`site-wrapper ${toggleNav ? `site-head-open` : ``}`}>
-      <React.Fragment>
+      <header>
         <div className="logo">
           <div>
             <img className="imgLogo" src={logonoAddClear} alt="logo" />
           </div>
         </div>
-      </React.Fragment>
+      </header>
       <header className="site-head">
-        <div className="site-head-container" style={{ marginTop: 20 }}>
+        <div className="site-head-container">
           <a
             className="nav-burger"
-            href={`#`}
+            // href={`#`}
             onClick={() => setToggleNav(!toggleNav)}
+            style={{ paddingTop: 50 }}
           >
             <div
               className="hamburger hamburger--collapse"
@@ -34,16 +35,25 @@ const Layout = props => {
             >
               <div className="hamburger-box">
                 <div className="hamburger-inner" />
+                <br />
               </div>
             </div>
           </a>
-          <nav id="swup" className="site-head-left">
+          <nav id="swup" className="site-head-left" style={{ marginTop: 70 }}>
             <ul className="nav" role="menu">
-              <li className="nav-home" role="menuitem">
+              <li
+                className="nav-home"
+                role="menuitem"
+                onClick={() => setToggleNav(false)}
+              >
                 <Link to={`/`}>Home</Link>
               </li>
 
-              <li className="nav-about" role="menuitem">
+              <li
+                className="nav-about"
+                role="menuitem"
+                onClick={() => setToggleNav(false)}
+              >
                 <Link to={`/about`}>About</Link>
               </li>
               <li className="nav-elements" role="menuitem">
@@ -51,7 +61,7 @@ const Layout = props => {
               </li>
             </ul>
           </nav>
-          <nav className="site-head-right">
+          <nav className="site-head-right" style={{ marginTop: 70 }}>
             <ul className="nav" role="menu">
               <div className="social-links">
                 <a href="https://www.facebook.com/pg/thewoollymammothshoes">
@@ -89,7 +99,7 @@ const Layout = props => {
           {children}
         </div>
       </main>
-      <footer className="site-foot">
+      <footer className="site-foot" style={{ marginTop: 30 }}>
         &copy; {new Date().getFullYear()} <Link to={`/`}>{title}</Link>
       </footer>
     </div>

@@ -39,7 +39,7 @@ const AboutPage = ({ data }, location) => {
               <img src={googleMap} alt="map" width="2300px" height="400px" />
             </div>
             <div>
-              <div style={{ fontSize: "20pt" }}>
+              <div style={{ fontSize: "20pt", marginTop: 20 }}>
                 We offer parking validation for any of the UDPA lots.
               </div>
             </div>

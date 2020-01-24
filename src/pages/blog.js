@@ -68,7 +68,7 @@ const BlogPage = ({ data }, location) => {
             <figcaption>Hershal</figcaption>
           </figure> */}
 
-        <h3>Blog Post</h3>
+        <h1>Woolly Mammoth Blog</h1>
         {blogs.map((blog, i) => {
           console.log(blog)
           return (
