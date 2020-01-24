@@ -4,6 +4,7 @@ import SwipeableTextMobileStepper from "../components/carousel"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import PostCard from "../components/postCard"
+import ShoeCard from "../components/shoeCard"
 import "font-awesome/css/font-awesome.min.css"
 // import "../utils/global.scss"
 import "../utils/normalize.css"
@@ -16,16 +17,19 @@ const BlogIndex = ({ data }, location) => {
   const siteTitle = data.site.siteMetadata.title
   const posts = data.allMarkdownRemark.edges
   const [logos, setLogos] = useState([])
+  // false means view brands, true means shoes
+  const [searchType, setSearchType] = useState(false)
   let postCounter = 0
   useEffect(() => {
     onLoad()
   }, [])
+
   async function onLoad() {
     try {
-      const products = await client.fetch(`
+      const vendors = await client.fetch(`
         *[_type == 'vendor']`)
-      console.log("testing 123", products)
-      setLogos(products)
+      // console.log("Fetched vendors", vendors)
+      setLogos(vendors)
     } catch (e) {
       if (e !== "No current user") {
         alert(e)
@@ -38,27 +42,43 @@ const BlogIndex = ({ data }, location) => {
       <SEO title="Home" keywords={[`blog`, `gatsby`, `javascript`, `react`]} />
       {/* <Bio /> */}
       <SwipeableTextMobileStepper />
-      {/* <DemoCarousel /> */}
-      {/* {data.site.siteMetadata.description && (
-        <header className="page-head">
-          <h2 className="page-head-title">
-            {data.site.siteMetadata.description}
-          </h2>
-        </header>
-      )} */}
+      <br />
+      <div style={{ display: "flex", justifyContent: "space-around" }}>
+        <button onClick={() => setSearchType(true)}>View Shoes</button>
+        <button onClick={() => setSearchType(false)}>View Brands</button>
+      </div>
+      <br />
+
       <div className="post-feed">
-        {logos.map((logo, i) => {
-          postCounter++
-          return (
-            <PostCard
-              key={logo.slug.current}
-              count={postCounter}
-              node={logo}
-              postClass={`post`}
-            />
-            // <h1>yo</h1>
-          )
-        })}
+        {searchType === true ? (
+          <React.Fragment>
+            {logos.map((logo, i) => {
+              postCounter++
+              return (
+                <ShoeCard
+                  key={logo.slug.current}
+                  count={postCounter}
+                  node={logo}
+                  postClass={`post`}
+                />
+              )
+            })}
+          </React.Fragment>
+        ) : (
+          <React.Fragment>
+            {logos.map((logo, i) => {
+              postCounter++
+              return (
+                <PostCard
+                  key={logo.slug.current}
+                  count={postCounter}
+                  node={logo}
+                  postClass={`post`}
+                />
+              )
+            })}
+          </React.Fragment>
+        )}
         {/* <div className="post-feed">
         {posts.map(({ node }) => {
           postCounter++
