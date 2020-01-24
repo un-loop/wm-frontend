@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import client from "../client"
-import Dropdown from "reactjs-dropdown-component"
 
 class DropdownContainer extends Component {
   constructor(props) {

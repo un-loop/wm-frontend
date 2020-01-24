@@ -6,7 +6,6 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import myConfiguredSanityClient from "../client"
 import imageUrlBuilder from "@sanity/image-url"
-import { Button, ButtonToolbar } from "react-bootstrap"
 import "../utils/css/components/global.css"
 // import "bootstrap/dist/css/bootstrap.min.css"
 import ProductDisplay from "../components/ProductDisplay"
@@ -28,6 +27,7 @@ class BlogPostTemplate extends React.Component {
       const result = await client.fetch(
         `*[_type == 'product' && vendorTitle == '${brand[1]}']`
       )
+      console.log('Products: ', result)
       this.setState({ brands: result })
     } catch (e) {
       console.log("Sanity fetch", e)
