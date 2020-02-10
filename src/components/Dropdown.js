@@ -86,15 +86,45 @@ class DropdownContainer extends Component {
   render() {
     const { listOpen, headerTitle } = this.state
     const styleWrapper = {
-      borderRadius: 5,
-      border: "2px solid #cccccc",
-      height: "calc(1.8em - 2px)",
-      maxWidth: "8.9em",
+      // borderRadius: 5,
+      // border: "2px solid #cccccc",
+      // height: "calc(1.8em - 2px)",
+      width: "100%",
     }
     const styleHeader = {
-      height: "calc(1.8em - 6px)",
-      maxWidth: "8.9em",
+      // height: "calc(1.8em - 6px)",
+      width: "100%",
+      fontSize: "100%",
+      lineHeight: "1.1em",
+      margin: "0.2em 0.2em",
+      paddingLeft: "0.3em",
     }
+    const listbox = {
+      backgroundImage: "none",
+      lineHeight: "1.1em",
+      fontSize: "100%",
+      width: "8em",
+      margin: 0,
+      padding: 0,
+      zIndex: 1,
+      position: "absolute",
+      listStyle: "none",
+      backgroundColor: "#fff",
+      overflow: "auto",
+      maxHeight: 300,
+      // borderRadius: 5,
+      // border: "1px solid rgba(0,0,0,.25)",
+      // '& li[data-focus="true"]': {
+      //   backgroundColor: "#4a8df6",
+      //   color: "white",
+      //   cursor: "pointer",
+      // },
+      // "& li:active": {
+      //   backgroundColor: "#2977f5",
+      //   color: "white",
+      // },
+    }
+
     return (
       <div className="dd-wrapper" style={styleWrapper}>
         <div
@@ -102,15 +132,16 @@ class DropdownContainer extends Component {
           style={styleHeader}
           onClick={() => this.toggleList()}
         >
-          <div className="dd-header-title" style={{ lineHeight: "1em" }}>
+          <div className="dd-header-title" style={styleHeader}>
             {headerTitle}
           </div>
           {listOpen}
         </div>
         {listOpen && (
+          // <nav id="search-head">
           <ul
             className="dd-list"
-            style={{ display: "flex", flexDirection: "column" }}
+            style={listbox}
             onClick={e => e.stopPropagation()}
           >
             {this.state.vendors.map(vendor => (
@@ -119,6 +150,8 @@ class DropdownContainer extends Component {
                 vendor.gender === "both" ? (
                   <li
                     className="dd-list-item"
+                    // style={{ "&:hover": { opacity: 1 } }}
+                    // style={{ fontSize: "0.8em" }}
                     key={vendor.title}
                     onClick={() => this.selectedItem(vendor.title, vendor.key)}
                   >
@@ -128,6 +161,7 @@ class DropdownContainer extends Component {
               </React.Fragment>
             ))}
           </ul>
+          // </nav>
         )}
       </div>
     )
