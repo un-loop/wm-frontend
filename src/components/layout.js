@@ -12,7 +12,7 @@ const Layout = props => {
 
   return (
     <div className={`site-wrapper ${toggleNav ? `site-head-open` : ``}`}>
-      <header>
+      <header id="logo">
         <div className="logo">
           <div>
             <img className="imgLogo" src={logonoAddClear} alt="logo" />
@@ -39,7 +39,8 @@ const Layout = props => {
               </div>
             </div>
           </a>
-          <nav id="swup" className="site-head-left" style={{ marginTop: 70 }}>
+          <nav id="swup" className="site-head-left">
+            {/* <nav id="swup" className="site-head-left" style={{ marginTop: 70 }}> */}
             <ul className="nav" role="menu">
               <li
                 className="nav-home"
@@ -61,7 +62,8 @@ const Layout = props => {
               </li>
             </ul>
           </nav>
-          <nav className="site-head-right" style={{ marginTop: 70 }}>
+          <nav className="site-head-right">
+            {/* <nav className="site-head-right" style={{ marginTop: 70 }}> */}
             <ul className="nav" role="menu">
               <div className="social-links">
                 <a href="https://www.facebook.com/pg/thewoollymammothshoes">

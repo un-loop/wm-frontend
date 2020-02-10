@@ -1,9 +1,15 @@
+/* @media only screen and (max-device-width: 480px) {
+  header#logo {
+    width: 80%;
+    height: 80%;
+  }
+} */
 .logo {
   display: ;
   margin-left: auto;
   margin-right: auto;
-  width: 30%;
-  height: 30%;
+  width: 50%;
+  height: 50%;
   justify-content: center;
 }
 /* #container { */
