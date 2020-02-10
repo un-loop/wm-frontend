@@ -81,7 +81,7 @@ const Layout = props => {
           </nav>
         </div>
       </header>
-      <div>
+      <div style={{ backgroundColor: "#FDEFE6" }}>
         <ul style={{ listStyle: "none", display: "flex" }}>
           <li>
             <DropdownContainer title="Women" gender="female" key={title} />
