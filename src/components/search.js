@@ -11,9 +11,9 @@ const useStyles = makeStyles(theme => ({
   input: {
     maxWidth: "8.9em",
     maxHeight: 80,
-    borderRadius: 5,
     height: "1.8em",
-    border: "2px solid #cccccc",
+    border: "none",
+    padding: "0.6em",
   },
   listbox: {
     width: "9em",
@@ -84,7 +84,7 @@ export default function UseAutocomplete() {
         <input
           className={classes.input}
           {...getInputProps()}
-          placeholder=" Search"
+          placeholder="Search"
         />
       </div>
       {groupedOptions.length > 0 ? (
