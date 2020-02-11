@@ -25,7 +25,7 @@ const Layout = props => {
             className="nav-burger"
             // href={`#`}
             onClick={() => setToggleNav(!toggleNav)}
-            style={{ paddingTop: 50 }}
+            // style={{ paddingTop: 50 }}
           >
             <div
               className="hamburger hamburger--collapse"
