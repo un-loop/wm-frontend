@@ -17,15 +17,6 @@ const AboutPage = ({ data }, location) => {
             Locally owned for over 40 years, specializing in comfortable, high
             quality, good-looking shoes and excellent customer service.
           </h3>
-          {/* <figure className="kg-card kg-image-card kg-width-full">
-            <Img
-              src={storeFront}
-              fluid={data.benchAccounting.childImageSharp.fluid}
-              className="kg-image"
-            />
-            <figcaption>Large imagery is at the heart of this theme</figcaption>
-          </figure> */}
-          {/* <h3 id="dynamic-styles"></h3> */}
           <React.Fragment>
             <div className="retro" id="container">
               <img

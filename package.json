@@ -47,7 +47,7 @@
     "react-helmet": "^5.2.1",
     "react-images": "^1.1.0-beta.1",
     "react-responsive": "^8.0.3",
-    "react-swipeable-views": "^0.13.3",
+    "react-swipeable-views": "^0.13.9",
     "react-swipeable-views-utils": "^0.13.3",
     "typeface-alegreya": "^0.0.69",
     "typeface-merriweather": "0.0.72",

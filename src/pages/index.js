@@ -3,14 +3,14 @@ import { graphql, StaticQuery } from "gatsby"
 import SwipeableTextMobileStepper from "../components/carousel"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import PostCard from "../components/postCard"
-import ShoeCard from "../components/shoeCard"
+// import PostCard from "../components/postCard"
+// import ShoeCard from "../components/shoeCard"
 import "font-awesome/css/font-awesome.min.css"
 // import "../utils/global.scss"
 import "../utils/normalize.css"
 import "../utils/css/screen.css"
 import client from "../client"
-import imageUrlBuilder from "@sanity/image-url"
+// import imageUrlBuilder from "@sanity/image-url"
 //TODO: switch to staticQuery, get rid of comments, remove unnecessary components, export as draft template
 
 const BlogIndex = ({ data }, location) => {
@@ -40,16 +40,18 @@ const BlogIndex = ({ data }, location) => {
   return (
     <Layout title={siteTitle}>
       <SEO title="Home" keywords={[`blog`, `gatsby`, `javascript`, `react`]} />
-      {/* <Bio /> */}
       <SwipeableTextMobileStepper />
       <br />
-      <div style={{ display: "flex", justifyContent: "space-around" }}>
+
+      {/* The code below has the brand images displayed, commented out due to client demand */}
+
+      {/* <div style={{ display: "flex", justifyContent: "space-around" }}>
         <button onClick={() => setSearchType(true)}>View Shoes</button>
         <button onClick={() => setSearchType(false)}>View Brands</button>
-      </div>
+      </div> */}
       <br />
 
-      <div className="post-feed">
+      {/* <div className="post-feed">
         {searchType === true ? (
           <React.Fragment>
             {logos.map((logo, i) => {
@@ -79,19 +81,7 @@ const BlogIndex = ({ data }, location) => {
             })}
           </React.Fragment>
         )}
-        {/* <div className="post-feed">
-        {posts.map(({ node }) => {
-          postCounter++
-          return (
-            <PostCard
-              key={node.fields.slug}
-              count={postCounter}
-              node={node}
-              postClass={`post`}
-            />
-          )
-        })} */}
-      </div>
+      </div> */}
     </Layout>
   )
 }

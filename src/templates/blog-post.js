@@ -27,7 +27,7 @@ class BlogPostTemplate extends React.Component {
       const result = await client.fetch(
         `*[_type == 'product' && vendorTitle == '${brand[1]}']`
       )
-      console.log('Products: ', result)
+      console.log("Products: ", result)
       this.setState({ brands: result })
     } catch (e) {
       console.log("Sanity fetch", e)
@@ -84,9 +84,7 @@ class BlogPostTemplate extends React.Component {
                     }
                   >
                     <img
-                      src={urlFor(
-                        brand.defaultProductVariant.images[0].asset._ref
-                      )
+                      src={urlFor(brand.images[0].asset._ref)
                         .width(200)
                         .url()}
                     />

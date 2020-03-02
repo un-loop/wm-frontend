@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
 import MobileStepper from "@material-ui/core/MobileStepper"
-import Paper from "@material-ui/core/Paper"
+// import Paper from "@material-ui/core/Paper"
 // import Typography from "@material-ui/core/Typography"
 import Button from "@material-ui/core/Button"
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft"
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight"
 import SwipeableViews from "react-swipeable-views"
 import { autoPlay } from "react-swipeable-views-utils"
+
 import myConfigSanityClient from "../client"
 import imageUrlBuilder from "@sanity/image-url"
 import client from "../client"
@@ -15,18 +16,6 @@ import client from "../client"
 const builder = imageUrlBuilder(myConfigSanityClient)
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews)
-
-// const tutorialSteps = [
-//   {
-//     imgPath: "https://wm-photos.s3.amazonaws.com/blund1.jpg",
-//   },
-//   {
-//     imgPath: "https://wm-photos.s3.amazonaws.com/herschelMix.jpg",
-//   },
-//   {
-//     imgPath: "https://wm-photos.s3.amazonaws.com/leopard.JPG",
-//   },
-// ]
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -99,6 +88,7 @@ function SwipeableTextMobileStepper() {
         index={activeStep}
         onChangeIndex={handleStepChange}
         enableMouseEvents
+        interval={10000}
       >
         {carouselImages.map((step, index) => {
           // console.log("Step:", step)

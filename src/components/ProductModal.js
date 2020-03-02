@@ -17,26 +17,6 @@ const builder = imageUrlBuilder(myConfigSanityClient)
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews)
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    // padding: '0 70px',
-    // box-sizing: border-box,
-    // display: 'absolute',
-    // width: '100%',
-    // top: '50%',
-    // left: '50%',
-    // maxWidth: "100%",
-    // flexGrow: 1,
-    // display: "flex",
-    // flexDirection: "column",
-    // textAlign: "center",
-  },
-  // header: {
-  //   display: "flex",
-  //   alignItems: "center",
-  //   height: 80,
-  //   paddingLeft: theme.spacing(4),
-  //   backgroundColor: theme.palette.background.default,
-  // },
   img: {
     height: "400",
     display: "block",
@@ -70,17 +50,15 @@ function SwipeableTextMobileStepper(props) {
     setActiveStep(step + 1)
   }
   return (
-    <div className={classes.root}>
+    <div>
       <Paper square elevation={0} className={classes.header}></Paper>
-      <AutoPlaySwipeableViews
+      <SwipeableViews
         axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={activeStep}
         onChangeIndex={handleStepChange}
         enableMouseEvents
       >
         {carouselImages.map((step, index) => {
-          // console.log("Step:", step)
-          // console.log('Image Index: ', index)
           function urlFor(_ref) {
             return builder.image(_ref)
           }
@@ -92,7 +70,7 @@ function SwipeableTextMobileStepper(props) {
               {Math.abs(activeStep - index) <= 2 ? (
                 <img
                   // className={classes.img}
-                  src={urlFor(step.defaultProductVariant.images[0].asset._ref)
+                  src={urlFor(step.images[0].asset._ref)
                     .width(400)
                     .url()}
                   // src={image.image}
@@ -102,7 +80,7 @@ function SwipeableTextMobileStepper(props) {
             </div>
           )
         })}
-      </AutoPlaySwipeableViews>
+      </SwipeableViews>
       <MobileStepper
         steps={maxSteps}
         position="static"

@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import { Link } from "react-dom"
 import client from "../client"
 
 class DropdownContainer extends Component {
@@ -45,8 +46,8 @@ class DropdownContainer extends Component {
       {
         headerTitle: title,
         listOpen: false,
-      },
-      this.props.resetThenSet(title, stateKey)
+      }
+      // this.props.resetThenSet(title, stateKey)
     )
   }
 
@@ -148,16 +149,21 @@ class DropdownContainer extends Component {
               <React.Fragment>
                 {vendor.gender === this.props.gender ||
                 vendor.gender === "both" ? (
+                  // <Link to={`/${vendor.title}`}>
                   <li
                     className="dd-list-item"
                     // style={{ "&:hover": { opacity: 1 } }}
                     // style={{ fontSize: "0.8em" }}
                     key={vendor.title}
-                    onClick={() => this.selectedItem(vendor.title, vendor.key)}
+                    onClick={() => {
+                      console.log("Whats good")
+                      this.selectItem(vendor.title, vendor.key)
+                    }}
                   >
                     {vendor.title} {vendor.selected}
                   </li>
-                ) : null}
+                ) : // </Link>
+                null}
               </React.Fragment>
             ))}
           </ul>
