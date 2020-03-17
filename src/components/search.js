@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react"
 import useAutocomplete from "@material-ui/lab/useAutocomplete"
 import { makeStyles } from "@material-ui/core/styles"
 import client from "../client"
+import { Link } from "gatsby"
 
 const useStyles = makeStyles(theme => ({
   label: {
@@ -73,25 +74,33 @@ export default function UseAutocomplete() {
     options: vendor,
     getOptionLabel: option => option.title,
   })
-  //   const []
 
   return (
     <div>
       <div {...getRootProps()}>
-        {/* <label className={classes.label} {...getInputLabelProps()}>
-          useAutocomplete
-        </label> */}
         <input
           className={classes.input}
           {...getInputProps()}
           placeholder="Search"
+          style={{ backgroundColor: "white" }}
         />
       </div>
       {groupedOptions.length > 0 ? (
         <ul className={classes.listbox} {...getListboxProps()}>
-          {groupedOptions.map((option, index) => (
-            <li {...getOptionProps({ option, index })}>{option.title}</li>
-          ))}
+          {groupedOptions.map((option, index) => {
+            console.log(option.slug)
+            return (
+              <React.Fragment>
+                {option.slug === undefined ? null : (
+                  <Link to={option.slug.current}>
+                    <li {...getOptionProps({ option, index })}>
+                      {option.title}
+                    </li>
+                  </Link>
+                )}
+              </React.Fragment>
+            )
+          })}
         </ul>
       ) : null}
     </div>

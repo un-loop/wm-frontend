@@ -11,6 +11,7 @@
   background-color: transparent;
   cursor: pointer;
   transition: opacity 0.15s linear, filter 0.15s linear;
+  color: white;
 }
 
 .hamburger-box {
@@ -18,12 +19,16 @@
   display: inline-block;
   width: 20px;
   height: 13px;
+  color: white;
 }
 
 .hamburger-inner {
   top: 50%;
   display: block;
   margin-top: -2px;
+  color: white;
+  background-color: white;
+  margin-left: 6px;
 }
 
 .hamburger-inner,
@@ -35,6 +40,7 @@
   background-color: color(var(--color-border) l(-20%));
   border-radius: 4px;
   transition: transform 0.15s ease;
+  background-color: white;
 }
 .hamburger-inner::before,
 .hamburger-inner::after {
@@ -57,6 +63,7 @@
   transition-delay: 0.15s;
   transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
   transition-duration: 0.15s;
+  /* color: white; */
 }
 .hamburger--collapse .hamburger-inner::after {
   top: -12px;

@@ -24,10 +24,7 @@ export default props => {
                 }
               }
             >
-              <Link
-                to={`/${props.node.slug.current}`}
-                className="post-card-link"
-              >
+              <Link to={`/${props.node.name}`} className="post-card-link">
                 <div className="post-card-content">
                   <h2 className="post-card-title">{props.node.title}</h2>
                 </div>
@@ -48,10 +45,7 @@ export default props => {
                 }
               }
             >
-              <Link
-                to={`/${props.node.slug.current}`}
-                className="post-card-link"
-              >
+              <Link to={`/${props.node.name}`} className="post-card-link">
                 <div className="post-card-content">
                   <h2 className="post-card-title">{props.node.title}</h2>
                 </div>

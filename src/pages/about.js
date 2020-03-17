@@ -30,26 +30,15 @@ const AboutPage = ({ data }, location) => {
             </div>
           </React.Fragment>
           <p>
-            Seattle shoppers in search of comfortable, functional and
-            fashionable footwear look no further. Where comfort meets fashion is
-            the motto here. Our store is a unique, service-oriented store where
-            you will find everything for your running & walking needs! A fun and
-            affordable shoe boutique. Quality brands from the United States,
-            Europe, and all over the world, our staff will measure your feet for
-            a proper fit and maximum comfort. While womens shoes predominate,
-            the shop carries a good selection of high-end mens footwear,
-            predominately Italian. We look forward to providing you with
-            footwear that can ease your aches or just give you the ultimate in
-            comfort. We carry all best name brands: dickies, levis, nike, vans,
-            converse, puma, adidas, reebok, dc, globe, caterpillar, work zone,
-            k-swiss, fila, LRG, wink, proclub, shaka etc... We provide an array
-            of footwear including sneakers, boots, fashion shoes, and a strong
-            mix of comfort to give our customers the quality they deserve at
-            prices they can afford. We can also help kids feet feel better and
-            be better supported. This local downtown shoe store strives to
-            deliver personal customer service and our experienced staff can not
-            wait to help you find the right shoe, the right style, and a proper
-            fit. Our staff will help you find shoes for any occasion!
+            The Woolly Mammoth is known for brand-name comfortable, casual &
+            rugged footwear for the family. We invite you to come to our store
+            in the University District, and try on our upcoming spring
+            collection. Our staff work with you to make sure that you are
+            comfortable & healthy in your shoes - many of our customers are
+            working on their feet all day, ranging from nurses to construction
+            professionals. It has been our families passion to serve the Seattle
+            area for over 40 years, and we look forward to welcoming you to our
+            store.
           </p>
         </div>
       </article>

@@ -3,7 +3,7 @@
   "private": true,
   "description": "Seattle's Premier Comfort Shoe Store ",
   "version": "1.0.0",
-  "author": "Imed Adel <aadelimed@gmail.com>",
+  "author": "Unloop Studio",
   "bugs": {
     "url": "https://github.com/ImedAdel/gatsby-london/issues"
   },
@@ -23,6 +23,7 @@
     "font-awesome": "^4.7.0",
     "gatsby": "^2.4.2",
     "gatsby-image": "^2.0.41",
+    "gatsby-paypal-button": "^1.0.5",
     "gatsby-plugin-feed": "^2.2.0",
     "gatsby-plugin-google-analytics": "^2.0.19",
     "gatsby-plugin-manifest": "^2.1.1",
@@ -46,9 +47,11 @@
     "react-dom": "^16.12.0",
     "react-helmet": "^5.2.1",
     "react-images": "^1.1.0-beta.1",
+    "react-redux": "^7.2.0",
     "react-responsive": "^8.0.3",
     "react-swipeable-views": "^0.13.9",
     "react-swipeable-views-utils": "^0.13.3",
+    "redux": "^4.0.5",
     "typeface-alegreya": "^0.0.69",
     "typeface-merriweather": "0.0.72",
     "typeface-montserrat": "0.0.54",

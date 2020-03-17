@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Link } from "react-dom"
+import { Link } from "gatsby"
 import client from "../client"
 
 class DropdownContainer extends Component {
@@ -17,7 +17,7 @@ class DropdownContainer extends Component {
   }
   async componentDidMount() {
     const results = await client.fetch(`*[_type == 'vendor' ]{	
-                title, gender, slug}`)
+    title, gender, slug}`)
     this.setState({ vendors: results })
   }
 
@@ -87,18 +87,15 @@ class DropdownContainer extends Component {
   render() {
     const { listOpen, headerTitle } = this.state
     const styleWrapper = {
-      // borderRadius: 5,
-      // border: "2px solid #cccccc",
-      // height: "calc(1.8em - 2px)",
       width: "100%",
     }
     const styleHeader = {
-      // height: "calc(1.8em - 6px)",
       width: "100%",
-      fontSize: "100%",
+      fontSize: "110%",
       lineHeight: "1.1em",
       margin: "0.2em 0.2em",
       paddingLeft: "0.3em",
+      color: "white",
     }
     const listbox = {
       backgroundImage: "none",
@@ -113,17 +110,6 @@ class DropdownContainer extends Component {
       backgroundColor: "#fff",
       overflow: "auto",
       maxHeight: 300,
-      // borderRadius: 5,
-      // border: "1px solid rgba(0,0,0,.25)",
-      // '& li[data-focus="true"]': {
-      //   backgroundColor: "#4a8df6",
-      //   color: "white",
-      //   cursor: "pointer",
-      // },
-      // "& li:active": {
-      //   backgroundColor: "#2977f5",
-      //   color: "white",
-      // },
     }
 
     return (
@@ -139,7 +125,6 @@ class DropdownContainer extends Component {
           {listOpen}
         </div>
         {listOpen && (
-          // <nav id="search-head">
           <ul
             className="dd-list"
             style={listbox}
@@ -149,25 +134,21 @@ class DropdownContainer extends Component {
               <React.Fragment>
                 {vendor.gender === this.props.gender ||
                 vendor.gender === "both" ? (
-                  // <Link to={`/${vendor.title}`}>
-                  <li
-                    className="dd-list-item"
-                    // style={{ "&:hover": { opacity: 1 } }}
-                    // style={{ fontSize: "0.8em" }}
-                    key={vendor.title}
-                    onClick={() => {
-                      console.log("Whats good")
-                      this.selectItem(vendor.title, vendor.key)
-                    }}
-                  >
-                    {vendor.title} {vendor.selected}
-                  </li>
-                ) : // </Link>
-                null}
+                  <Link to={`/${vendor.slug.current}`}>
+                    <li
+                      className="dd-list-item"
+                      key={vendor.title}
+                      onClick={() => {
+                        this.selectItem(vendor.title, vendor.key)
+                      }}
+                    >
+                      {vendor.title} {vendor.selected}
+                    </li>
+                  </Link>
+                ) : null}
               </React.Fragment>
             ))}
           </ul>
-          // </nav>
         )}
       </div>
     )

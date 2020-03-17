@@ -2,15 +2,6 @@
   font-size: large !important;
 }
 
-/* .MuiOutlinedInput-base {
-  font-size: larger !important;
-}
-
-.MuiAutocomplete-inputRoot {
-  font-size: larger !important;
-  max-height: 50 !important;
-} */
-
 .MuiFormControl-root {
   font-size: large !important;
   max-height: 1.7em !important;
@@ -27,8 +18,25 @@
   width: 5rem !important;
 }
 
-/* #search-text-box {
-  max-height: 50 !important;
-  width: "50%" !important;
-  font-size: large !important;
-} */
+@media screen and (max-width: 568px) {
+  .home {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+}
+
+@media screen and (min-width: 568px) {
+  .start {
+    /* margin-top: 70px; */
+  }
+}
+
+@media screen and (min-width: 568px) {
+  .end {
+    /* display: flex;
+    flex-direction: column; */
+    /* justify-content: 'end'; */
+    /* flex-wrap: wrap; */
+  }
+}

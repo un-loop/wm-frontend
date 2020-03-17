@@ -7,6 +7,10 @@ import SEO from "../components/seo"
 import myConfiguredSanityClient from "../client"
 import imageUrlBuilder from "@sanity/image-url"
 import "../utils/css/components/global.css"
+import { connect } from "react-redux"
+import { bindActionCreators } from "redux"
+import Button from "@material-ui/core/Button"
+import { addItem } from "../state/app"
 // import "bootstrap/dist/css/bootstrap.min.css"
 import ProductDisplay from "../components/ProductDisplay"
 const builder = imageUrlBuilder(myConfiguredSanityClient)
@@ -23,6 +27,8 @@ class BlogPostTemplate extends React.Component {
   }
   async componentDidMount() {
     const brand = window.location.pathname.split("/")
+    console.log(brand)
+    console.log("Brand Page Props: ", this.props)
     try {
       const result = await client.fetch(
         `*[_type == 'product' && vendorTitle == '${brand[1]}']`
@@ -70,6 +76,13 @@ class BlogPostTemplate extends React.Component {
                 function urlFor(_ref) {
                   return builder.image(_ref)
                 }
+                let cartItem = {
+                  model: brand.title,
+                  manufacturer: brand.vendorTitle,
+                  price: brand.price,
+                  image: brand.images,
+                }
+                // console.log('Individual brand: ', brand)
                 return (
                   <div
                     key={index}
@@ -77,7 +90,8 @@ class BlogPostTemplate extends React.Component {
                       display: "flex",
                       flexDirection: "column",
                       flexWrap: "wrap",
-                      flex: "0 1 24%",
+                      flex: "0 1 45%",
+                      justifyContent: "space-between",
                     }}
                     onClick={() =>
                       this.setState({ addModalShow: true, openingIndex: index })
@@ -85,10 +99,13 @@ class BlogPostTemplate extends React.Component {
                   >
                     <img
                       src={urlFor(brand.images[0].asset._ref)
-                        .width(200)
+                        .width(400)
                         .url()}
                     />
                     <p>{brand.title}</p>
+                    <Button onClick={() => this.props.addItem(cartItem)}>
+                      Add To Cart
+                    </Button>
                   </div>
                 )
               })}
@@ -116,12 +133,7 @@ class BlogPostTemplate extends React.Component {
               dangerouslySetInnerHTML={{ __html: post.html }}
             />
 
-            <footer className="post-content-footer">
-              {/* There are two options for how we display the byline/author-info.
-        If the post has more than one author, we load a specific template
-        from includes/byline-multiple.hbs, otherwise, we just use the
-        default byline. */}
-            </footer>
+            <footer className="post-content-footer"></footer>
           </article>
         </Layout>
       </div>
@@ -129,7 +141,23 @@ class BlogPostTemplate extends React.Component {
   }
 }
 
-export default BlogPostTemplate
+const mapStateToProps = state => {
+  return {
+    everything: state,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      addItem: item => addItem(item),
+      // swapThemeColors: (checked) => swapThemeColors(checked),
+    },
+    dispatch
+  )
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BlogPostTemplate)
 
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
