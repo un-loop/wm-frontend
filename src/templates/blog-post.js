@@ -1,9 +1,14 @@
-import React from "react"
+import React, { useState } from "react"
 import { graphql } from "gatsby"
 import Img from "gatsby-image"
 import client from "../client"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import InputLabel from "@material-ui/core/InputLabel"
+import MenuItem from "@material-ui/core/MenuItem"
+import FormHelperText from "@material-ui/core/FormHelperText"
+import FormControl from "@material-ui/core/FormControl"
+import Select from "@material-ui/core/Select"
 import myConfiguredSanityClient from "../client"
 import imageUrlBuilder from "@sanity/image-url"
 import "../utils/css/components/global.css"
@@ -76,13 +81,35 @@ class BlogPostTemplate extends React.Component {
                 function urlFor(_ref) {
                   return builder.image(_ref)
                 }
+                let emptyArr = []
+                brand.sizes.map((size, i) => {
+                  let newArr = size.split(",")
+                  newArr.map(item => {
+                    emptyArr.push(item.slice(0, 2))
+                  })
+                })
+                console.log("Empty: ", emptyArr)
                 let cartItem = {
                   model: brand.title,
                   manufacturer: brand.vendorTitle,
                   price: brand.price,
                   image: brand.images,
                 }
-                // console.log('Individual brand: ', brand)
+                let last2 = brand.price.slice(-2)
+                let priceLength = brand.price.length - 2
+                let firstFew = brand.price.slice(0, priceLength)
+                let newPrice = `${firstFew}.${last2}`
+
+                let shoeSize = emptyArr[0]
+
+                // const [shoeSize, setShoeSize] = useState(36)
+
+                // const handleChange = event => {
+                //   console.log('event? :', event)
+                //   setShoeSize(event.target.value);
+                // }
+
+                console.log("Shoe size: ", shoeSize)
                 return (
                   <div
                     key={index}
@@ -91,21 +118,94 @@ class BlogPostTemplate extends React.Component {
                       flexDirection: "column",
                       flexWrap: "wrap",
                       flex: "0 1 45%",
-                      justifyContent: "space-between",
+                      alignText: "center",
                     }}
-                    onClick={() =>
-                      this.setState({ addModalShow: true, openingIndex: index })
-                    }
                   >
-                    <img
-                      src={urlFor(brand.images[0].asset._ref)
-                        .width(400)
-                        .url()}
-                    />
-                    <p>{brand.title}</p>
-                    <Button onClick={() => this.props.addItem(cartItem)}>
-                      Add To Cart
-                    </Button>
+                    <div
+                      onClick={() =>
+                        this.setState({
+                          addModalShow: true,
+                          openingIndex: index,
+                        })
+                      }
+                    >
+                      <img
+                        src={urlFor(brand.images[0].asset._ref)
+                          .width(400)
+                          .url()}
+                      />
+                    </div>
+
+                    <p style={{ display: "flex", justifyContent: "center" }}>
+                      {brand.title}
+                    </p>
+                    <p
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        marginTop: -20,
+                      }}
+                    >
+                      ${newPrice}
+                    </p>
+
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        flexWrap: "wrap",
+                      }}
+                    >
+                      <p>Sizes:&nbsp; </p>
+                      {emptyArr.map((size, i) => {
+                        return <p>{size},&nbsp; </p>
+                      })}
+                    </div>
+
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        flexWrap: "wrap",
+                      }}
+                    >
+                      <Button onClick={() => this.props.addItem(cartItem)}>
+                        Add To Cart
+                      </Button>
+                    </div>
+
+                    {/* <FormControl>
+                        <InputLabel id="demo-simple-select-helper-label">Shoe Sizes</InputLabel>
+                        <Select
+                          labelId="demo-simple-select-helper-label"
+                          id="demo-simple-select-helper"
+                          value={shoeSize}
+                          onChange={handleChange}
+                        >
+                          {emptyArr.map((size, i) => {
+                              return(
+                                <MenuItem value={size}>{size}</MenuItem>
+                              )
+                            })}
+                        
+                        </Select>
+                        <FormHelperText>Some important helper text</FormHelperText>
+                      </FormControl> */}
+
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          flexWrap: "wrap",
+                        }}
+                      ></div>
+                    </div>
                   </div>
                 )
               })}
@@ -143,7 +243,7 @@ class BlogPostTemplate extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    everything: state,
+    // everything: state,
   }
 }
 

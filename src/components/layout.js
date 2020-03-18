@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Link } from "gatsby"
 import DropdownContainer from "./Dropdown"
 import Slide from "@material-ui/core/Slide"
@@ -9,10 +9,12 @@ import Button from "@material-ui/core/Button"
 import DialogActions from "@material-ui/core/DialogActions"
 import DialogContent from "@material-ui/core/DialogContent"
 import DialogContentText from "@material-ui/core/DialogContentText"
+import myConfiguredSanityClient from "../client"
+import imageUrlBuilder from "@sanity/image-url"
 import DialogTitle from "@material-ui/core/DialogTitle"
 import CancelIcon from "@material-ui/icons/Cancel"
 import IconButton from "@material-ui/core/IconButton"
-import PaypalExpressBtn from "gatsby-paypal-button"
+// import PaypalExpressBtn from "gatsby-paypal-button"
 import Cart from "./Cart"
 // import client from "../client
 import UseAutoComplete from "../components/search"
@@ -20,6 +22,9 @@ import "./util.css"
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
 import { removeItem } from "../state/app"
+import { Elements, StripeProvider } from "react-stripe-elements"
+import BillingForm from "./BillingForm"
+import Amplify, { API } from "aws-amplify"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -29,6 +34,8 @@ const useStyles = makeStyles(theme => ({
     },
   },
 }))
+
+const builder = imageUrlBuilder(myConfiguredSanityClient)
 
 const logonoAddClear = require("../images/logono_add_clear.png")
 const newLogo = require("../images/logo.png")
@@ -41,43 +48,123 @@ const Layout = props => {
   const { title, children } = props
   const [toggleNav, setToggleNav] = useState(false)
   const [toggleCart, setToggleCart] = useState(false)
+  const [cartTotal, setCartTotal] = useState(0)
+  const [toggleCheckout, setToggleCheckout] = useState(false)
   const classes = useStyles()
-  const [firstName, setFirstName] = React.useState("")
-  const [lastName, setLastName] = React.useState("")
-  const [address, setAddress] = React.useState("")
-  const [zip, setZip] = React.useState("")
-  const [city, setCity] = React.useState("")
 
-  console.log("Layout props: ", props)
+  const sendConfirmationEmail = async params => {
+    let body = {
+      to: params.recipient,
+      from: params.sender,
+      subject: params.subject,
+      htmlBody: params.htmlBody,
+      textBody: params.textBody,
+    }
+    try {
+      console.log("API request body here: ", body)
+      let response = await fetch(
+        "https://cors-anywhere.herokuapp.com/https://u1ilv840u4.execute-api.us-east-1.amazonaws.com/prod/email",
+        {
+          method: "POST",
+          body: JSON.stringify(body),
+          // mode: 'no-cors',
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": true,
+          },
+        }
+      ).then(responseText => {
+        console.log("REsponse text: ", responseText)
+        console.log(responseText.status)
+        // the status above (200 vs 500) will determine the loading/error message.
+        var response = responseText.json()
+        console.log("Response: ", response)
+      })
 
-  const client = {
-    sandbox: "Your-Sandbox-Client-ID",
-    production: "Your-Production-Client-ID",
+      console.log("Response: ", response)
+    } catch (e) {
+      console.log("Email send error: ", e)
+    }
   }
 
-  const handleFirst = event => {
-    setFirstName(event.target.value)
+  const [stripe, setStripe] = useState(null)
+
+  useEffect(() => {
+    if (typeof window !== undefined && typeof window.Stripe !== undefined) {
+      setStripe(window.Stripe("pk_test_hnclQ0ChvfU9waes6yOHnPbx00oNYQkfIw"))
+    }
+  }, [])
+
+  const handleSubmit = async stripeInfo => {
+    let body = {
+      ...stripeInfo.body,
+      amount: 125000,
+    }
+
+    // let emailInfo = {
+    //   recipient: `matthea@woollymammothshoes.com`,
+    //   sender: 'paretojs@gmail.com',
+    //   subject: `New Woolly Sale!`,
+    //   htmlBody: `You have a new sale from ${stripeInfo.body.firstName} ${stripeInfo.body.lastName}`,
+    //   textBody: `<p></p>`,
+    // }
+
+    // let emailInfo = {
+    //   recipient: stripeInfo.body.,
+    //   sender: 'paretojs@gmail.com',
+    //   subject: `New Woolly Sale!`,
+    //   htmlBody: `You have a new sale from ${stripeInfo.bodyfirstName} ${stripeInfo.lastName}`,
+    //   textBody: `<p></p>`,
+    // }
+
+    try {
+      console.log("API request body here: ", body)
+      let response = await fetch(
+        "https://cors-anywhere.herokuapp.com/https://u1ilv840u4.execute-api.us-east-1.amazonaws.com/prod/billing",
+        {
+          method: "POST",
+          body: JSON.stringify(body),
+          // mode: 'no-cors',
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": true,
+          },
+        }
+      ).then(responseText => {
+        console.log("REsponse text: ", responseText)
+        console.log(responseText.status)
+        // the status above (200 vs 500) will determine the loading/error message.
+        var response = responseText.json()
+        console.log("Response: ", response)
+      })
+
+      // await sendConfirmationEmail()
+
+      console.log("Response: ", response)
+    } catch (e) {
+      console.log("Billing submissions error: ", e)
+    }
   }
 
-  const handleLast = event => {
-    setLastName(event.target.value)
-  }
+  let newPrice = "0"
+  let priceArray = [0]
 
-  const handleAddress = event => {
-    setAddress(event.target.value)
-  }
+  props.everything.app.cart.map(cartItem => {
+    priceArray.push(parseInt(cartItem.price, 10))
+  })
 
-  const handleCity = event => {
-    setCity(event.target.value)
-  }
+  let sumTotal = priceArray.reduce((a, b) => a + b)
+  console.log(sumTotal)
 
-  const handleZip = event => {
-    setZip(event.target.value)
-  }
+  let newTotal = sumTotal.toString()
 
-  const closeCart = () => {
-    setToggleCart(false)
-  }
+  let last2 = newTotal.slice(-2)
+  let priceLength = newTotal.length - 2
+  let firstFew = newTotal.slice(0, priceLength)
+  newPrice = `${firstFew}.${last2}`
+  console.log(newPrice)
 
   return (
     <div className={`site-wrapper ${toggleNav ? `site-head-open` : ``}`}>
@@ -186,7 +273,6 @@ const Layout = props => {
         }}
         open={toggleCart}
         TransitionComponent={Transition}
-        // keepMounted
         disableBackdropClick={false}
         hideBackdrop={false}
         onClose={() => setToggleCart(false)}
@@ -205,106 +291,113 @@ const Layout = props => {
           >
             <CancelIcon />
           </IconButton>
-          <DialogContent style={{ textAlign: "center" }} dividers={true}>
-            {/* <img
-          src={require('../assets/warning.svg')}
-          alt=''
-          width='50'
-          height='50'
-        /> */}
+          <DialogContent style={{ textAlign: "center", paddingBottom: 30 }}>
+            Woolly Mammoth Checkout <br />
+            {props.everything.app.cart.length < 1 ? (
+              <p>Cart Total: $0</p>
+            ) : (
+              <p>Cart Total: ${newPrice}</p>
+            )}
           </DialogContent>
 
-          <DialogTitle
-            style={{ textAlign: "center" }}
-            id="alert-dialog-slide-title"
-          >
-            {`Woolly Mammoth Checkout`}
-          </DialogTitle>
+          {!toggleCheckout ? (
+            <div>
+              {props.everything.app.cart.map((cartItem, i) => {
+                function urlFor(_ref) {
+                  return builder.image(_ref)
+                }
+                let last2 = cartItem.price.slice(-2)
+                let priceLength = cartItem.price.length - 2
+                let firstFew = cartItem.price.slice(0, priceLength)
+                let newPrice = `${firstFew}.${last2}`
+                return (
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      padding: 20,
+                    }}
+                  >
+                    <div>
+                      <p>{cartItem.model}</p>
+                      <p>{cartItem.manufacturer}</p>
+                      <p>${newPrice}</p>
+                      {/* <p>{cartItem.image}</p> */}
+                    </div>
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                      <img
+                        src={urlFor(cartItem.image[0].asset._ref)
+                          .width(100)
+                          .url()}
+                      />
+                      <button onClick={() => props.removeItem(i)}>
+                        Remove Item
+                      </button>
+                    </div>
+                  </div>
+                )
+              })}
 
-          {props.everything.app.cart.map((cartItem, i) => {
-            return (
-              <React.Fragment>
-                <div style={{ display: "flex" }}>
-                  <p>{cartItem.model}</p>
-                  <p>{cartItem.manufacturer}</p>
-                  <p>{cartItem.price}</p>
-                  {/* <p>{cartItem.image}</p> */}
-                </div>
-                <button onClick={() => props.removeItem(i)}>Remove Item</button>
-              </React.Fragment>
-            )
-          })}
-
-          <div>
-            <TextField
-              id="filled-name"
-              placeholder="First Name"
-              value={firstName}
-              onChange={handleFirst}
-              // variant="filled"
-              style={{ width: "90%" }}
-            />
-            <TextField
-              id="filled-name"
-              placeholder="Last Name"
-              value={lastName}
-              onChange={handleLast}
-              // variant="filled"
-              style={{ width: "90%" }}
-            />
-            <TextField
-              id="filled-name"
-              placeholder="Street Address"
-              value={address}
-              onChange={handleAddress}
-              // variant="filled"
-              style={{ width: "90%" }}
-            />
-            <TextField
-              id="filled-name"
-              placeholder="City"
-              value={city}
-              onChange={handleCity}
-              // variant="filled"
-              style={{ width: "90%" }}
-            />
-            <TextField
-              id="filled-name"
-              placeholder="Zip Code"
-              value={zip}
-              onChange={handleZip}
-              // variant="filled"
-              style={{ width: "90%" }}
-            />
-          </div>
-
-          <DialogContent>
-            <DialogContentText
-              style={{ textAlign: "center", color: "black" }}
-              id="alert-dialog-slide-description"
-            >
-              Failure to respond to Mini-Case will negatively impact your
-              company.
-            </DialogContentText>
-          </DialogContent>
-
-          <PaypalExpressBtn client={client} currency={"USD"} total={1.0} />
-
-          <DialogActions style={{ display: "flex", justifyContent: "center" }}>
-            <Link>
-              <Button
-                style={{ margin: "15px auto", backgroundColor: "black" }}
-                onClick={() => {
-                  setToggleCart(false)
-                  // props.toggleDarkMode(!props.everything.app.isDarkMode)
-                }}
-                variant="contained"
-                color="primary"
+              <DialogActions
+                style={{ display: "flex", justifyContent: "space-between" }}
               >
-                Close Popup
-              </Button>
-            </Link>
-          </DialogActions>
+                <Button
+                  style={{ margin: "15px auto", backgroundColor: "orange" }}
+                  onClick={() => {
+                    setToggleCart(false)
+                  }}
+                  variant="contained"
+                  color="primary"
+                >
+                  Close Cart
+                </Button>
+                <Button
+                  style={{ margin: "15px auto", backgroundColor: "green" }}
+                  onClick={() => {
+                    setToggleCheckout(true)
+                  }}
+                  variant="contained"
+                  color="primary"
+                >
+                  Checkout
+                </Button>
+              </DialogActions>
+            </div>
+          ) : (
+            <div>
+              <StripeProvider stripe={stripe}>
+                <Elements>
+                  <BillingForm handleSubmit={handleSubmit} />
+                </Elements>
+              </StripeProvider>
+              <DialogActions
+                style={{ display: "flex", justifyContent: "space-between" }}
+              >
+                <Button
+                  style={{ margin: "15px auto", backgroundColor: "orange" }}
+                  onClick={() => {
+                    setToggleCart(false)
+                  }}
+                  variant="contained"
+                  color="primary"
+                >
+                  Close Cart
+                </Button>
+                <Button
+                  style={{ margin: "15px auto", backgroundColor: "green" }}
+                  onClick={() => {
+                    setToggleCheckout(false)
+                  }}
+                  variant="contained"
+                  color="primary"
+                >
+                  Back to Cart
+                </Button>
+              </DialogActions>
+            </div>
+          )}
+
+          <div></div>
         </div>
       </Dialog>
       <footer className="site-foot" style={{ marginTop: 30 }}>
