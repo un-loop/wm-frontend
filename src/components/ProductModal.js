@@ -10,11 +10,12 @@ import SwipeableViews from "react-swipeable-views"
 import { autoPlay } from "react-swipeable-views-utils"
 import myConfigSanityClient from "../client"
 import imageUrlBuilder from "@sanity/image-url"
+import { addItem } from "../state/app"
+import { connect } from "react-redux"
+import { bindActionCreators } from "redux"
 import client from "../client"
 
 const builder = imageUrlBuilder(myConfigSanityClient)
-
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews)
 
 const useStyles = makeStyles(theme => ({
   img: {
@@ -62,10 +63,34 @@ function SwipeableTextMobileStepper(props) {
           function urlFor(_ref) {
             return builder.image(_ref)
           }
+          let emptyArr = []
+          step.sizes.map((size, i) => {
+            let newArr = size.split(",")
+            newArr.map(item => {
+              emptyArr.push(item.slice(0, 4))
+            })
+          })
+          let cartItem = {
+            model: step.title,
+            manufacturer: step.vendorTitle,
+            price: step.price,
+            image: step.images,
+            sizes: emptyArr,
+            size: emptyArr[0],
+          }
+          let last2 = step.price.slice(-2)
+          let priceLength = step.price.length - 2
+          let firstFew = step.price.slice(0, priceLength)
+          let newPrice = `${firstFew}.${last2}`
+          console.log("Active Step: ", step)
           return (
             <div
               key={step.label}
-              style={{ display: "flex", justifyContent: "center" }}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+              }}
             >
               {Math.abs(activeStep - index) <= 2 ? (
                 <img
@@ -77,6 +102,17 @@ function SwipeableTextMobileStepper(props) {
                   // alt={image.label}
                 />
               ) : null}
+              <br />
+              <h5 style={{ display: "flex", justifyContent: "center" }}>
+                {newPrice}
+              </h5>
+              <Button
+                onClick={() => props.addItem(cartItem)}
+                style={{ backgroundColor: "green", color: "white" }}
+              >
+                Add to Cart
+              </Button>
+              <br />
             </div>
           )
         })}
@@ -115,4 +151,23 @@ function SwipeableTextMobileStepper(props) {
   )
 }
 
-export default SwipeableTextMobileStepper
+const mapStateToProps = state => {
+  return {
+    // everything: state,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      addItem: item => addItem(item),
+      // swapThemeColors: (checked) => swapThemeColors(checked),
+    },
+    dispatch
+  )
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SwipeableTextMobileStepper)

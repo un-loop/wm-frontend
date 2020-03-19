@@ -9,8 +9,8 @@ import SwipeableViews from "react-swipeable-views"
 import { autoPlay } from "react-swipeable-views-utils"
 import imageUrlBuilder from "@sanity/image-url"
 import client from "../client"
-const builder = imageUrlBuilder(client)
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews)
+// const builder = imageUrlBuilder(client)
+// const AutoPlaySwipeableViews = autoPlay(SwipeableViews)
 // const images = [{src:this.state.images}]
 
 class ProductDisplay extends React.Component {
@@ -40,25 +40,20 @@ class ProductDisplay extends React.Component {
             centered
             className="modal"
           >
-            <Modal.Header closeButton className="modal-header">
-              {/* <Modal.Title id="contained-modal-title-vcenter">
-              Blundstone
-            </Modal.Title> */}
-            </Modal.Header>
-            {/* 
-          <div className="">put the info</div>
-          <h4>Centered Modal</h4> */}
+            <Modal.Header closeButton className="modal-header"></Modal.Header>
+
             <div>
               <Modal.Body isOpen={this.state.showModal}>
-                <SwipeableTextMobileStepper
-                  // images={this.props.brands}
-                  {...this.props}
-                />
+                <SwipeableTextMobileStepper {...this.props} />
               </Modal.Body>
             </div>
 
             <Modal.Footer>
-              <Button onClick={this.props.onHide} className="modal-btn">
+              <Button
+                onClick={this.props.onHide}
+                style={{ width: "100%" }}
+                variant="primary"
+              >
                 Close
               </Button>
             </Modal.Footer>

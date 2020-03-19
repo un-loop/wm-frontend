@@ -18,6 +18,7 @@ class DropdownContainer extends Component {
   async componentDidMount() {
     const results = await client.fetch(`*[_type == 'vendor' ]{	
     title, gender, slug}`)
+    console.log("Results: ", results)
     this.setState({ vendors: results })
   }
 
@@ -120,7 +121,7 @@ class DropdownContainer extends Component {
           onClick={() => this.toggleList()}
         >
           <div className="dd-header-title" style={styleHeader}>
-            {headerTitle}
+            {`${headerTitle}`}
           </div>
           {listOpen}
         </div>
@@ -130,10 +131,10 @@ class DropdownContainer extends Component {
             style={listbox}
             onClick={e => e.stopPropagation()}
           >
-            {this.state.vendors.map(vendor => (
-              <React.Fragment>
+            {this.state.vendors.map((vendor, idx) => (
+              <React.Fragment key={idx}>
                 {vendor.gender === this.props.gender ||
-                vendor.gender === "both" ? (
+                vendor.gender === "Accessories" ? (
                   <Link to={`/${vendor.slug.current}`}>
                     <li
                       className="dd-list-item"

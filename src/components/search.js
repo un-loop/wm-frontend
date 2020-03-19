@@ -82,7 +82,7 @@ export default function UseAutocomplete() {
           className={classes.input}
           {...getInputProps()}
           placeholder="Search"
-          style={{ backgroundColor: "white" }}
+          style={{ backgroundColor: "white", width: 100 }}
         />
       </div>
       {groupedOptions.length > 0 ? (

@@ -19,9 +19,10 @@ import Cart from "./Cart"
 // import client from "../client
 import UseAutoComplete from "../components/search"
 import "./util.css"
+import CartItem from "../components/CartItem"
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
-import { removeItem } from "../state/app"
+import { removeItem, clearCart } from "../state/app"
 import { Elements, StripeProvider } from "react-stripe-elements"
 import BillingForm from "./BillingForm"
 import Amplify, { API } from "aws-amplify"
@@ -36,7 +37,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const builder = imageUrlBuilder(myConfiguredSanityClient)
-
+const smallWoolly = require("../images/wm-small-logo.png")
 const logonoAddClear = require("../images/logono_add_clear.png")
 const newLogo = require("../images/logo.png")
 
@@ -51,10 +52,14 @@ const Layout = props => {
   const [cartTotal, setCartTotal] = useState(0)
   const [toggleCheckout, setToggleCheckout] = useState(false)
   const classes = useStyles()
+  const [displaySuccess, setDisplaySuccess] = useState(false)
+  const [displayFailure, setDisplayFailure] = useState(false)
+  const [checkoutComplete, setCheckoutComplete] = useState(false)
 
-  const sendConfirmationEmail = async params => {
+  const sendConfirmationEmail = params => {
     let body = {
       to: params.recipient,
+      // to: 'misha@un-loop.org',
       from: params.sender,
       subject: params.subject,
       htmlBody: params.htmlBody,
@@ -62,7 +67,7 @@ const Layout = props => {
     }
     try {
       console.log("API request body here: ", body)
-      let response = await fetch(
+      return fetch(
         "https://cors-anywhere.herokuapp.com/https://u1ilv840u4.execute-api.us-east-1.amazonaws.com/prod/email",
         {
           method: "POST",
@@ -81,8 +86,6 @@ const Layout = props => {
         var response = responseText.json()
         console.log("Response: ", response)
       })
-
-      console.log("Response: ", response)
     } catch (e) {
       console.log("Email send error: ", e)
     }
@@ -92,31 +95,42 @@ const Layout = props => {
 
   useEffect(() => {
     if (typeof window !== undefined && typeof window.Stripe !== undefined) {
-      setStripe(window.Stripe("pk_test_hnclQ0ChvfU9waes6yOHnPbx00oNYQkfIw"))
+      setStripe(window.Stripe("pk_live_he28Fk30nKJvWw52HRR6keOo00cFoZhr0m"))
     }
   }, [])
 
   const handleSubmit = async stripeInfo => {
     let body = {
       ...stripeInfo.body,
-      amount: 125000,
+      // amount: newtaxPrizeInt,
     }
 
-    // let emailInfo = {
-    //   recipient: `matthea@woollymammothshoes.com`,
-    //   sender: 'paretojs@gmail.com',
-    //   subject: `New Woolly Sale!`,
-    //   htmlBody: `You have a new sale from ${stripeInfo.body.firstName} ${stripeInfo.body.lastName}`,
-    //   textBody: `<p></p>`,
-    // }
+    let orderInfo = []
+    props.everything.app.cart.map((cartItem, i) => {
+      let tempString
+      tempString = `${i + 1}: ${cartItem.model} from ${
+        cartItem.manufacturer
+      } in size ${cartItem.size}`
+      orderInfo.push(tempString)
+    })
 
-    // let emailInfo = {
-    //   recipient: stripeInfo.body.,
-    //   sender: 'paretojs@gmail.com',
-    //   subject: `New Woolly Sale!`,
-    //   htmlBody: `You have a new sale from ${stripeInfo.bodyfirstName} ${stripeInfo.lastName}`,
-    //   textBody: `<p></p>`,
-    // }
+    let orderString = orderInfo.join()
+
+    let emailInfo = {
+      recipient: "matthea@woollymammothshoes.com",
+      sender: "matthea@woollymammothshoes.com",
+      subject: `New Woolly Sale - ${stripeInfo.body.firstName} ${stripeInfo.body.lastName}`,
+      htmlBody: `<p>You have a new sale from ${stripeInfo.body.firstName} ${stripeInfo.body.lastName}. <br /><br />Their purchases include ${orderString}. <br /><br />Please ship the order to ${stripeInfo.body.address}, ${stripeInfo.body.city} ${stripeInfo.body.zip}</p>`,
+      textBody: `You have a new sale from ${stripeInfo.body.firstName} ${stripeInfo.body.lastName}. Their purchases include ${orderString}. Please ship the order to ${stripeInfo.body.shippingAddress}, ${stripeInfo.body.shippingCity} ${stripeInfo.body.shippingZip}`,
+    }
+
+    let receiptInfo = {
+      recipient: stripeInfo.body.email,
+      sender: "matthea@woollymammothshoes.com",
+      subject: `Thank You from Woolly Mammoth!`,
+      htmlBody: `<p>We appreciate your support and your business! <br /><br />Your order will be delivered in 5-7 business days, please respond here if you have any questions. <br /><br />Sincerely,<br /><br />Matthea Anglin<br />Owner, Woolly Mammoth Shoes</p>`,
+      textBody: `We appreciate your support and your business! Your order will be delivered in 5-7 business days, please respond here if you have any questions. Sincerely, Matthea Anglin - Owner, Woolly Mammoth Shoes`,
+    }
 
     try {
       console.log("API request body here: ", body)
@@ -132,15 +146,26 @@ const Layout = props => {
             "Access-Control-Allow-Credentials": true,
           },
         }
-      ).then(responseText => {
-        console.log("REsponse text: ", responseText)
-        console.log(responseText.status)
-        // the status above (200 vs 500) will determine the loading/error message.
-        var response = responseText.json()
-        console.log("Response: ", response)
-      })
-
-      // await sendConfirmationEmail()
+      )
+        .then(responseText => {
+          console.log("REsponse text: ", responseText)
+          console.log(responseText.status)
+          // the status above (200 vs 500) will determine the loading/error message.
+          var response = responseText.json()
+          console.log("Response: ", response)
+          if (responseText.status === 200) {
+            setDisplaySuccess(true)
+            setCheckoutComplete(true)
+            props.clearCart()
+            sendConfirmationEmail(emailInfo)
+            sendConfirmationEmail(receiptInfo)
+          } else {
+            setDisplayFailure(true)
+          }
+        })
+        .catch(err => {
+          setDisplayFailure(true)
+        })
 
       console.log("Response: ", response)
     } catch (e) {
@@ -156,7 +181,6 @@ const Layout = props => {
   })
 
   let sumTotal = priceArray.reduce((a, b) => a + b)
-  console.log(sumTotal)
 
   let newTotal = sumTotal.toString()
 
@@ -164,8 +188,12 @@ const Layout = props => {
   let priceLength = newTotal.length - 2
   let firstFew = newTotal.slice(0, priceLength)
   newPrice = `${firstFew}.${last2}`
-  console.log(newPrice)
+  let newPriceWithTax = (newPrice * 1.095).toFixed(2)
 
+  let taxPrizeString = newPriceWithTax.toString().split(".")
+  console.log(taxPrizeString)
+  let newTaxPrizeInt = parseInt(`${taxPrizeString[0]}${taxPrizeString[1]}`, 10)
+  console.log(newTaxPrizeInt)
   return (
     <div className={`site-wrapper ${toggleNav ? `site-head-open` : ``}`}>
       <header className="site-head">
@@ -207,11 +235,14 @@ const Layout = props => {
               <li className="nav-elements" role="menuitem">
                 <Link to={`/contact`}>Contact</Link>
               </li>
+              <li className="nav-elements" role="menuitem">
+                <Link to={`/brands`}>Brands</Link>
+              </li>
             </ul>
           </nav>
           <div className="site-head-center">
             <Link className="site-head-logo" to={`/`}>
-              <img src="http://woollymammothshoes.com/wordpress/wp-content/themes/twentyten-child/images/woolly_logo.png"></img>
+              <img src={smallWoolly}></img>
             </Link>
           </div>
 
@@ -236,10 +267,10 @@ const Layout = props => {
       <div style={{ backgroundColor: "#584E8F" }}>
         <ul style={{ listStyle: "none", display: "flex" }}>
           <li>
-            <DropdownContainer title="Women" gender="female" key={title} />
+            <DropdownContainer title="Women" gender="Women" key={title} />
           </li>
-          <li>
-            <DropdownContainer title="Men" gender="male" key={title} />
+          <li style={{ marginLeft: -12 }}>
+            <DropdownContainer title="Men" gender="Men" key={title} />
           </li>
           <li>
             <UseAutoComplete style={{}} />
@@ -263,7 +294,7 @@ const Layout = props => {
         </div>
         <div id="mybutton">
           <button class="feedback" onClick={() => setToggleCart(true)}>
-            View Cart
+            View Cart ({props.everything.app.cart.length})
           </button>
         </div>
       </main>
@@ -280,24 +311,17 @@ const Layout = props => {
         aria-describedby="alert-dialog-slide-description"
       >
         <div>
-          <IconButton
-            style={{
-              position: "absolute",
-              top: "5px",
-              right: "5px",
-              padding: "0px",
-            }}
-            onClick={() => setToggleCart(false)}
-          >
-            <CancelIcon />
-          </IconButton>
           <DialogContent style={{ textAlign: "center", paddingBottom: 30 }}>
             Woolly Mammoth Checkout <br />
             {props.everything.app.cart.length < 1 ? (
               <p>Cart Total: $0</p>
             ) : (
-              <p>Cart Total: ${newPrice}</p>
+              <React.Fragment>
+                <p>Cart Total: ${newPrice}</p>
+                <p>With Tax: ${newPriceWithTax}</p>
+              </React.Fragment>
             )}
+            Free Shipping Arrives in 5-7 Days
           </DialogContent>
 
           {!toggleCheckout ? (
@@ -319,10 +343,13 @@ const Layout = props => {
                     }}
                   >
                     <div>
-                      <p>{cartItem.model}</p>
+                      <p style={{ paddingRight: 10 }}>{cartItem.model}</p>
                       <p>{cartItem.manufacturer}</p>
                       <p>${newPrice}</p>
                       {/* <p>{cartItem.image}</p> */}
+                      <button onClick={() => props.removeItem(i)}>
+                        Remove Item
+                      </button>
                     </div>
                     <div style={{ display: "flex", flexDirection: "column" }}>
                       <img
@@ -330,9 +357,11 @@ const Layout = props => {
                           .width(100)
                           .url()}
                       />
-                      <button onClick={() => props.removeItem(i)}>
-                        Remove Item
-                      </button>
+                      <CartItem
+                        emptyArr={cartItem.sizes}
+                        item={cartItem}
+                        itemIndex={i}
+                      />
                     </div>
                   </div>
                 )
@@ -367,9 +396,16 @@ const Layout = props => {
             <div>
               <StripeProvider stripe={stripe}>
                 <Elements>
-                  <BillingForm handleSubmit={handleSubmit} />
+                  <BillingForm
+                    handleSubmit={handleSubmit}
+                    displaySuccess={displaySuccess}
+                    displayFailure={displayFailure}
+                    checkoutComplete={checkoutComplete}
+                    totalInt={newTaxPrizeInt}
+                  />
                 </Elements>
               </StripeProvider>
+
               <DialogActions
                 style={{ display: "flex", justifyContent: "space-between" }}
               >
@@ -384,7 +420,7 @@ const Layout = props => {
                   Close Cart
                 </Button>
                 <Button
-                  style={{ margin: "15px auto", backgroundColor: "green" }}
+                  style={{ margin: "15px auto", backgroundColor: "#584e8f" }}
                   onClick={() => {
                     setToggleCheckout(false)
                   }}
@@ -401,7 +437,7 @@ const Layout = props => {
         </div>
       </Dialog>
       <footer className="site-foot" style={{ marginTop: 30 }}>
-        &copy; {new Date().getFullYear()} <Link to={`/`}>{title}</Link>
+        &copy; {new Date().getFullYear()} <Link to={`/`}>{title}</Link> v 0.9.3
       </footer>
     </div>
   )
@@ -417,7 +453,7 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       removeItem: index => removeItem(index),
-      // swapThemeColors: (checked) => swapThemeColors(checked),
+      clearCart: checked => clearCart(checked),
     },
     dispatch
   )

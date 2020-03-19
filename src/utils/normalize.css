@@ -13,6 +13,16 @@ html {
   -webkit-text-size-adjust: 100%; /* 2 */
 }
 
+.block {
+  border: none;
+  border-radius: 3px;
+  border-color: rgb(17, 16, 16);
+  background: white;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px 0px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
 /* Sections
  ========================================================================== */
 

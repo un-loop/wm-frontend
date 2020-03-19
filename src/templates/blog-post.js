@@ -4,11 +4,6 @@ import Img from "gatsby-image"
 import client from "../client"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import InputLabel from "@material-ui/core/InputLabel"
-import MenuItem from "@material-ui/core/MenuItem"
-import FormHelperText from "@material-ui/core/FormHelperText"
-import FormControl from "@material-ui/core/FormControl"
-import Select from "@material-ui/core/Select"
 import myConfiguredSanityClient from "../client"
 import imageUrlBuilder from "@sanity/image-url"
 import "../utils/css/components/global.css"
@@ -25,21 +20,34 @@ class BlogPostTemplate extends React.Component {
     super(props)
     this.state = {
       brands: [],
+      femaleBrands: [],
+      maleBrands: [],
       addModalShow: false,
       showBig: false,
       openingIndex: 0,
+      brand: "",
     }
   }
   async componentDidMount() {
     const brand = window.location.pathname.split("/")
-    console.log(brand)
-    console.log("Brand Page Props: ", this.props)
     try {
+      let female = []
+      let male = []
       const result = await client.fetch(
         `*[_type == 'product' && vendorTitle == '${brand[1]}']`
       )
-      console.log("Products: ", result)
-      this.setState({ brands: result })
+      this.setState({ brands: result, brand: brand[1] })
+      result.map((item, i) => {
+        if (item.categories === "Men") {
+          male.push(item)
+        } else if (item.categories === "Women") {
+          female.push(item)
+        } else {
+          female.push(item)
+          male.push(item)
+        }
+      })
+      this.setState({ femaleBrands: female, maleBrands: male })
     } catch (e) {
       console.log("Sanity fetch", e)
     }
@@ -69,6 +77,13 @@ class BlogPostTemplate extends React.Component {
                 {post.frontmatter.description}
               </p>
             )}
+
+            {this.state.brands.length <= 1 ? (
+              <p className="post-content-excerpt">More Inventory Coming Soon</p>
+            ) : null}
+
+            {this.state.femaleBrands.length < 1 ? null : <h2>Women's Shoes</h2>}
+
             <div
               style={{
                 display: "flex",
@@ -77,7 +92,7 @@ class BlogPostTemplate extends React.Component {
                 flexWrap: "wrap",
               }}
             >
-              {this.state.brands.map((brand, index) => {
+              {this.state.femaleBrands.map((brand, index) => {
                 function urlFor(_ref) {
                   return builder.image(_ref)
                 }
@@ -85,15 +100,16 @@ class BlogPostTemplate extends React.Component {
                 brand.sizes.map((size, i) => {
                   let newArr = size.split(",")
                   newArr.map(item => {
-                    emptyArr.push(item.slice(0, 2))
+                    emptyArr.push(item.slice(0, 4))
                   })
                 })
-                console.log("Empty: ", emptyArr)
                 let cartItem = {
                   model: brand.title,
                   manufacturer: brand.vendorTitle,
                   price: brand.price,
                   image: brand.images,
+                  sizes: emptyArr,
+                  size: emptyArr[0],
                 }
                 let last2 = brand.price.slice(-2)
                 let priceLength = brand.price.length - 2
@@ -101,15 +117,6 @@ class BlogPostTemplate extends React.Component {
                 let newPrice = `${firstFew}.${last2}`
 
                 let shoeSize = emptyArr[0]
-
-                // const [shoeSize, setShoeSize] = useState(36)
-
-                // const handleChange = event => {
-                //   console.log('event? :', event)
-                //   setShoeSize(event.target.value);
-                // }
-
-                console.log("Shoe size: ", shoeSize)
                 return (
                   <div
                     key={index}
@@ -157,9 +164,20 @@ class BlogPostTemplate extends React.Component {
                       }}
                     >
                       <p>Sizes:&nbsp; </p>
-                      {emptyArr.map((size, i) => {
-                        return <p>{size},&nbsp; </p>
-                      })}
+                      {this.state.brand !== "blundstone" ? (
+                        <React.Fragment>
+                          {emptyArr.map((size, i) => {
+                            return <p>{size},&nbsp; </p>
+                          })}
+                        </React.Fragment>
+                      ) : (
+                        <React.Fragment>
+                          {brand.sizes.map((size, i) => {
+                            console.log(size)
+                            return <p>{size}</p>
+                          })}
+                        </React.Fragment>
+                      )}
                     </div>
 
                     <div
@@ -169,29 +187,19 @@ class BlogPostTemplate extends React.Component {
                         flexWrap: "wrap",
                       }}
                     >
-                      <Button onClick={() => this.props.addItem(cartItem)}>
+                      <Button
+                        onClick={() => this.props.addItem(cartItem)}
+                        style={{
+                          margin: "15px auto",
+                          backgroundColor: "green",
+                          color: "white",
+                        }}
+                        color="primary"
+                        variant="contained"
+                      >
                         Add To Cart
                       </Button>
                     </div>
-
-                    {/* <FormControl>
-                        <InputLabel id="demo-simple-select-helper-label">Shoe Sizes</InputLabel>
-                        <Select
-                          labelId="demo-simple-select-helper-label"
-                          id="demo-simple-select-helper"
-                          value={shoeSize}
-                          onChange={handleChange}
-                        >
-                          {emptyArr.map((size, i) => {
-                              return(
-                                <MenuItem value={size}>{size}</MenuItem>
-                              )
-                            })}
-                        
-                        </Select>
-                        <FormHelperText>Some important helper text</FormHelperText>
-                      </FormControl> */}
-
                     <div
                       style={{
                         display: "flex",
@@ -205,6 +213,110 @@ class BlogPostTemplate extends React.Component {
                           flexWrap: "wrap",
                         }}
                       ></div>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+            <div>
+              {this.state.maleBrands.length < 1 ? null : <h2>Men's Shoes</h2>}
+              {this.state.maleBrands.map((brand, index) => {
+                function urlFor(_ref) {
+                  return builder.image(_ref)
+                }
+                let emptyArr = []
+                brand.sizes.map((size, i) => {
+                  let newArr = size.split(",")
+                  newArr.map(item => {
+                    emptyArr.push(item.slice(0, 4))
+                  })
+                })
+                console.log("Empty: ", emptyArr)
+                let cartItem = {
+                  model: brand.title,
+                  manufacturer: brand.vendorTitle,
+                  price: brand.price,
+                  image: brand.images,
+                  sizes: emptyArr,
+                  size: emptyArr[0],
+                }
+                let last2 = brand.price.slice(-2)
+                let priceLength = brand.price.length - 2
+                let firstFew = brand.price.slice(0, priceLength)
+                let newPrice = `${firstFew}.${last2}`
+
+                let shoeSize = emptyArr[0]
+
+                return (
+                  <div
+                    key={index}
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      flexWrap: "wrap",
+                      flex: "0 1 45%",
+                      alignText: "center",
+                    }}
+                  >
+                    <div>
+                      <img
+                        src={urlFor(brand.images[0].asset._ref)
+                          .width(400)
+                          .url()}
+                        onClick={() =>
+                          this.setState({
+                            addModalShow: true,
+                            openingIndex: index,
+                          })
+                        }
+                      />
+
+                      <p style={{ display: "flex", justifyContent: "center" }}>
+                        {brand.title}
+                      </p>
+                      <p
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          marginTop: -20,
+                        }}
+                      >
+                        ${newPrice}
+                      </p>
+
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          flexWrap: "wrap",
+                        }}
+                      >
+                        <p>Sizes:&nbsp; </p>
+                        {emptyArr.map((size, i) => {
+                          return <p>{size},&nbsp; </p>
+                        })}
+                      </div>
+
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          flexWrap: "wrap",
+                        }}
+                      >
+                        <Button
+                          onClick={() => this.props.addItem(cartItem)}
+                          style={{
+                            margin: "15px auto",
+                            backgroundColor: "green",
+                            color: "white",
+                          }}
+                          color="primary"
+                          variant="contained"
+                        >
+                          Add To Cart
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 )

@@ -59,7 +59,7 @@ const BlogIndex = ({ data }, location) => {
   return (
     <Layout title={siteTitle}>
       <SEO
-        title="Home"
+        title="Woolly Mammoth Shoes"
         keywords={[`shoes`, `boots`, `seattle shoes`, `seattle boots`]}
       />
       {/* <SwipeableTextMobileStepper /> */}
@@ -69,203 +69,75 @@ const BlogIndex = ({ data }, location) => {
 
       <br />
 
-      <MediaQuery maxWidth={568}>
-        {matches => {
-          if (matches) {
-            return (
-              <React.Fragment>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-evenly",
-                    flexWrap: "wrap",
-                  }}
-                >
-                  <Button color="primary" variant="contained">
-                    <a
-                      href="https://www.facebook.com/thewoollymammothshoes/"
-                      target="_blank"
-                      style={{ color: "white" }}
-                    >
-                      <i
-                        className="fa fa-facebook"
-                        style={{ marginRight: 7 }}
-                      />
-                      Visit us on Facebook
-                    </a>
-                  </Button>
-                  <br />
-                  <Button
-                    color="default"
-                    variant="contained"
-                    onClick={() => document.getElementById("blog").click()}
-                  >
-                    {" "}
-                    <i className="fa fa-photo" style={{ marginRight: 7 }} />
-                    Visit our Blog
-                  </Button>
-                  <br />
-                  <Button color="secondary" variant="contained">
-                    {" "}
-                    <a
-                      href="https://www.instagram.com/thewoollymammothshoes/"
-                      target="_blank"
-                      style={{ color: "white" }}
-                    ></a>
-                    <i className="fa fa-instagram" style={{ marginRight: 7 }} />
-                    Follow on Instagram
-                  </Button>
-                </div>
-                <Link to="/blog">
-                  <div id="blog"></div>
-                </Link>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    textAlign: "center",
-                  }}
-                >
-                  <h2 id="dynamic-styles">Peace for your sole</h2>
+      <React.Fragment>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-evenly",
+            flexWrap: "wrap",
+          }}
+        >
+          <Button color="primary" variant="contained">
+            <a
+              href="https://www.facebook.com/thewoollymammothshoes/"
+              target="_blank"
+              style={{ color: "white" }}
+            >
+              <i className="fa fa-facebook" style={{ marginRight: 7 }} />
+              Visit us on Facebook
+            </a>
+          </Button>
+          <br />
+          <Button
+            color="default"
+            variant="contained"
+            onClick={() => document.getElementById("blog").click()}
+          >
+            {" "}
+            <i className="fa fa-photo" style={{ marginRight: 7 }} />
+            Visit our Blog
+          </Button>
+          <br />
+          <Button color="secondary" variant="contained">
+            {" "}
+            <a
+              href="https://www.instagram.com/thewoollymammothshoes/"
+              target="_blank"
+              style={{ color: "white" }}
+            ></a>
+            <i className="fa fa-instagram" style={{ marginRight: 7 }} />
+            Follow on Instagram
+          </Button>
+        </div>
+        <Link to="/blog">
+          <div id="blog"></div>
+        </Link>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            textAlign: "center",
+          }}
+        >
+          <h2 id="dynamic-styles">Peace for your sole</h2>
 
-                  {/* <div>
-              <div class="body-text-2" />
-              <div class="body-text-2">Monday - Friday 10:00 to 7:00</div>
-              <div class="w-100" />
-            
-              <div class="body-text-2">Satuday 10:00 to 6:00</div>
-              <div class="body-text-2">Sunday 12:00 to 7:00</div>
-            </div>
-        <div> */}
-                  <div class="body-text-2">Telephone:(206)632-3254</div>
-                  <div class="body-text-2">Fax:(206)545-3814</div>
-                  <a
-                    href="mailto:info@woollymammothshoes.com"
-                    class="body-text-2 link"
-                  >
-                    info@woollymammothshoes.com
-                  </a>
-                  <div class="body-text-2">4303 University Way NE</div>
-                  <div class="body-text-2">Seattle, WA 98105</div>
-                  <div class="body-text-2">
-                    We offer <b>free parking validation</b> <br />
-                    for any of the UDPA lots.
-                  </div>
-                </div>
-
-                {/* <div class="body-text-2">
-              <img src={streets} alt="map" width="500px" height="400px" />
-            </div>
-            <br /><br />
-            <div class="body-text-2">
-              <img src={googleMap} alt="map" width="500px" height="400px" />
-            </div>
-          </div> */}
-              </React.Fragment>
-            )
-          } else {
-            return (
-              <React.Fragment>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-evenly",
-                    flexWrap: "wrap",
-                  }}
-                >
-                  <Button color="primary" variant="contained">
-                    <a
-                      href="https://www.facebook.com/thewoollymammothshoes/"
-                      target="_blank"
-                      style={{ color: "white" }}
-                    >
-                      <i
-                        className="fa fa-facebook"
-                        style={{ marginRight: 7 }}
-                      />
-                      Visit us on Facebook
-                    </a>
-                  </Button>
-                  <Link to="/blog">
-                    <Button color="default" variant="contained">
-                      {" "}
-                      <i className="fa fa-photo" style={{ marginRight: 7 }} />
-                      Visit our Blog
-                    </Button>
-                  </Link>
-                  <Button color="secondary" variant="contained">
-                    {" "}
-                    <a
-                      href="https://www.instagram.com/thewoollymammothshoes/"
-                      target="_blank"
-                      style={{ color: "white" }}
-                    ></a>
-                    <i className="fa fa-instagram" style={{ marginRight: 7 }} />
-                    Follow on Instagram
-                  </Button>
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    flexWrap: "wrap",
-                    flexGrow: 1,
-                  }}
-                >
-                  <div>
-                    <h2 id="dynamic-styles">Peace for your sole</h2>
-                    {/* <div class="body-text-2">Monday - Friday 10:00 to 7:00</div>            
-                  <div class="body-text-2">Satuday 10:00 to 6:00</div>
-                  <div class="body-text-2">Sunday 12:00 to 7:00</div>        */}
-                  </div>
-
-                  <div style={{ marginTop: 40 }}>
-                    <div class="body-text-2">Telephone:(206)632-3254</div>
-                    <div class="body-text-2">Fax:(206)545-3814</div>
-                    <a
-                      href="mailto:info@woollymammothshoes.com"
-                      class="body-text-2 link"
-                    >
-                      info@woollymammothshoes.com
-                    </a>
-                    <div class="body-text-2">4303 University Way NE</div>
-                    <div class="body-text-2">Seattle, WA 98105</div>
-                    {/* <div class="body-text-2">We offer <b>free parking validation</b> <br />for any of the UDPA lots.</div> */}
-                  </div>
-
-                  {/* <div style={{display: 'flex', justifyContent: 'space-evenly'}}>
-
+          <div class="body-text-2">Telephone:(206)632-3254</div>
+          <div class="body-text-2">Fax:(206)545-3814</div>
+          <a href="mailto:info@woollymammothshoes.com" class="body-text-2 link">
+            info@woollymammothshoes.com
+          </a>
+          <div class="body-text-2">4303 University Way NE</div>
+          <div class="body-text-2">Seattle, WA 98105</div>
           <div class="body-text-2">
-              <img src={streets} alt="map" width="500px" height="400px" />
+            We offer <b>free parking validation</b> <br />
+            for any of the UDPA lots.
           </div>
-            <br /><br />
-            <div class="body-text-2">
-              <img src={googleMap} alt="map" width="500px" height="400px" />
-            </div> */}
-                  {/* </div> */}
-                  {/* </div> */}
-                </div>
-              </React.Fragment>
-            )
-          }
-        }}
-      </MediaQuery>
-
+        </div>
+      </React.Fragment>
       <br />
       <br />
       <br />
-
-      {/* </div> */}
-      {/* </article> */}
-
-      {/* The code below has the brand images displayed, commented out due to client demand */}
-
-      {/* <div style={{ display: "flex", justifyContent: "space-around" }}>
-        <button onClick={() => setSearchType(true)}>View Shoes</button>
-        <button onClick={() => setSearchType(false)}>View Brands</button>
-      </div> */}
 
       <h1 style={{ display: "flex", justifyContent: "center" }}>
         Explore our brands
