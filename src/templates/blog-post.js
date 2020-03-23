@@ -11,7 +11,6 @@ import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
 import Button from "@material-ui/core/Button"
 import { addItem } from "../state/app"
-// import "bootstrap/dist/css/bootstrap.min.css"
 import ProductDisplay from "../components/ProductDisplay"
 const builder = imageUrlBuilder(myConfiguredSanityClient)
 
@@ -72,11 +71,11 @@ class BlogPostTemplate extends React.Component {
             <header className="post-content-header">
               <h1 className="post-content-title">{post.frontmatter.title}</h1>
             </header>
-            {post.frontmatter.description && (
+            {/* {post.frontmatter.description && (
               <p className="post-content-excerpt">
                 {post.frontmatter.description}
               </p>
-            )}
+            )} */}
 
             {this.state.brands.length <= 1 ? (
               <p className="post-content-excerpt">More Inventory Coming Soon</p>
@@ -166,14 +165,13 @@ class BlogPostTemplate extends React.Component {
                       <p>Sizes:&nbsp; </p>
                       {this.state.brand !== "blundstone" ? (
                         <React.Fragment>
-                          {emptyArr.map((size, i) => {
+                          {brand.sizes.map((size, i) => {
                             return <p>{size},&nbsp; </p>
                           })}
                         </React.Fragment>
                       ) : (
                         <React.Fragment>
                           {brand.sizes.map((size, i) => {
-                            console.log(size)
                             return <p>{size}</p>
                           })}
                         </React.Fragment>
@@ -231,7 +229,6 @@ class BlogPostTemplate extends React.Component {
                     emptyArr.push(item.slice(0, 4))
                   })
                 })
-                console.log("Empty: ", emptyArr)
                 let cartItem = {
                   model: brand.title,
                   manufacturer: brand.vendorTitle,
@@ -387,13 +384,6 @@ export const pageQuery = graphql`
         title
         date(formatString: "MMMM DD, YYYY")
         description
-        thumbnail {
-          childImageSharp {
-            fluid(maxWidth: 1360) {
-              ...GatsbyImageSharpFluid
-            }
-          }
-        }
       }
     }
   }

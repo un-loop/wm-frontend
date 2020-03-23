@@ -12,7 +12,7 @@ import "./sandbox.css"
 import PostCard from "../components/postCard"
 import ShoeCard from "../components/shoeCard"
 import imageUrlBuilder from "@sanity/image-url"
-
+import orderBy from "lodash.orderBy"
 import "../utils/normalize.css"
 import "../utils/css/screen.css"
 import client from "../client"
@@ -47,8 +47,8 @@ const BlogIndex = ({ data }, location) => {
     try {
       const vendors = await client.fetch(`
         *[_type == 'vendor']`)
-      console.log(vendors)
-      setLogos(vendors)
+      let orderedBrands = orderBy(vendors, ["title"], ["asc"])
+      setLogos(orderedBrands)
     } catch (e) {
       if (e !== "No current user") {
         alert(e)
@@ -150,12 +150,16 @@ const BlogIndex = ({ data }, location) => {
             {logos.map((logo, i) => {
               postCounter++
               return (
-                <ShoeCard
-                  key={i}
-                  count={postCounter}
-                  node={logo}
-                  postClass={`post`}
-                />
+                <React.Fragment>
+                  {logo.visible === "visible" ? (
+                    <ShoeCard
+                      key={i}
+                      count={postCounter}
+                      node={logo}
+                      postClass={`post`}
+                    />
+                  ) : null}
+                </React.Fragment>
               )
             })}
           </React.Fragment>
@@ -197,14 +201,6 @@ const indexQuery = graphql`
           frontmatter {
             date(formatString: "MMMM DD, YYYY")
             title
-            description
-            thumbnail {
-              childImageSharp {
-                fluid(maxWidth: 1360) {
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
           }
         }
       }

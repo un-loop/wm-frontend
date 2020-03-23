@@ -82,7 +82,6 @@ function SwipeableTextMobileStepper(props) {
           let priceLength = step.price.length - 2
           let firstFew = step.price.slice(0, priceLength)
           let newPrice = `${firstFew}.${last2}`
-          console.log("Active Step: ", step)
           return (
             <div
               key={step.label}

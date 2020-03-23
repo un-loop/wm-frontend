@@ -28,7 +28,6 @@ class ProductDisplay extends React.Component {
   }
 
   render() {
-    console.log("props", this.props)
     return (
       <React.Fragment>
         <Backdrop />

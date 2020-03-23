@@ -52,8 +52,6 @@ export default function UseAutocomplete() {
       const vendor = await client.fetch(`
         *[_type == 'vendor']{
           slug, title }`)
-
-      // console.log("testing 123", vendor)
       setVendor(vendor)
     } catch (e) {
       if (e !== "No current user") {
@@ -88,7 +86,6 @@ export default function UseAutocomplete() {
       {groupedOptions.length > 0 ? (
         <ul className={classes.listbox} {...getListboxProps()}>
           {groupedOptions.map((option, index) => {
-            console.log(option.slug)
             return (
               <React.Fragment>
                 {option.slug === undefined ? null : (

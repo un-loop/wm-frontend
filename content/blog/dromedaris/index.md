@@ -2,5 +2,5 @@
 title: Dromedaris
 date: "2019-05-08"
 # thumbnail: ./droTalBlk.jpg
-description:
+description: Dromedaris in Seattle
 ---

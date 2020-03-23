@@ -11,12 +11,7 @@ import DialogContent from "@material-ui/core/DialogContent"
 import DialogContentText from "@material-ui/core/DialogContentText"
 import myConfiguredSanityClient from "../client"
 import imageUrlBuilder from "@sanity/image-url"
-import DialogTitle from "@material-ui/core/DialogTitle"
-import CancelIcon from "@material-ui/icons/Cancel"
-import IconButton from "@material-ui/core/IconButton"
-// import PaypalExpressBtn from "gatsby-paypal-button"
 import Cart from "./Cart"
-// import client from "../client
 import UseAutoComplete from "../components/search"
 import "./util.css"
 import CartItem from "../components/CartItem"
@@ -191,9 +186,7 @@ const Layout = props => {
   let newPriceWithTax = (newPrice * 1.095).toFixed(2)
 
   let taxPrizeString = newPriceWithTax.toString().split(".")
-  console.log(taxPrizeString)
   let newTaxPrizeInt = parseInt(`${taxPrizeString[0]}${taxPrizeString[1]}`, 10)
-  console.log(newTaxPrizeInt)
   return (
     <div className={`site-wrapper ${toggleNav ? `site-head-open` : ``}`}>
       <header className="site-head">

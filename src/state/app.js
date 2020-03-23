@@ -39,10 +39,8 @@ export default (state = initialState, action) => {
     case TOGGLE_DARKMODE:
       return { ...state, isDarkMode: action.isDarkMode }
     case ADD_ITEM:
-      console.log(action)
       let newCart = state.cart.slice()
       newCart.push(action.newItem)
-      console.log(state)
       return { ...state, cart: newCart }
     case REMOVE_ITEM:
       let updated = state.cart.slice()
@@ -53,14 +51,9 @@ export default (state = initialState, action) => {
           emptyCart.push(item)
         }
       })
-
-      console.log(action)
-      console.log(emptyCart)
       return { ...state, cart: emptyCart }
     case CHOOSE_SIZE:
       let updatedCartItems = state.cart.slice()
-      console.log(updatedCartItems)
-      console.log(action)
       updatedCartItems[action.item.index].size = action.item.size
       return { ...state, cart: updatedCartItems }
     case CLEAR_CART:

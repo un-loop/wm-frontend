@@ -10,20 +10,8 @@ import "../utils/normalize.css"
 import "../utils/css/screen.css"
 
 const BlogPage = ({ data }, location) => {
-  // console.log(data)
   const siteTitle = data.site.siteMetadata.title
-  // const posts = data.allMarkdownRemark.edges
-  // let postCounter = 0
   const [blogs, setBlogs] = useState([])
-  // const serializers = {
-  //   types: {
-  //     code: props => (
-  //       <pre data-language={props.node.language}>
-  //   <code>{props.node.code}</code>
-  //       </pre>
-  //     )
-  //   }
-  // }
 
   useEffect(() => {
     onLoad()
@@ -33,8 +21,6 @@ const BlogPage = ({ data }, location) => {
       const blogs = await client.fetch(`
         *[_type == 'blog']{
           title, images, author, created, blog}`)
-
-      // console.log("testing 123", blogs)
       setBlogs(blogs)
     } catch (e) {
       if (e !== "No current user") {
@@ -58,7 +44,6 @@ const BlogPage = ({ data }, location) => {
       <article className="post-content page-template no-image">
         <h1>Woolly Mammoth Blog</h1>
         {blogs.map((blog, i) => {
-          console.log(blog)
           return (
             <div style={mystyle}>
               <h4 style={{ paddingLeft: 15 }}>{blog.title}</h4>
