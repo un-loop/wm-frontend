@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react"
 import { graphql, StaticQuery } from "gatsby"
-import SwipeableTextMobileStepper from "../components/carousel"
+// import SwipeableTextMobileStepper from "../components/carousel"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import MediaQuery from "react-responsive"
 import Button from "@material-ui/core/Button"
 import { Link } from "gatsby"
 import "font-awesome/css/font-awesome.min.css"
@@ -11,28 +10,14 @@ import { makeStyles, withStyles } from "@material-ui/core/styles"
 import "./sandbox.css"
 import PostCard from "../components/postCard"
 import ShoeCard from "../components/shoeCard"
-import imageUrlBuilder from "@sanity/image-url"
 import orderBy from "lodash.orderBy"
 import "../utils/normalize.css"
 import "../utils/css/screen.css"
 import client from "../client"
-const googleMap = require("../images/googleMap.png")
-const streets = require("../images/signpost.jpeg")
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    color: "white",
-  },
-  button: {
-    fontColor: "white",
-    backgroundColor: "black",
-    color: "white",
-  },
-}))
+// const googleMap = require("../images/googleMap.png")
+// const streets = require("../images/signpost.jpeg")
 
 const BlogIndex = ({ data }, location) => {
-  const classes = useStyles()
-
   const siteTitle = data.site.siteMetadata.title
   const posts = data.allMarkdownRemark.edges
   const [logos, setLogos] = useState([])

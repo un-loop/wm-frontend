@@ -130,24 +130,26 @@ class DropdownContainer extends Component {
             style={listbox}
             onClick={e => e.stopPropagation()}
           >
-            {this.state.vendors.map((vendor, idx) => (
-              <React.Fragment key={idx}>
-                {vendor.gender === this.props.gender ||
-                vendor.gender === "Accessories" ? (
-                  <Link to={`/${vendor.slug.current}`}>
-                    <li
-                      className="dd-list-item"
-                      key={vendor.title}
-                      onClick={() => {
-                        this.selectItem(vendor.title, vendor.key)
-                      }}
-                    >
-                      {vendor.title} {vendor.selected}
-                    </li>
-                  </Link>
-                ) : null}
-              </React.Fragment>
-            ))}
+            {this.state.vendors.map((vendor, idx) => {
+              return (
+                <React.Fragment key={idx}>
+                  {vendor.gender === this.props.gender ||
+                  vendor.gender === "Accessories" ? (
+                    <Link to={`/${vendor.slug.current}`}>
+                      <li
+                        className="dd-list-item"
+                        key={vendor.title}
+                        onClick={() => {
+                          this.selectItem(vendor.title, vendor.key)
+                        }}
+                      >
+                        {vendor.title} {vendor.selected}
+                      </li>
+                    </Link>
+                  ) : null}
+                </React.Fragment>
+              )
+            })}
           </ul>
         )}
       </div>

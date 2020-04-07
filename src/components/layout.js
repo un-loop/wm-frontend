@@ -11,7 +11,7 @@ import DialogContent from "@material-ui/core/DialogContent"
 import DialogContentText from "@material-ui/core/DialogContentText"
 import myConfiguredSanityClient from "../client"
 import imageUrlBuilder from "@sanity/image-url"
-import Cart from "./Cart"
+import { ShoppingCart } from "@material-ui/icons"
 import UseAutoComplete from "../components/search"
 import "./util.css"
 import CartItem from "../components/CartItem"
@@ -287,14 +287,12 @@ const Layout = props => {
         </div>
         <div id="mybutton">
           <button class="feedback" onClick={() => setToggleCart(true)}>
-            View Cart ({props.everything.app.cart.length})
+            <ShoppingCart /> Open Cart ({props.everything.app.cart.length})
           </button>
         </div>
       </main>
       <Dialog
-        style={{
-          margin: "auto",
-        }}
+        style={{ margin: "auto" }}
         open={toggleCart}
         TransitionComponent={Transition}
         disableBackdropClick={false}
@@ -327,29 +325,36 @@ const Layout = props => {
                 let priceLength = cartItem.price.length - 2
                 let firstFew = cartItem.price.slice(0, priceLength)
                 let newPrice = `${firstFew}.${last2}`
+                let firstLetter = cartItem.manufacturer[0].toUpperCase()
+                let restOf = cartItem.manufacturer.slice(1)
+                let newManufacturer = `${firstLetter}${restOf}`
                 return (
                   <div
                     style={{
                       display: "flex",
                       justifyContent: "space-between",
                       padding: 20,
+                      borderStyle: "solid",
+                      borderWidth: "1px",
+                      borderColor: "gray",
                     }}
                   >
                     <div>
                       <p style={{ paddingRight: 10 }}>{cartItem.model}</p>
-                      <p>{cartItem.manufacturer}</p>
+                      <p>{newManufacturer}</p>
                       <p>${newPrice}</p>
-                      {/* <p>{cartItem.image}</p> */}
                       <button onClick={() => props.removeItem(i)}>
-                        Remove Item
+                        Remove
                       </button>
                     </div>
-                    <div style={{ display: "flex", flexDirection: "column" }}>
-                      <img
-                        src={urlFor(cartItem.image[0].asset._ref)
-                          .width(100)
-                          .url()}
-                      />
+                    <div
+                      style={{
+                        display: "flex",
+                        flex: "0 1 45%",
+                        flexDirection: "column",
+                      }}
+                    >
+                      <img src={urlFor(cartItem.image[0].asset._ref).url()} />
                       <CartItem
                         emptyArr={cartItem.sizes}
                         item={cartItem}
@@ -430,7 +435,7 @@ const Layout = props => {
         </div>
       </Dialog>
       <footer className="site-foot" style={{ marginTop: 30 }}>
-        &copy; {new Date().getFullYear()} <Link to={`/`}>{title}</Link> v 0.9.3
+        &copy; {new Date().getFullYear()} <Link to={`/`}>{title}</Link> v 1.0.0
       </footer>
     </div>
   )

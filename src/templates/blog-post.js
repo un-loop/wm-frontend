@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { graphql } from "gatsby"
 import Img from "gatsby-image"
 import client from "../client"
@@ -7,6 +7,7 @@ import SEO from "../components/seo"
 import myConfiguredSanityClient from "../client"
 import imageUrlBuilder from "@sanity/image-url"
 import "../utils/css/components/global.css"
+import "../pages/sandbox.css"
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
 import Button from "@material-ui/core/Button"
@@ -71,11 +72,6 @@ class BlogPostTemplate extends React.Component {
             <header className="post-content-header">
               <h1 className="post-content-title">{post.frontmatter.title}</h1>
             </header>
-            {/* {post.frontmatter.description && (
-              <p className="post-content-excerpt">
-                {post.frontmatter.description}
-              </p>
-            )} */}
 
             {this.state.brands.length <= 1 ? (
               <p className="post-content-excerpt">More Inventory Coming Soon</p>
@@ -115,7 +111,6 @@ class BlogPostTemplate extends React.Component {
                 let firstFew = brand.price.slice(0, priceLength)
                 let newPrice = `${firstFew}.${last2}`
 
-                let shoeSize = emptyArr[0]
                 return (
                   <div
                     key={index}
@@ -142,14 +137,21 @@ class BlogPostTemplate extends React.Component {
                       />
                     </div>
 
-                    <p style={{ display: "flex", justifyContent: "center" }}>
+                    <p
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignSelf: "center",
+                        alignItems: "center",
+                      }}
+                    >
                       {brand.title}
                     </p>
                     <p
                       style={{
                         display: "flex",
                         justifyContent: "center",
-                        marginTop: -20,
+                        marginTop: -10,
                       }}
                     >
                       ${newPrice}
@@ -158,23 +160,28 @@ class BlogPostTemplate extends React.Component {
                     <div
                       style={{
                         display: "flex",
+                        flexDirection: "column",
+                        alignSelf: "center",
+                        alignItems: "center",
                         justifyContent: "center",
-                        flexWrap: "wrap",
+                        // flexWrap: "wrap",
+                        minHeight: 120,
+                        marginTop: -20,
                       }}
                     >
-                      <p>Sizes:&nbsp; </p>
+                      <p style={{ fontWeight: "bold" }}>Sizes</p>
                       {this.state.brand !== "blundstone" ? (
-                        <React.Fragment>
+                        <div style={{ marginTop: -10 }}>
                           {brand.sizes.map((size, i) => {
-                            return <p>{size},&nbsp; </p>
+                            return <p key={i}>{size},&nbsp; </p>
                           })}
-                        </React.Fragment>
+                        </div>
                       ) : (
-                        <React.Fragment>
+                        <div style={{ marginTop: -10 }}>
                           {brand.sizes.map((size, i) => {
-                            return <p>{size}</p>
+                            return <p key={i}>{size}</p>
                           })}
-                        </React.Fragment>
+                        </div>
                       )}
                     </div>
 
@@ -191,6 +198,7 @@ class BlogPostTemplate extends React.Component {
                           margin: "15px auto",
                           backgroundColor: "green",
                           color: "white",
+                          width: "100%",
                         }}
                         color="primary"
                         variant="contained"
@@ -250,22 +258,19 @@ class BlogPostTemplate extends React.Component {
                     style={{
                       display: "flex",
                       flexDirection: "column",
-                      flexWrap: "wrap",
-                      flex: "0 1 45%",
                       alignText: "center",
                     }}
                   >
                     <div>
                       <img
-                        src={urlFor(brand.images[0].asset._ref)
-                          .width(400)
-                          .url()}
+                        src={urlFor(brand.images[0].asset._ref).url()}
                         onClick={() =>
                           this.setState({
                             addModalShow: true,
                             openingIndex: index,
                           })
                         }
+                        className="#imgHover"
                       />
 
                       <p style={{ display: "flex", justifyContent: "center" }}>
@@ -307,6 +312,7 @@ class BlogPostTemplate extends React.Component {
                             margin: "15px auto",
                             backgroundColor: "green",
                             color: "white",
+                            width: "50%",
                           }}
                           color="primary"
                           variant="contained"

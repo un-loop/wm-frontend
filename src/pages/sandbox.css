@@ -40,3 +40,7 @@
     /* flex-wrap: wrap; */
   }
 }
+
+.imgHover:hover {
+  background-color: black;
+}

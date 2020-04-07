@@ -279,7 +279,11 @@ function BillingForm({ isLoading, onSubmit, ...props }) {
             >
               {/* <div> */}
               <Button
-                style={{ margin: "15px auto", backgroundColor: "green" }}
+                style={{
+                  margin: "15px auto",
+                  backgroundColor: "green",
+                  width: "70%",
+                }}
                 onClick={handleSubmitClick}
                 variant="contained"
                 color="primary"
