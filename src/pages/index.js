@@ -41,6 +41,7 @@ const BlogIndex = ({ data }, location) => {
     }
   }
 
+  const newLogo = require("../images/logo.png")
   return (
     <Layout title={siteTitle}>
       <SEO
@@ -55,6 +56,17 @@ const BlogIndex = ({ data }, location) => {
       <br />
 
       <React.Fragment>
+        <header>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <img src={newLogo} alt="logo" style={{ marginLeft: 20 }} />
+          </div>
+        </header>
         <div
           style={{
             display: "flex",
