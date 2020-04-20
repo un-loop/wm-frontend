@@ -117,7 +117,7 @@ const BlogIndex = ({ data }, location) => {
             textAlign: "center",
           }}
         >
-          {/* <h2 id="dynamic-styles">Peace for your sole</h2>
+          <h2 id="dynamic-styles">Peace for your sole</h2>
 
           <div class="body-text-2">Telephone:(206)632-3254</div>
           <div class="body-text-2">Fax:(206)545-3814</div>
@@ -129,7 +129,7 @@ const BlogIndex = ({ data }, location) => {
           <div class="body-text-2">
             We offer <b>free parking validation</b> <br />
             for any of the UDPA lots.
-          </div> */}
+          </div>
         </div>
       </React.Fragment>
       <br />
