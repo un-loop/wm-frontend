@@ -24,7 +24,7 @@ const AboutPage = ({ data }, location) => {
           </figure> */}
           <h3 id="dynamic-styles">Get more miles for your shoes</h3>
           <p>
-            Shoes is our passion. We carry an extensive collection of shoes for
+            Shoes are our passion. We carry an extensive collection of shoes for
             women, from sandals and sneakers to women's boots, we're confident
             you'll find the perfect ones for you!
           </p>
