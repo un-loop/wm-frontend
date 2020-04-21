@@ -57,7 +57,7 @@ const BlogIndex = ({ data }, location) => {
 
       <React.Fragment>
         <header>
-          <div
+          {/* <div
             style={{
               display: "flex",
               alignItems: "center",
@@ -65,7 +65,7 @@ const BlogIndex = ({ data }, location) => {
             }}
           >
             <img src={newLogo} alt="logo" style={{ marginLeft: 20 }} />
-          </div>
+          </div> */}
         </header>
         <div
           style={{
@@ -75,7 +75,7 @@ const BlogIndex = ({ data }, location) => {
             flexWrap: "wrap",
           }}
         >
-          <Button color="primary" variant="contained">
+          {/* <Button color="primary" variant="contained">
             <a
               href="https://www.facebook.com/thewoollymammothshoes/"
               target="_blank"
@@ -105,7 +105,7 @@ const BlogIndex = ({ data }, location) => {
             ></a>
             <i className="fa fa-instagram" style={{ marginRight: 7 }} />
             Follow on Instagram
-          </Button>
+          </Button> */}
         </div>
         <Link to="/blog">
           <div id="blog"></div>
