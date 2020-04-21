@@ -270,17 +270,6 @@ const Layout = props => {
           </li>
         </ul>
       </div>
-      <header>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <img src={newLogo} alt="logo" style={{ marginLeft: 20 }} />
-        </div>
-      </header>
       <main id="site-main" className="site-main" style={{ marginTop: -30 }}>
         <div id="swup" className="transition-fade">
           {children}

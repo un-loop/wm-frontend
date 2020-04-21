@@ -354,33 +354,187 @@ const BlogPostTemplate = props => {
                       /> */}
                     </div>
                   </div>
-                </div>
-              )
-            })}
-          </div>
-
-          <ProductDisplay
-            show={addModalShow}
-            onHide={addModalClose}
-            brands={brands}
-            openingIndex={openingIndex}
-          />
-
-          {post.frontmatter.thumbnail && (
-            <div className="post-content-image">
-              <Img
-                className="kg-image"
-                fluid={post.frontmatter.thumbnail.childImageSharp.fluid}
-                alt={post.frontmatter.title}
-              />
+                )
+              })}
             </div>
-          )}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                flex: "0 1 24%",
+                flexWrap: "wrap",
+              }}
+            >
+              {this.state.maleBrands.length < 1 ? null : <h2>Men's Shoes</h2>}
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  flex: "0 1 24%",
+                  flexWrap: "wrap",
+                }}
+              >
+                {this.state.maleBrands.map((brand, index) => {
+                  function urlFor(_ref) {
+                    return builder.image(_ref)
+                  }
+                  let emptyArr = []
+                  brand.sizes.map((size, i) => {
+                    let newArr = size.split(",")
+                    newArr.map(item => {
+                      emptyArr.push(item.slice(0, 4))
+                    })
+                  })
+                  let cartItem = {
+                    model: brand.title,
+                    manufacturer: brand.vendorTitle,
+                    price: brand.price,
+                    image: brand.images,
+                    sizes: emptyArr,
+                    size: emptyArr[0],
+                  }
+                  let last2 = brand.price.slice(-2)
+                  let priceLength = brand.price.length - 2
+                  let firstFew = brand.price.slice(0, priceLength)
+                  let newPrice = `${firstFew}.${last2}`
 
-          <div
-            className="post-content-body"
-            dangerouslySetInnerHTML={{ __html: post.html }}
-          />
+                  let shoeSize = emptyArr[0]
 
+                  return (
+                    <div
+                      key={index}
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        flexWrap: "wrap",
+                        flex: "0 1 45%",
+                        alignText: "center",
+                      }}
+                    >
+                      <div
+                        onClick={() =>
+                          this.setState({
+                            addModalShow: true,
+                            openingIndex: index,
+                          })
+                        }
+                      >
+                        <img
+                          src={urlFor(brand.images[0].asset._ref)
+                            .width(400)
+                            .url()}
+                        />
+                      </div>
+
+                      <p
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignSelf: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        {brand.title}
+                      </p>
+                      <p
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          marginTop: -10,
+                        }}
+                      >
+                        ${newPrice}
+                      </p>
+
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          alignSelf: "center",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          // flexWrap: "wrap",
+                          minHeight: 120,
+                          marginTop: -20,
+                        }}
+                      >
+                        <p style={{ fontWeight: "bold" }}>Sizes</p>
+                        {this.state.brand !== "blundstone" ? (
+                          <div style={{ marginTop: -10 }}>
+                            {brand.sizes.map((size, i) => {
+                              return <p key={i}>{size},&nbsp; </p>
+                            })}
+                          </div>
+                        ) : (
+                          <div style={{ marginTop: -10 }}>
+                            {brand.sizes.map((size, i) => {
+                              return <p key={i}>{size}</p>
+                            })}
+                          </div>
+                        )}
+                      </div>
+
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          flexWrap: "wrap",
+                        }}
+                      >
+                        <Button
+                          onClick={() => this.props.addItem(cartItem)}
+                          style={{
+                            margin: "15px auto",
+                            backgroundColor: "green",
+                            color: "white",
+                            width: "100%",
+                          }}
+                          color="primary"
+                          variant="contained"
+                        >
+                          Add To Cart
+                        </Button>
+                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            flexWrap: "wrap",
+                          }}
+                        ></div>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+            <ProductDisplay
+              show={this.state.addModalShow}
+              onHide={addModalClose}
+              brands={this.state.brands}
+              openingIndex={this.state.openingIndex}
+            />
+
+            {post.frontmatter.thumbnail && (
+              <div className="post-content-image">
+                <Img
+                  className="kg-image"
+                  fluid={post.frontmatter.thumbnail.childImageSharp.fluid}
+                  alt={post.frontmatter.title}
+                />
+              </div>
+            )}
+
+            <div
+              className="post-content-body"
+              dangerouslySetInnerHTML={{ __html: post.html }}
+            />
           <footer className="post-content-footer"></footer>
         </article>
       </Layout>

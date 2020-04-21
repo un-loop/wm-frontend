@@ -41,6 +41,7 @@ const BlogIndex = ({ data }, location) => {
     }
   }
 
+  const newLogo = require("../images/logo.png")
   return (
     <Layout title={siteTitle}>
       <SEO
@@ -48,13 +49,24 @@ const BlogIndex = ({ data }, location) => {
         keywords={[`shoes`, `boots`, `seattle shoes`, `seattle boots`]}
       />
       {/* <SwipeableTextMobileStepper /> */}
-
+      {/* 
       <br />
       <br />
 
-      <br />
+      <br /> */}
 
       <React.Fragment>
+        <header>
+          {/* <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <img src={newLogo} alt="logo" style={{ marginLeft: 20 }} />
+          </div> */}
+        </header>
         <div
           style={{
             display: "flex",
@@ -63,7 +75,7 @@ const BlogIndex = ({ data }, location) => {
             flexWrap: "wrap",
           }}
         >
-          <Button color="primary" variant="contained">
+          {/* <Button color="primary" variant="contained">
             <a
               href="https://www.facebook.com/thewoollymammothshoes/"
               target="_blank"
@@ -93,7 +105,7 @@ const BlogIndex = ({ data }, location) => {
             ></a>
             <i className="fa fa-instagram" style={{ marginRight: 7 }} />
             Follow on Instagram
-          </Button>
+          </Button> */}
         </div>
         <Link to="/blog">
           <div id="blog"></div>
@@ -103,6 +115,7 @@ const BlogIndex = ({ data }, location) => {
             display: "flex",
             flexDirection: "column",
             textAlign: "center",
+            marginBottom: "1.5em",
           }}
         >
           <h2 id="dynamic-styles">Peace for your sole</h2>
@@ -120,9 +133,9 @@ const BlogIndex = ({ data }, location) => {
           </div>
         </div>
       </React.Fragment>
+      {/* <br />
       <br />
-      <br />
-      <br />
+      <br /> */}
 
       <h1 style={{ display: "flex", justifyContent: "center" }}>
         Explore our brands
