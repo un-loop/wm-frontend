@@ -224,7 +224,14 @@ class BlogPostTemplate extends React.Component {
                 )
               })}
             </div>
-            <div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                flex: "0 1 24%",
+                flexWrap: "wrap",
+              }}
+            >
               {this.state.maleBrands.length < 1 ? null : <h2>Men's Shoes</h2>}
               {this.state.maleBrands.map((brand, index) => {
                 function urlFor(_ref) {
