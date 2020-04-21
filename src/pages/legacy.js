@@ -12,6 +12,11 @@ import "../utils/css/screen.css"
 const Legacy = ({ data }, location) => {
   const siteTitle = data.site.siteMetadata.title
   const [blogs, setBlogs] = useState([])
+  const newLogo = require("../images/logo.png")
+  const logoStyle = {
+    height: "35vm",
+    width: "35vm",
+  }
 
   useEffect(() => {
     onLoad()
@@ -40,6 +45,18 @@ const Legacy = ({ data }, location) => {
           {blogs.map((blog, i) => {
             return (
               <div>
+                <header>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <img src={newLogo} alt="logo" style={logoStyle} />
+                    {/* <img src={newLogo} alt="logo" style={{ marginLeft: 20 }} /> */}
+                  </div>
+                </header>
                 <h1 style={{ paddingLeft: 15 }}>{blog.title}</h1>
                 <BlockContent
                   blocks={blog.blog}
