@@ -49,11 +49,11 @@ const BlogIndex = ({ data }, location) => {
         keywords={[`shoes`, `boots`, `seattle shoes`, `seattle boots`]}
       />
       {/* <SwipeableTextMobileStepper /> */}
-
+      {/* 
       <br />
       <br />
 
-      <br />
+      <br /> */}
 
       <React.Fragment>
         <header>
@@ -115,6 +115,7 @@ const BlogIndex = ({ data }, location) => {
             display: "flex",
             flexDirection: "column",
             textAlign: "center",
+            marginBottom: "1.5em",
           }}
         >
           <h2 id="dynamic-styles">Peace for your sole</h2>
@@ -132,9 +133,9 @@ const BlogIndex = ({ data }, location) => {
           </div>
         </div>
       </React.Fragment>
+      {/* <br />
       <br />
-      <br />
-      <br />
+      <br /> */}
 
       <h1 style={{ display: "flex", justifyContent: "center" }}>
         Explore our brands
