@@ -36,6 +36,7 @@ class BlogPostTemplate extends React.Component {
       const result = await client.fetch(
         `*[_type == 'product' && vendorTitle == '${brand[1]}']`
       )
+
       this.setState({ brands: result, brand: brand[1] })
       result.map((item, i) => {
         if (item.categories === "Men") {
@@ -56,7 +57,8 @@ class BlogPostTemplate extends React.Component {
   render() {
     const post = this.props.data.markdownRemark
     const siteTitle = this.props.data.site.siteMetadata.title
-    let addModalClose = () => this.setState({ addModalShow: false })
+    let addModalClose = () =>
+      this.setState({ addModalShow: false, category: this.state.brands })
     return (
       <div>
         <Layout location={this.props.location} title={siteTitle}>
@@ -125,6 +127,7 @@ class BlogPostTemplate extends React.Component {
                     <div
                       onClick={() =>
                         this.setState({
+                          category: this.state.femaleBrands,
                           addModalShow: true,
                           openingIndex: index,
                         })
@@ -273,6 +276,7 @@ class BlogPostTemplate extends React.Component {
                     <div
                       onClick={() =>
                         this.setState({
+                          category: this.state.maleBrands,
                           addModalShow: true,
                           openingIndex: index,
                         })
@@ -375,7 +379,7 @@ class BlogPostTemplate extends React.Component {
             <ProductDisplay
               show={this.state.addModalShow}
               onHide={addModalClose}
-              brands={this.state.brands}
+              brands={this.state.category}
               openingIndex={this.state.openingIndex}
             />
 
