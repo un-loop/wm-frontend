@@ -29,6 +29,11 @@ const useStyles = makeStyles(theme => ({
       width: 200,
     },
   },
+  icon: {
+    height: "1.5em",
+    width: "1.5em",
+    fontWeight: 900,
+  },
 }))
 
 const builder = imageUrlBuilder(myConfiguredSanityClient)
@@ -229,6 +234,9 @@ const Layout = props => {
                 <Link to={`/contact`}>Contact</Link>
               </li>
               <li className="nav-elements" role="menuitem">
+                <Link to={`/blog`}>Blog</Link>
+              </li>
+              <li className="nav-elements" role="menuitem">
                 <Link to={`/brands`}>Brands</Link>
               </li>
             </ul>
@@ -242,16 +250,19 @@ const Layout = props => {
           <nav className="site-head-right" style={{ marginTop: 70 }}>
             <ul className="nav" role="menu">
               <div className="social-links">
-                <a href="https://www.facebook.com/pg/thewoollymammothshoes">
+                <a
+                  href="https://www.facebook.com/pg/thewoollymammothshoes"
+                  className={classes.icon}
+                >
                   <i className="fa fa-facebook" />
                 </a>
-                <a href="https://www.instagram.com/thewoollymammothshoes/">
+                <a
+                  href="https://www.instagram.com/thewoollymammothshoes/"
+                  className={classes.icon}
+                >
                   <i className="fa fa-instagram" />
                 </a>
               </div>
-              <li className="nav-elements" role="menuitem">
-                <Link to={`/blog`}>Blog</Link>
-              </li>
             </ul>
           </nav>
         </div>
