@@ -55,6 +55,7 @@ const BlogPostTemplate = props => {
       const result = await client.fetch(
         `*[_type == 'product' && vendorTitle == '${brand[1]}']`
       )
+
       setBrands(result)
       setBrand(brand[1])
       // this.setState({ brands: result, brand: brand[1] })
@@ -221,6 +222,7 @@ const BlogPostTemplate = props => {
                       flexWrap: "wrap",
                     }}
                   >
+
                     <Button
                       onClick={() => {
                         handleClick(SlideTransition)
