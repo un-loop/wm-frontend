@@ -49,11 +49,6 @@ const BlogIndex = ({ data }, location) => {
         keywords={[`shoes`, `boots`, `seattle shoes`, `seattle boots`]}
       />
       {/* <SwipeableTextMobileStepper /> */}
-      {/* 
-      <br />
-      <br />
-
-      <br /> */}
 
       <React.Fragment>
         <header>
@@ -133,9 +128,6 @@ const BlogIndex = ({ data }, location) => {
           </div>
         </div>
       </React.Fragment>
-      {/* <br />
-      <br />
-      <br /> */}
 
       <h1 style={{ display: "flex", justifyContent: "center" }}>
         Explore our brands
