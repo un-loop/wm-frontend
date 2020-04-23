@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react"
+import React, { useState, useEffect } from "react"
 import { Link } from "gatsby"
 import DropdownContainer from "./Dropdown"
 import Slide from "@material-ui/core/Slide"
@@ -21,7 +21,6 @@ import { removeItem, clearCart } from "../state/app"
 import { Elements, StripeProvider } from "react-stripe-elements"
 import BillingForm from "./BillingForm"
 import Amplify, { API } from "aws-amplify"
-import { StickyContainer, Sticky } from "react-sticky"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -49,8 +48,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const Layout = props => {
   const { title, children } = props
   const [toggleNav, setToggleNav] = useState(false)
-  // const [isSticky, setSticky] = useState(false)
-  // const ref = useRef(null)
   const [toggleCart, setToggleCart] = useState(false)
   const [cartTotal, setCartTotal] = useState(0)
   const [toggleCheckout, setToggleCheckout] = useState(false)
@@ -83,7 +80,7 @@ const Layout = props => {
           },
         }
       ).then(responseText => {
-        console.log("Response text: ", responseText)
+        console.log("REsponse text: ", responseText)
         console.log(responseText.status)
         // the status above (200 vs 500) will determine the loading/error message.
         var response = responseText.json()
@@ -100,18 +97,7 @@ const Layout = props => {
     if (typeof window !== undefined && typeof window.Stripe !== undefined) {
       setStripe(window.Stripe("pk_live_he28Fk30nKJvWw52HRR6keOo00cFoZhr0m"))
     }
-    // window.addEventListener("scroll", handleScroll)
-
-    // return () => {
-    //   window.removeEventListener("scroll", () => handleScroll)
-    // }
   }, [])
-
-  // const handleScroll = () => {
-  //   if (ref.current) {
-  //     setSticky(ref.current.getBoundingClientRect().top <= 0)
-  //   }
-  // }
 
   const handleSubmit = async stripeInfo => {
     let body = {
@@ -207,256 +193,251 @@ const Layout = props => {
   let taxPrizeString = newPriceWithTax.toString().split(".")
   let newTaxPrizeInt = parseInt(`${taxPrizeString[0]}${taxPrizeString[1]}`, 10)
   return (
-    // className={`sticky-wrapper${isSticky ? " sticky" : ""}`}
-    <>
-      <div id="mybutton" ref={ref}>
-        <button class="feedback" onClick={() => setToggleCart(true)}>
-          <ShoppingCart /> Open Cart ({props.everything.app.cart.length})
-        </button>
-      </div>
-
-      <div className={`site-wrapper ${toggleNav ? `site-head-open` : ``}`}>
-        <header className="site-head">
-          <div className="site-head-container">
-            <a
-              className="nav-burger"
-              onClick={() => setToggleNav(!toggleNav)}
-              style={{ paddingTop: 50 }}
+    <div className={`site-wrapper ${toggleNav ? `site-head-open` : ``}`}>
+      <header className="site-head">
+        <div className="site-head-container">
+          <a
+            className="nav-burger"
+            onClick={() => setToggleNav(!toggleNav)}
+            style={{ paddingTop: 50 }}
+          >
+            <div
+              className="hamburger hamburger--collapse"
+              aria-label="Menu"
+              role="button"
+              aria-controls="navigation"
             >
-              <div
-                className="hamburger hamburger--collapse"
-                aria-label="Menu"
-                role="button"
-                aria-controls="navigation"
-              >
-                <div className="hamburger-box">
-                  <div className="hamburger-inner" />
-                  <br />
-                </div>
+              <div className="hamburger-box">
+                <div className="hamburger-inner" />
+                <br />
               </div>
-            </a>
-            <nav id="swup" className="site-head-left" style={{ marginTop: 70 }}>
-              <ul className="nav" role="menu">
-                <li
-                  className="nav-home"
-                  role="menuitem"
-                  onClick={() => setToggleNav(false)}
-                >
-                  <Link to={`/`}>Home</Link>
-                </li>
-
-                <li
-                  className="nav-about"
-                  role="menuitem"
-                  onClick={() => setToggleNav(false)}
-                >
-                  <Link to={`/about`}>About</Link>
-                </li>
-                <li className="nav-elements" role="menuitem">
-                  <Link to={`/contact`}>Contact</Link>
-                </li>
-                <li className="nav-elements" role="menuitem">
-                  <Link to={`/blog`}>Blog</Link>
-                </li>
-                <li className="nav-elements" role="menuitem">
-                  <Link to={`/brands`}>Brands</Link>
-                </li>
-              </ul>
-            </nav>
-            <div className="site-head-center">
-              <Link className="site-head-logo" to={`/`}>
-                <img src={smallWoolly}></img>
-              </Link>
             </div>
+          </a>
+          <nav id="swup" className="site-head-left" style={{ marginTop: 70 }}>
+            <ul className="nav" role="menu">
+              <li
+                className="nav-home"
+                role="menuitem"
+                onClick={() => setToggleNav(false)}
+              >
+                <Link to={`/`}>Home</Link>
+              </li>
 
-            <nav className="site-head-right" style={{ marginTop: 70 }}>
-              <ul className="nav" role="menu">
-                <div className="social-links">
-                  <a
-                    href="https://www.facebook.com/pg/thewoollymammothshoes"
-                    className={classes.icon}
-                  >
-                    <i className="fa fa-facebook" />
-                  </a>
-                  <a
-                    href="https://www.instagram.com/thewoollymammothshoes/"
-                    className={classes.icon}
-                  >
-                    <i className="fa fa-instagram" />
-                  </a>
-                </div>
-              </ul>
-            </nav>
+              <li
+                className="nav-about"
+                role="menuitem"
+                onClick={() => setToggleNav(false)}
+              >
+                <Link to={`/about`}>About</Link>
+              </li>
+              <li className="nav-elements" role="menuitem">
+                <Link to={`/contact`}>Contact</Link>
+              </li>
+              <li className="nav-elements" role="menuitem">
+                <Link to={`/blog`}>Blog</Link>
+              </li>
+              <li className="nav-elements" role="menuitem">
+                <Link to={`/brands`}>Brands</Link>
+              </li>
+            </ul>
+          </nav>
+          <div className="site-head-center">
+            <Link className="site-head-logo" to={`/`}>
+              <img src={smallWoolly}></img>
+            </Link>
           </div>
-        </header>
 
-        <div style={{ backgroundColor: "#584E8F" }}>
-          <ul style={{ listStyle: "none", display: "flex" }}>
-            <li>
-              <DropdownContainer title="Women" gender="Women" key={title} />
-            </li>
-            <li style={{ marginLeft: -12 }}>
-              <DropdownContainer title="Men" gender="Men" key={title} />
-            </li>
-            <li>
-              <UseAutoComplete style={{}} />
-            </li>
-          </ul>
+          <nav className="site-head-right" style={{ marginTop: 70 }}>
+            <ul className="nav" role="menu">
+              <div className="social-links">
+                <a
+                  href="https://www.facebook.com/pg/thewoollymammothshoes"
+                  className={classes.icon}
+                >
+                  <i className="fa fa-facebook" />
+                </a>
+                <a
+                  href="https://www.instagram.com/thewoollymammothshoes/"
+                  className={classes.icon}
+                >
+                  <i className="fa fa-instagram" />
+                </a>
+              </div>
+            </ul>
+          </nav>
         </div>
-        <main id="site-main" className="site-main" style={{ marginTop: -30 }}>
-          <div id="swup" className="transition-fade">
-            {children}
-          </div>
-        </main>
-        <Dialog
-          style={{ margin: "auto" }}
-          open={toggleCart}
-          TransitionComponent={Transition}
-          disableBackdropClick={false}
-          hideBackdrop={false}
-          onClose={() => setToggleCart(false)}
-          aria-labelledby="alert-dialog-slide-title"
-          aria-describedby="alert-dialog-slide-description"
-        >
-          <div>
-            <DialogContent style={{ textAlign: "center", paddingBottom: 30 }}>
-              Woolly Mammoth Checkout <br />
-              {props.everything.app.cart.length < 1 ? (
-                <p>Cart Total: $0</p>
-              ) : (
-                <React.Fragment>
-                  <p>Cart Total: ${newPrice}</p>
-                  <p>With Tax: ${newPriceWithTax}</p>
-                </React.Fragment>
-              )}
-              Free Shipping Arrives in 5-7 Days
-            </DialogContent>
+      </header>
 
-            {!toggleCheckout ? (
-              <div>
-                {props.everything.app.cart.map((cartItem, i) => {
-                  function urlFor(_ref) {
-                    return builder.image(_ref)
-                  }
-                  let last2 = cartItem.price.slice(-2)
-                  let priceLength = cartItem.price.length - 2
-                  let firstFew = cartItem.price.slice(0, priceLength)
-                  let newPrice = `${firstFew}.${last2}`
-                  let firstLetter = cartItem.manufacturer[0].toUpperCase()
-                  let restOf = cartItem.manufacturer.slice(1)
-                  let newManufacturer = `${firstLetter}${restOf}`
-                  return (
+      <div style={{ backgroundColor: "#584E8F" }}>
+        <ul style={{ listStyle: "none", display: "flex" }}>
+          <li>
+            <DropdownContainer title="Women" gender="Women" key={title} />
+          </li>
+          <li style={{ marginLeft: -12 }}>
+            <DropdownContainer title="Men" gender="Men" key={title} />
+          </li>
+          <li>
+            <UseAutoComplete style={{}} />
+          </li>
+        </ul>
+      </div>
+      <main id="site-main" className="site-main" style={{ marginTop: -30 }}>
+        <div id="swup" className="transition-fade">
+          {children}
+        </div>
+        <div id="mybutton">
+          <button class="feedback" onClick={() => setToggleCart(true)}>
+            <ShoppingCart /> Open Cart ({props.everything.app.cart.length})
+          </button>
+        </div>
+      </main>
+      <Dialog
+        style={{ margin: "auto" }}
+        open={toggleCart}
+        TransitionComponent={Transition}
+        disableBackdropClick={false}
+        hideBackdrop={false}
+        onClose={() => setToggleCart(false)}
+        aria-labelledby="alert-dialog-slide-title"
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <div>
+          <DialogContent style={{ textAlign: "center", paddingBottom: 30 }}>
+            Woolly Mammoth Checkout <br />
+            {props.everything.app.cart.length < 1 ? (
+              <p>Cart Total: $0</p>
+            ) : (
+              <React.Fragment>
+                <p>Cart Total: ${newPrice}</p>
+                <p>With Tax: ${newPriceWithTax}</p>
+              </React.Fragment>
+            )}
+            Free Shipping Arrives in 5-7 Days
+          </DialogContent>
+
+          {!toggleCheckout ? (
+            <div>
+              {props.everything.app.cart.map((cartItem, i) => {
+                function urlFor(_ref) {
+                  return builder.image(_ref)
+                }
+                let last2 = cartItem.price.slice(-2)
+                let priceLength = cartItem.price.length - 2
+                let firstFew = cartItem.price.slice(0, priceLength)
+                let newPrice = `${firstFew}.${last2}`
+                let firstLetter = cartItem.manufacturer[0].toUpperCase()
+                let restOf = cartItem.manufacturer.slice(1)
+                let newManufacturer = `${firstLetter}${restOf}`
+                return (
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      padding: 20,
+                      borderStyle: "solid",
+                      borderWidth: "1px",
+                      borderColor: "gray",
+                    }}
+                  >
+                    <div>
+                      <p style={{ paddingRight: 10 }}>{cartItem.model}</p>
+                      <p>{newManufacturer}</p>
+                      <p>${newPrice}</p>
+                      <button onClick={() => props.removeItem(i)}>
+                        Remove
+                      </button>
+                    </div>
                     <div
                       style={{
                         display: "flex",
-                        justifyContent: "space-between",
-                        padding: 20,
-                        borderStyle: "solid",
-                        borderWidth: "1px",
-                        borderColor: "gray",
+                        flex: "0 1 45%",
+                        flexDirection: "column",
                       }}
                     >
-                      <div>
-                        <p style={{ paddingRight: 10 }}>{cartItem.model}</p>
-                        <p>{newManufacturer}</p>
-                        <p>${newPrice}</p>
-                        <button onClick={() => props.removeItem(i)}>
-                          Remove
-                        </button>
-                      </div>
-                      <div
-                        style={{
-                          display: "flex",
-                          flex: "0 1 45%",
-                          flexDirection: "column",
-                        }}
-                      >
-                        <img src={urlFor(cartItem.image[0].asset._ref).url()} />
-                        <CartItem
-                          emptyArr={cartItem.sizes}
-                          item={cartItem}
-                          itemIndex={i}
-                        />
-                      </div>
+                      <img src={urlFor(cartItem.image[0].asset._ref).url()} />
+                      <CartItem
+                        emptyArr={cartItem.sizes}
+                        item={cartItem}
+                        itemIndex={i}
+                      />
                     </div>
-                  )
-                })}
+                  </div>
+                )
+              })}
 
-                <DialogActions
-                  style={{ display: "flex", justifyContent: "space-between" }}
+              <DialogActions
+                style={{ display: "flex", justifyContent: "space-between" }}
+              >
+                <Button
+                  style={{ margin: "15px auto", backgroundColor: "orange" }}
+                  onClick={() => {
+                    setToggleCart(false)
+                  }}
+                  variant="contained"
+                  color="primary"
                 >
-                  <Button
-                    style={{ margin: "15px auto", backgroundColor: "orange" }}
-                    onClick={() => {
-                      setToggleCart(false)
-                    }}
-                    variant="contained"
-                    color="primary"
-                  >
-                    Close Cart
-                  </Button>
-                  <Button
-                    style={{ margin: "15px auto", backgroundColor: "green" }}
-                    onClick={() => {
-                      setToggleCheckout(true)
-                    }}
-                    variant="contained"
-                    color="primary"
-                  >
-                    Checkout
-                  </Button>
-                </DialogActions>
-              </div>
-            ) : (
-              <div>
-                <StripeProvider stripe={stripe}>
-                  <Elements>
-                    <BillingForm
-                      handleSubmit={handleSubmit}
-                      displaySuccess={displaySuccess}
-                      displayFailure={displayFailure}
-                      checkoutComplete={checkoutComplete}
-                      totalInt={newTaxPrizeInt}
-                    />
-                  </Elements>
-                </StripeProvider>
-
-                <DialogActions
-                  style={{ display: "flex", justifyContent: "space-between" }}
+                  Close Cart
+                </Button>
+                <Button
+                  style={{ margin: "15px auto", backgroundColor: "green" }}
+                  onClick={() => {
+                    setToggleCheckout(true)
+                  }}
+                  variant="contained"
+                  color="primary"
                 >
-                  <Button
-                    style={{ margin: "15px auto", backgroundColor: "orange" }}
-                    onClick={() => {
-                      setToggleCart(false)
-                    }}
-                    variant="contained"
-                    color="primary"
-                  >
-                    Close Cart
-                  </Button>
-                  <Button
-                    style={{ margin: "15px auto", backgroundColor: "#584e8f" }}
-                    onClick={() => {
-                      setToggleCheckout(false)
-                    }}
-                    variant="contained"
-                    color="primary"
-                  >
-                    Back to Cart
-                  </Button>
-                </DialogActions>
-              </div>
-            )}
+                  Checkout
+                </Button>
+              </DialogActions>
+            </div>
+          ) : (
+            <div>
+              <StripeProvider stripe={stripe}>
+                <Elements>
+                  <BillingForm
+                    handleSubmit={handleSubmit}
+                    displaySuccess={displaySuccess}
+                    displayFailure={displayFailure}
+                    checkoutComplete={checkoutComplete}
+                    totalInt={newTaxPrizeInt}
+                  />
+                </Elements>
+              </StripeProvider>
 
-            <div></div>
-          </div>
-        </Dialog>
-        <footer className="site-foot" style={{ marginTop: 30 }}>
-          &copy; {new Date().getFullYear()} <Link to={`/`}>{title}</Link> v
-          1.0.0
-        </footer>
-      </div>
-    </>
+              <DialogActions
+                style={{ display: "flex", justifyContent: "space-between" }}
+              >
+                <Button
+                  style={{ margin: "15px auto", backgroundColor: "orange" }}
+                  onClick={() => {
+                    setToggleCart(false)
+                  }}
+                  variant="contained"
+                  color="primary"
+                >
+                  Close Cart
+                </Button>
+                <Button
+                  style={{ margin: "15px auto", backgroundColor: "#584e8f" }}
+                  onClick={() => {
+                    setToggleCheckout(false)
+                  }}
+                  variant="contained"
+                  color="primary"
+                >
+                  Back to Cart
+                </Button>
+              </DialogActions>
+            </div>
+          )}
+
+          <div></div>
+        </div>
+      </Dialog>
+      <footer className="site-foot" style={{ marginTop: 30 }}>
+        &copy; {new Date().getFullYear()} <Link to={`/`}>{title}</Link> v 1.0.0
+      </footer>
+    </div>
   )
 }
 
