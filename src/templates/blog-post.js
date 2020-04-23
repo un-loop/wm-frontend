@@ -147,7 +147,6 @@ const BlogPostTemplate = props => {
               return (
                 <div
                   key={index}
-                  className="container"
                   style={{
                     display: "flex",
                     flexDirection: "column",
@@ -198,6 +197,7 @@ const BlogPostTemplate = props => {
                       // flexWrap: "wrap",
                       minHeight: 120,
                       marginTop: -20,
+                      marginBottom: -30,
                     }}
                   >
                     <p style={{ fontWeight: "bold" }}>Sizes</p>
@@ -222,12 +222,19 @@ const BlogPostTemplate = props => {
                       flexWrap: "wrap",
                     }}
                   >
-
                     <Button
                       onClick={() => {
                         handleClick(SlideTransition)
                         props.addItem(cartItem)
                       }}
+                      style={{
+                        margin: "3em auto",
+                        backgroundColor: "green",
+                        color: "white",
+                        width: "100%",
+                      }}
+                      color="primary"
+                      variant="contained"
                     >
                       Add To Cart
                     </Button>
@@ -252,57 +259,78 @@ const BlogPostTemplate = props => {
           </div>
           <div>
             {maleBrands.length < 1 ? null : <h2>Men's Shoes</h2>}
-            {maleBrands.map((brand, index) => {
-              function urlFor(_ref) {
-                return builder.image(_ref)
-              }
-              let emptyArr = []
-              brand.sizes.map((size, i) => {
-                let newArr = size.split(",")
-                newArr.map(item => {
-                  emptyArr.push(item.slice(0, 4))
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                flex: "0 1 24%",
+                flexWrap: "wrap",
+              }}
+            >
+              {maleBrands.map((brand, index) => {
+                function urlFor(_ref) {
+                  return builder.image(_ref)
+                }
+                let emptyArr = []
+                brand.sizes.map((size, i) => {
+                  let newArr = size.split(",")
+                  newArr.map(item => {
+                    emptyArr.push(item.slice(0, 4))
+                  })
                 })
-              })
-              let cartItem = {
-                model: brand.title,
-                manufacturer: brand.vendorTitle,
-                price: brand.price,
-                image: brand.images,
-                sizes: emptyArr,
-                size: emptyArr[0],
-              }
-              let last2 = brand.price.slice(-2)
-              let priceLength = brand.price.length - 2
-              let firstFew = brand.price.slice(0, priceLength)
-              let newPrice = `${firstFew}.${last2}`
-              let shoeSize = emptyArr[0]
-              return (
-                <div
-                  key={index}
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignText: "center",
-                  }}
-                >
-                  <div>
-                    <img
-                      src={urlFor(brand.images[0].asset._ref).url()}
+                let cartItem = {
+                  model: brand.title,
+                  manufacturer: brand.vendorTitle,
+                  price: brand.price,
+                  image: brand.images,
+                  sizes: emptyArr,
+                  size: emptyArr[0],
+                }
+                let last2 = brand.price.slice(-2)
+                let priceLength = brand.price.length - 2
+                let firstFew = brand.price.slice(0, priceLength)
+                let newPrice = `${firstFew}.${last2}`
+                let shoeSize = emptyArr[0]
+                return (
+                  <div
+                    key={index}
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      flexWrap: "wrap",
+                      flex: "0 1 45%",
+                      alignText: "center",
+                    }}
+                  >
+                    <div
                       onClick={() => {
                         setAddModalShow(true)
                         setCategory(maleBrands)
                         setOpeningIndex(index)
                       }}
-                      className="#imgHover"
-                    />
-                    <p style={{ display: "flex", justifyContent: "center" }}>
+                    >
+                      <img
+                        src={urlFor(brand.images[0].asset._ref)
+                          .width(400)
+                          .url()}
+                      />
+                    </div>
+                    {/* className="#imgHover" */}
+                    <p
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignSelf: "center",
+                        alignItems: "center",
+                      }}
+                    >
                       {brand.title}
                     </p>
                     <p
                       style={{
                         display: "flex",
                         justifyContent: "center",
-                        marginTop: -20,
+                        marginTop: -10,
                       }}
                     >
                       ${newPrice}
@@ -310,14 +338,32 @@ const BlogPostTemplate = props => {
                     <div
                       style={{
                         display: "flex",
+                        flexDirection: "column",
+                        alignSelf: "center",
+                        alignItems: "center",
                         justifyContent: "center",
-                        flexWrap: "wrap",
+                        minHeight: 120,
+                        marginTop: -20,
+                        marginBottom: -30,
                       }}
                     >
-                      <p>Sizes:&nbsp; </p>
-                      {emptyArr.map((size, i) => {
+                      <p style={{ fontWeight: "bold" }}>Sizes</p>
+                      {/* {emptyArr.map((size, i) => {
                         return <p>{size},&nbsp; </p>
-                      })}
+                      })} */}
+                      {brand !== "blundstone" ? (
+                        <div style={{ marginTop: -10 }}>
+                          {brand.sizes.map((size, i) => {
+                            return <p key={i}>{size},&nbsp; </p>
+                          })}
+                        </div>
+                      ) : (
+                        <div style={{ marginTop: -10 }}>
+                          {brand.sizes.map((size, i) => {
+                            return <p key={i}>{size}</p>
+                          })}
+                        </div>
+                      )}
                     </div>
                     <div
                       style={{
@@ -331,8 +377,16 @@ const BlogPostTemplate = props => {
                           handleClick(SlideTransition)
                           props.addItem(cartItem)
                         }}
+                        style={{
+                          margin: "3em auto",
+                          backgroundColor: "green",
+                          color: "white",
+                          width: "100%",
+                        }}
+                        color="primary"
+                        variant="contained"
                       >
-                        > Add To Cart
+                        Add To Cart
                       </Button>
                       {/* <Snackbar
                         className="MuiSnackbar-anchorOriginTopCenter"
@@ -343,9 +397,9 @@ const BlogPostTemplate = props => {
                       /> */}
                     </div>
                   </div>
-                </div>
-              )
-            })}
+                )
+              })}
+            </div>
           </div>
           <ProductDisplay
             show={addModalShow}
