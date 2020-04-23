@@ -209,7 +209,7 @@ const Layout = props => {
   return (
     // className={`sticky-wrapper${isSticky ? " sticky" : ""}`}
     <>
-      <div id="mybutton" ref={ref}>
+      <div id="mybutton">
         <button class="feedback" onClick={() => setToggleCart(true)}>
           <ShoppingCart /> Open Cart ({props.everything.app.cart.length})
         </button>
