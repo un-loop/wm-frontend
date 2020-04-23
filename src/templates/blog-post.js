@@ -56,12 +56,12 @@ const BlogPostTemplate = props => {
       const result = await client.fetch(
         `*[_type == 'product' && vendorTitle == '${brand[1]}']`
       )
-      console.log("result from api blog: ", result)
+
       let sortResult = result.sort((a, b) => {
         let orderBool = a.title > b.title
         return orderBool ? 1 : -1
       })
-      console.log("sortResult: ", sortResult)
+
       setBrands(sortResult)
       setBrand(brand[1])
       // this.setState({ brands: result, brand: brand[1] })

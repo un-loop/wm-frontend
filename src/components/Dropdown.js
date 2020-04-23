@@ -17,8 +17,14 @@ class DropdownContainer extends Component {
   }
   async componentDidMount() {
     const results = await client.fetch(`*[_type == 'vendor' ]{	
+     
     title, gender, slug}`)
-    this.setState({ vendors: results })
+    console.log("results: ", results)
+    let sortResult = results.sort((a, b) => {
+      let orderBool = a.title > b.title
+      return orderBool ? 1 : -1
+    })
+    this.setState({ vendors: sortResult })
   }
 
   componentDidUpdate() {
