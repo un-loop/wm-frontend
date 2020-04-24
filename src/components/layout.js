@@ -209,12 +209,6 @@ const Layout = props => {
   return (
     // className={`sticky-wrapper${isSticky ? " sticky" : ""}`}
     <>
-      <div id="mybutton">
-        <button class="feedback" onClick={() => setToggleCart(true)}>
-          <ShoppingCart /> Open Cart ({props.everything.app.cart.length})
-        </button>
-      </div>
-
       <div className={`site-wrapper ${toggleNav ? `site-head-open` : ``}`}>
         <header className="site-head">
           <div className="site-head-container">
@@ -290,8 +284,15 @@ const Layout = props => {
           </div>
         </header>
 
-        <div style={{ backgroundColor: "#584E8F" }}>
-          <ul style={{ listStyle: "none", display: "flex" }}>
+        <div
+          style={{
+            backgroundColor: "#584E8F",
+            display: "flex",
+            position: "sticky",
+            top: "0",
+          }}
+        >
+          <ul style={{ listStyle: "none", display: "flex", height: "2.7rem" }}>
             <li>
               <DropdownContainer title="Women" gender="Women" key={title} />
             </li>
@@ -302,6 +303,11 @@ const Layout = props => {
               <UseAutoComplete style={{}} />
             </li>
           </ul>
+
+          <button class="feedback" onClick={() => setToggleCart(true)}>
+            <ShoppingCart style={{ fontSize: "3.8rem" }} /> Open Cart (
+            {props.everything.app.cart.length})
+          </button>
         </div>
         <main id="site-main" className="site-main" style={{ marginTop: -30 }}>
           <div id="swup" className="transition-fade">
