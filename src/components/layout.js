@@ -22,6 +22,7 @@ import { Elements, StripeProvider } from "react-stripe-elements"
 import BillingForm from "./BillingForm"
 import Amplify, { API } from "aws-amplify"
 import { StickyContainer, Sticky } from "react-sticky"
+import Hidden from "@material-ui/core/Hidden"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -292,12 +293,21 @@ const Layout = props => {
             </ul>
           </div>
           <div>
-            <a className="feedback" onClick={() => setToggleCart(true)}>
-              <ShoppingCart style={{ fontSize: "3.8rem" }} /> Open Cart (
-              {props.everything.app.cart.length})
-            </a>
+            <Hidden xsDown>
+              <a className="feedback" onClick={() => setToggleCart(true)}>
+                <ShoppingCart style={{ fontSize: "3.8rem" }} /> Open Cart (
+                {props.everything.app.cart.length})
+              </a>
+            </Hidden>
           </div>
         </div>
+        <Hidden smUp>
+          <Button idonClick={() => setToggleCart(true)}>
+            <ShoppingCart style={{ fontSize: "3.8rem" }} /> Open Cart (
+            {props.everything.app.cart.length})
+          </Button>
+        </Hidden>
+        {/* </div> */}
         <main id="site-main" className="site-main" style={{ marginTop: -30 }}>
           <div id="swup" className="transition-fade">
             {children}
