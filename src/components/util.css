@@ -3,52 +3,13 @@
 }
 
 .feedback {
-  /* background-color: #584e8f; */
-  color: white;
-  /* padding: 10px 20px; */
-  /* border-radius: 4px;
-  border-color: #584e8f;  */
-  height: auto;
-  font-size: 24px;
-  /* align-self: flex-end; */
-  /* display: flex; */
-  clear: right;
-  border: 0;
-  align-self: end;
-  margin-left: 80rem;
-  display: flex;
-  padding-top: 0.2rem;
+  color: white !important;
+  height: auto !important;
+  font-size: 24px !important;
+  clear: right !important;
+  border: 0 !important;
+  align-self: end !important;
+  margin-left: 80rem !important;
+  display: flex !important;
+  padding-top: 0.2rem !important;
 }
-/* .sticky-wrapper {
-  position: relative;
-  height: 1rem; /* We need to change this value */
-/* }
-
-.sticky .sticky-inner {
-  position: fixed;
-  top: 130;
-  left: 60;
-  right: 60;
-  z-index: 1;
-} */
-/* #mybutton {
-  position: fixed;
-  top: 15px;
-  right: 48px;
-  z-index: 100;
-} */
-/* 190 */
-/* 
-float: right;
-
-position: sticky;
-
-top: 150px; */
-
-/* <div style={{ display: "flex" }}>
-<ul
-  style={{
-    listStyle: "none",
-    display: "flex",
-    paddingTop: ".5rem",
-  }} */
