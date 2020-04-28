@@ -1,34 +1,7 @@
 .feedback {
-  background-color: #584e8f;
-  color: white;
-  /* padding: 10px 20px; */
-  border-radius: 4px;
-  border-color: #584e8f;
-  height: 60px;
-  font-size: 24px;
+  color: white !important;
+  font-size: 24px !important;
+  margin-left: -31px !important;
+  display: flex !important;
+  padding-top: 0.2rem !important;
 }
-/* .sticky-wrapper {
-  position: relative;
-  height: 1rem; /* We need to change this value */
-/* }
-
-.sticky .sticky-inner {
-  position: fixed;
-  top: 130;
-  left: 60;
-  right: 60;
-  z-index: 1;
-} */
-#mybutton {
-  position: fixed;
-  top: 15px;
-  right: 48px;
-  z-index: 100;
-}
-/* 190 */
-/* 
-float: right;
-
-position: sticky;
-
-top: 150px; */
