@@ -1,12 +1,7 @@
 .feedback {
   color: white !important;
-  height: auto !important;
   font-size: 24px !important;
-  clear: right !important;
-  border: 0 !important;
-  align-self: end !important;
-  margin-left: 80rem !important;
+  margin-left: -31px !important;
   display: flex !important;
   padding-top: 0.2rem !important;
-  visibility: visible;
 }

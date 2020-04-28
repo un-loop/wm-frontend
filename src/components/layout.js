@@ -20,8 +20,6 @@ import { bindActionCreators } from "redux"
 import { removeItem, clearCart } from "../state/app"
 import { Elements, StripeProvider } from "react-stripe-elements"
 import BillingForm from "./BillingForm"
-import Amplify, { API } from "aws-amplify"
-import { StickyContainer, Sticky } from "react-sticky"
 import Hidden from "@material-ui/core/Hidden"
 
 const useStyles = makeStyles(theme => ({
@@ -197,11 +195,8 @@ const Layout = props => {
   let taxPrizeString = newPriceWithTax.toString().split(".")
   let newTaxPrizeInt = parseInt(`${taxPrizeString[0]}${taxPrizeString[1]}`, 10)
   return (
-    // className={`sticky-wrapper${isSticky ? " sticky" : ""}`}
     <>
-      <div id="mybutton"></div>
-
-      <div className={`site-wrapper ${toggleNav ? `site-head-open` : ``}`}>
+      <div className={` ${toggleNav ? `site-head-open` : ``}`}>
         <header className="site-head">
           <div className="site-head-container">
             <a
@@ -275,8 +270,14 @@ const Layout = props => {
             </nav>
           </div>
         </header>
+        <div
+          style={{
+            backgroundColor: "#584E8F",
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
 
-        <div style={{ backgroundColor: "#584E8F", display: "flex" }}>
           <div>
             <ul
               style={{ listStyle: "none", display: "flex", height: "2.7rem" }}
@@ -293,27 +294,19 @@ const Layout = props => {
             </ul>
           </div>
           <div>
-            <Hidden xsDown>
-              <a className="feedback" onClick={() => setToggleCart(true)}>
-                <ShoppingCart style={{ fontSize: "3.8rem" }} /> Open Cart (
-                {props.everything.app.cart.length})
-              </a>
-            </Hidden>
+            <a className="feedback" onClick={() => setToggleCart(true)}>
+              <ShoppingCart style={{ fontSize: "3.8rem" }} />(
+              {props.everything.app.cart.length})
+            </a>
           </div>
         </div>
-        <Hidden smUp>
-          <div>
-            <Button
-              style={{ margin: "2px 0px 15px 210px" }}
-              onClick={() => setToggleCart(true)}
-            >
-              <ShoppingCart style={{ fontSize: "3.8rem" }} /> Open Cart (
-              {props.everything.app.cart.length})
-            </Button>
-          </div>
-        </Hidden>
-        {/* </div> */}
-        <main id="site-main" className="site-main" style={{ marginTop: -30 }}>
+
+        <main
+          id="site-main"
+          className="site-main site-wrapper"
+          style={{ marginTop: -30 }}
+        >
+
           <div id="swup" className="transition-fade">
             {children}
           </div>
