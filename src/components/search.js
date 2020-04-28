@@ -49,10 +49,15 @@ export default function UseAutocomplete() {
   }, [])
   async function onLoad() {
     try {
-      const vendor = await client.fetch(`
+      const results = await client.fetch(`
         *[_type == 'vendor']{
           slug, title }`)
-      setVendor(vendor)
+      console.log("results: ", results)
+      let sortResult = results.sort((a, b) => {
+        let orderBool = a.title > b.title
+        return orderBool ? 1 : -1
+      })
+      setVendor(sortResult)
     } catch (e) {
       if (e !== "No current user") {
         alert(e)
