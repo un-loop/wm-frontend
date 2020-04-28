@@ -19,6 +19,7 @@ import Slide from "@material-ui/core/Slide"
 import { ToastContainer } from "react-toastr"
 import IconButton from "@material-ui/core/IconButton"
 import CloseIcon from "@material-ui/icons/Close"
+
 const builder = imageUrlBuilder(myConfiguredSanityClient)
 function TransitionDown(props) {
   return <Slide {...props} direction="down" />
@@ -56,10 +57,15 @@ const BlogPostTemplate = props => {
         `*[_type == 'product' && vendorTitle == '${brand[1]}']`
       )
 
-      setBrands(result)
+      let sortResult = result.sort((a, b) => {
+        let orderBool = a.title > b.title
+        return orderBool ? 1 : -1
+      })
+
+      setBrands(sortResult)
       setBrand(brand[1])
       // this.setState({ brands: result, brand: brand[1] })
-      result.map((item, i) => {
+      sortResult.map((item, i) => {
         if (item.categories === "Men") {
           male.push(item)
         } else if (item.categories === "Women") {
