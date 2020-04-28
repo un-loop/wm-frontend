@@ -302,10 +302,15 @@ const Layout = props => {
           </div>
         </div>
         <Hidden smUp>
-          <Button idonClick={() => setToggleCart(true)}>
-            <ShoppingCart style={{ fontSize: "3.8rem" }} /> Open Cart (
-            {props.everything.app.cart.length})
-          </Button>
+          <div>
+            <Button
+              style={{ margin: "2px 0px 15px 210px" }}
+              onClick={() => setToggleCart(true)}
+            >
+              <ShoppingCart style={{ fontSize: "3.8rem" }} /> Open Cart (
+              {props.everything.app.cart.length})
+            </Button>
+          </div>
         </Hidden>
         {/* </div> */}
         <main id="site-main" className="site-main" style={{ marginTop: -30 }}>
