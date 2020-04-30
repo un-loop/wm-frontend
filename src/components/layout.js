@@ -20,8 +20,7 @@ import { bindActionCreators } from "redux"
 import { removeItem, clearCart } from "../state/app"
 import { Elements, StripeProvider } from "react-stripe-elements"
 import BillingForm from "./BillingForm"
-import Amplify, { API } from "aws-amplify"
-import { StickyContainer, Sticky } from "react-sticky"
+import Hidden from "@material-ui/core/Hidden"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -100,18 +99,7 @@ const Layout = props => {
     if (typeof window !== undefined && typeof window.Stripe !== undefined) {
       setStripe(window.Stripe("pk_live_he28Fk30nKJvWw52HRR6keOo00cFoZhr0m"))
     }
-    // window.addEventListener("scroll", handleScroll)
-
-    // return () => {
-    //   window.removeEventListener("scroll", () => handleScroll)
-    // }
   }, [])
-
-  // const handleScroll = () => {
-  //   if (ref.current) {
-  //     setSticky(ref.current.getBoundingClientRect().top <= 0)
-  //   }
-  // }
 
   const handleSubmit = async stripeInfo => {
     let body = {
@@ -207,9 +195,8 @@ const Layout = props => {
   let taxPrizeString = newPriceWithTax.toString().split(".")
   let newTaxPrizeInt = parseInt(`${taxPrizeString[0]}${taxPrizeString[1]}`, 10)
   return (
-    // className={`sticky-wrapper${isSticky ? " sticky" : ""}`}
     <>
-      <div className={`site-wrapper ${toggleNav ? `site-head-open` : ``}`}>
+      <div className={` ${toggleNav ? `site-head-open` : ``}`}>
         <header className="site-head">
           <div className="site-head-container">
             <a
@@ -283,33 +270,43 @@ const Layout = props => {
             </nav>
           </div>
         </header>
-
         <div
           style={{
             backgroundColor: "#584E8F",
             display: "flex",
-            position: "sticky",
-            top: "0",
+            justifyContent: "space-between",
           }}
         >
-          <ul style={{ listStyle: "none", display: "flex", height: "2.7rem" }}>
-            <li>
-              <DropdownContainer title="Women" gender="Women" key={title} />
-            </li>
-            <li style={{ marginLeft: -12 }}>
-              <DropdownContainer title="Men" gender="Men" key={title} />
-            </li>
-            <li>
-              <UseAutoComplete style={{}} />
-            </li>
-          </ul>
 
-          <button class="feedback" onClick={() => setToggleCart(true)}>
-            <ShoppingCart style={{ fontSize: "3.8rem" }} /> Open Cart (
-            {props.everything.app.cart.length})
-          </button>
+          <div>
+            <ul
+              style={{ listStyle: "none", display: "flex", height: "2.7rem" }}
+            >
+              <li>
+                <DropdownContainer title="Women" gender="Women" key={title} />
+              </li>
+              <li style={{ marginLeft: -12 }}>
+                <DropdownContainer title="Men" gender="Men" key={title} />
+              </li>
+              <li>
+                <UseAutoComplete style={{}} />
+              </li>
+            </ul>
+          </div>
+          <div>
+            <a className="feedback" onClick={() => setToggleCart(true)}>
+              <ShoppingCart style={{ fontSize: "3.8rem" }} />(
+              {props.everything.app.cart.length})
+            </a>
+          </div>
         </div>
-        <main id="site-main" className="site-main" style={{ marginTop: -30 }}>
+
+        <main
+          id="site-main"
+          className="site-main site-wrapper"
+          style={{ marginTop: -30 }}
+        >
+
           <div id="swup" className="transition-fade">
             {children}
           </div>
