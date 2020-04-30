@@ -1,5 +1,8 @@
 const urljoin = require("url-join")
 const siteConfig = require("./siteConfig")
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
 
 module.exports = {
   siteMetadata: {
@@ -12,6 +15,41 @@ module.exports = {
     },
   },
   plugins: [
+    // {
+    //   resolve: 'gatsby-source-sanity',
+    //   options: {
+    //     projectId: process.env.SANITY_PROJECT_ID,
+    //     dataset: process.env.SANITY_DATASET,
+    //     token: process.env.SANITY_TOKEN
+    //     // ...
+    //   }
+    // },
+    {
+      resolve: "gatsby-source-sanity",
+      options: {
+        projectId: "v8vntiu0",
+        dataset: "production",
+
+        // a token with read permissions is required
+        // if you have a private dataset
+        token: process.env.SANITY_TOKEN,
+
+        // If the Sanity GraphQL API was deployed using `--tag <name>`,
+        // use `graphqlTag` to specify the tag name. Defaults to `default`.
+        graphqlTag: "default",
+      },
+    },
+    {
+      resolve: "gatsby-source-graphql",
+      options: {
+        // Arbitrary name for the remote schema Query type
+        typeName: "SWAPI",
+        // Field under which the remote schema will be accessible. You'll use this in your Gatsby query
+        fieldName: "swapi",
+        // Url to query from
+        url: "https://swapi-graphql.netlify.com/.netlify/functions/index",
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
