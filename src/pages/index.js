@@ -65,39 +65,7 @@ const BlogIndex = ({ data }, location) => {
             justifyContent: "space-evenly",
             flexWrap: "wrap",
           }}
-        >
-          {/* <Button color="primary" variant="contained">
-            <a
-              href="https://www.facebook.com/thewoollymammothshoes/"
-              target="_blank"
-              style={{ color: "white" }}
-            >
-              <i className="fa fa-facebook" style={{ marginRight: 7 }} />
-              Visit us on Facebook
-            </a>
-          </Button>
-          <br />
-          <Button
-            color="default"
-            variant="contained"
-            onClick={() => document.getElementById("blog").click()}
-          >
-            {" "}
-            <i className="fa fa-photo" style={{ marginRight: 7 }} />
-            Visit our Blog
-          </Button>
-          <br />
-          <Button color="secondary" variant="contained">
-            {" "}
-            <a
-              href="https://www.instagram.com/thewoollymammothshoes/"
-              target="_blank"
-              style={{ color: "white" }}
-            ></a>
-            <i className="fa fa-instagram" style={{ marginRight: 7 }} />
-            Follow on Instagram
-          </Button> */}
-        </div>
+        />
         <Link to="/blog">
           <div id="blog" />
         </Link>
