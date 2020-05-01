@@ -15,15 +15,6 @@ module.exports = {
     },
   },
   plugins: [
-    // {
-    //   resolve: 'gatsby-source-sanity',
-    //   options: {
-    //     projectId: process.env.SANITY_PROJECT_ID,
-    //     dataset: process.env.SANITY_DATASET,
-    //     token: process.env.SANITY_TOKEN
-    //     // ...
-    //   }
-    // },
     {
       resolve: "gatsby-source-sanity",
       options: {
@@ -37,17 +28,6 @@ module.exports = {
         // If the Sanity GraphQL API was deployed using `--tag <name>`,
         // use `graphqlTag` to specify the tag name. Defaults to `default`.
         graphqlTag: "default",
-      },
-    },
-    {
-      resolve: "gatsby-source-graphql",
-      options: {
-        // Arbitrary name for the remote schema Query type
-        typeName: "SWAPI",
-        // Field under which the remote schema will be accessible. You'll use this in your Gatsby query
-        fieldName: "swapi",
-        // Url to query from
-        url: "https://swapi-graphql.netlify.com/.netlify/functions/index",
       },
     },
     {
@@ -90,25 +70,14 @@ module.exports = {
               wrapperStyle: `margin-bottom: 1.0725rem`,
             },
           },
-          `gatsby-remark-prismjs`,
-          `gatsby-remark-copy-linked-files`,
-          `gatsby-remark-smartypants`,
+          // `gatsby-remark-prismjs`,
+          // `gatsby-remark-copy-linked-files`,
+          // `gatsby-remark-smartypants`,
         ],
       },
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    {
-      resolve: `gatsby-plugin-postcss`,
-      options: {
-        postCssPlugins: [
-          require("postcss-easy-import")(),
-          require("postcss-custom-properties")({ preserve: false }),
-          require("postcss-color-function")(),
-          require("autoprefixer")({ browsers: ["last 2 versions"] }),
-        ],
-      },
-    },
     {
       resolve: `gatsby-plugin-purgecss`,
       options: {
@@ -120,26 +89,6 @@ module.exports = {
         // purgeOnly : ['components/', '/main.css', 'bootstrap/'], // Purge only these files/folders
       },
     },
-    {
-      resolve: `gatsby-plugin-google-analytics`,
-      options: {
-        //trackingId: `ADD YOUR TRACKING ID HERE`,
-      },
-    },
-    `gatsby-plugin-feed`,
-    {
-      resolve: `gatsby-plugin-manifest`,
-      options: {
-        name: siteConfig.name,
-        short_name: siteConfig.shortName,
-        start_url: siteConfig.prefix,
-        background_color: `#ffffff`,
-        theme_color: `#663399`,
-        display: `minimal-ui`,
-        icon: `content/assets/gatsby-icon.png`,
-      },
-    },
-    `gatsby-plugin-netlify`,
     `gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`,
   ],

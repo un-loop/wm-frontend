@@ -16,9 +16,6 @@ import ProductDisplay from "../components/ProductDisplay"
 import Snackbar from "@material-ui/core/Snackbar"
 import SnackbarContent from "@material-ui/core/SnackbarContent"
 import Slide from "@material-ui/core/Slide"
-import { ToastContainer } from "react-toastr"
-import IconButton from "@material-ui/core/IconButton"
-import CloseIcon from "@material-ui/icons/Close"
 
 const builder = imageUrlBuilder(myConfiguredSanityClient)
 function TransitionDown(props) {
@@ -257,7 +254,7 @@ const BlogPostTemplate = props => {
                         flexDirection: "column",
                         flexWrap: "wrap",
                       }}
-                    ></div>
+                    />
                   </div>
                 </div>
               )
@@ -426,7 +423,7 @@ const BlogPostTemplate = props => {
             className="post-content-body"
             dangerouslySetInnerHTML={{ __html: post.html }}
           />
-          <footer className="post-content-footer"></footer>
+          <footer className="post-content-footer" />
         </article>
       </Layout>
       <Snackbar
@@ -443,7 +440,7 @@ const BlogPostTemplate = props => {
             color: "white",
           }}
           message="Successfully Added to the Cart"
-        ></SnackbarContent>
+        />
       </Snackbar>
     </div>
   )
@@ -462,7 +459,10 @@ const mapDispatchToProps = dispatch => {
     dispatch
   )
 }
-export default connect(mapStateToProps, mapDispatchToProps)(BlogPostTemplate)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BlogPostTemplate)
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
     site {
