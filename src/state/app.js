@@ -44,13 +44,8 @@ export default (state = initialState, action) => {
       return { ...state, cart: newCart }
     case REMOVE_ITEM:
       let updated = state.cart.slice()
-      let emptyCart = []
+      let emptyCart = updated.filter((item, i) => i !== action.item)
 
-      updated.map((item, i) => {
-        if (i !== action.item) {
-          emptyCart.push(item)
-        }
-      })
       return { ...state, cart: emptyCart }
     case CHOOSE_SIZE:
       let updatedCartItems = state.cart.slice()

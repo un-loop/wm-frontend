@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
 import { graphql, StaticQuery } from "gatsby"
-// import SwipeableTextMobileStepper from "../components/carousel"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Button from "@material-ui/core/Button"
@@ -14,8 +13,6 @@ import orderBy from "lodash.orderBy"
 import "../utils/normalize.css"
 import "../utils/css/screen.css"
 import client from "../client"
-// const googleMap = require("../images/googleMap.png")
-// const streets = require("../images/signpost.jpeg")
 
 const BlogIndex = ({ data }, location) => {
   const siteTitle = data.site.siteMetadata.title
@@ -48,7 +45,6 @@ const BlogIndex = ({ data }, location) => {
         title="Woolly Mammoth Shoes"
         keywords={[`shoes`, `boots`, `seattle shoes`, `seattle boots`]}
       />
-      {/* <SwipeableTextMobileStepper /> */}
 
       <React.Fragment>
         <header>
@@ -103,7 +99,7 @@ const BlogIndex = ({ data }, location) => {
           </Button> */}
         </div>
         <Link to="/blog">
-          <div id="blog"></div>
+          <div id="blog" />
         </Link>
         <div
           style={{
