@@ -257,13 +257,19 @@ const Layout = props => {
                     href="https://www.facebook.com/pg/thewoollymammothshoes"
                     className={classes.icon}
                   >
-                    <i className="fa fa-facebook" />
+                    <i
+                      className="fa fa-facebook"
+                      style={{ height: 20, width: 20 }}
+                    />
                   </a>
                   <a
                     href="https://www.instagram.com/thewoollymammothshoes/"
                     className={classes.icon}
                   >
-                    <i className="fa fa-instagram" />
+                    <i
+                      className="fa fa-instagram"
+                      style={{ height: 20, width: 20 }}
+                    />
                   </a>
                 </div>
               </ul>
@@ -277,7 +283,6 @@ const Layout = props => {
             justifyContent: "space-between",
           }}
         >
-
           <div>
             <ul
               style={{ listStyle: "none", display: "flex", height: "2.7rem" }}
@@ -306,7 +311,6 @@ const Layout = props => {
           className="site-main site-wrapper"
           style={{ marginTop: -30 }}
         >
-
           <div id="swup" className="transition-fade">
             {children}
           </div>
