@@ -95,9 +95,13 @@ const Layout = props => {
 
   const [stripe, setStripe] = useState(null)
 
+  console.log(process.env)
   useEffect(() => {
+    // if (process.env)
     if (typeof window !== undefined && typeof window.Stripe !== undefined) {
       setStripe(window.Stripe("pk_live_he28Fk30nKJvWw52HRR6keOo00cFoZhr0m"))
+      // } else {
+      //   setStripe(window.Stripe("pk_test_hnclQ0ChvfU9waes6yOHnPbx00oNYQkfIw"))
     }
   }, [])
 
@@ -122,7 +126,7 @@ const Layout = props => {
       recipient: "matthea@woollymammothshoes.com",
       sender: "matthea@woollymammothshoes.com",
       subject: `New Woolly Sale - ${stripeInfo.body.firstName} ${stripeInfo.body.lastName}`,
-      htmlBody: `<p>You have a new sale from ${stripeInfo.body.firstName} ${stripeInfo.body.lastName}. <br /><br />Their purchases include ${orderString}. <br /><br />Please ship the order to ${stripeInfo.body.address}, ${stripeInfo.body.city} ${stripeInfo.body.zip}</p>`,
+      htmlBody: `<p>You have a new sale from ${stripeInfo.body.firstName} ${stripeInfo.body.lastName}. Email is ${stripeInfo.body.email}. <br /><br />Their purchases include ${orderString}. <br /><br />Please ship the order to ${stripeInfo.body.address}, ${stripeInfo.body.city} ${stripeInfo.body.zip}</p>`,
       textBody: `You have a new sale from ${stripeInfo.body.firstName} ${stripeInfo.body.lastName}. Their purchases include ${orderString}. Please ship the order to ${stripeInfo.body.shippingAddress}, ${stripeInfo.body.shippingCity} ${stripeInfo.body.shippingZip}`,
     }
 
@@ -454,8 +458,6 @@ const Layout = props => {
                 </DialogActions>
               </div>
             )}
-
-            <div></div>
           </div>
         </Dialog>
         <footer className="site-foot" style={{ marginTop: 30 }}>

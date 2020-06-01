@@ -83,13 +83,19 @@ function BillingForm({ isLoading, onSubmit, ...props }) {
   async function handleSubmitClick(event) {
     event.preventDefault()
 
-    let description = `Purchase from ${firstName} ${lastName}, located at ${address}, ${city}, ${zip}.`
+    let description = `Purchase from ${firstName} ${lastName} , located at ${address}, ${city}, ${zip}.`
 
     setIsProcessing(true)
 
     const { token, error } = await props.stripe.createToken({
       name: props.firstName,
     })
+
+    if (error) {
+      alert("Please check the credit card number you entered.")
+      setIsProcessing(false)
+      return
+    }
 
     let body = {
       total: props.totalInt,
