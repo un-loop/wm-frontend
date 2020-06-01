@@ -82,10 +82,9 @@ function BillingForm({ isLoading, onSubmit, ...props }) {
 
   async function handleSubmitClick(event) {
     event.preventDefault()
+    setIsProcessing(true)
 
     let description = `Purchase from ${firstName} ${lastName} , located at ${address}, ${city}, ${zip}.`
-
-    setIsProcessing(true)
 
     const { token, error } = await props.stripe.createToken({
       name: props.firstName,
