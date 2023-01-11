@@ -39,7 +39,7 @@
     "gatsby-source-filesystem": "^2.0.33",
     "gatsby-source-graphql": "^2.5.0",
     "gatsby-source-sanity": "^5.0.6",
-    "gatsby-transformer-remark": "^2.3.12",
+    "gatsby-transformer-remark": "^5.25.1",
     "gatsby-transformer-sharp": "^2.1.19",
     "lodash.orderby": "^4.6.0",
     "prismjs": "^1.16.0",
